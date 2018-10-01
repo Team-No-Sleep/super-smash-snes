@@ -11,13 +11,13 @@
   ###### Write down the primary goal of the product.
   ###### Identify and prioritize essential user stories.
 
-#### Idea: A web app multiplayer game of street fight."
+#### Idea: A web app multiplayer game of street fight.
 
-#### Popular among older generation who enjoy watching street fights."
+#### Popular among older generation who enjoy watching street fights.
 
-#### Problem: Relying on sprite.js to generate characters'movements.Game can only be played on the web and after logging in using their google account to chat."
+#### Problem: Relying on sprite.js to generate characters'movements.Game can only be played on the web and after logging in using their google account to chat.
 
-#### Goal: Provide an online street fight web app where users can chat."
+#### Goal: Provide an online street fight web app where users can chat.
 
 ### User Stories:
 
