@@ -1,18 +1,6 @@
 # Sprite-MVP
 
 
-### MVP:
-
-
-<<<<<<< HEAD
-  ###### Start with a general idea.
-  ###### Identify the target audience.
-  ###### Identify the problem that the product will address.
-  ###### Write down the primary goal of the product.
-  ###### Identify and prioritize essential user stories.
-
-=======
->>>>>>> 0d163d313e467bc9b576ba5743b6cc8fff626ebf
 #### Idea: A web app multiplayer game of street fight.
 
 #### Popular among older generation who enjoy watching street fights.
