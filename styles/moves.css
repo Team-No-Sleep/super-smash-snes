@@ -4,20 +4,12 @@
 ============ 
 */
 
-.stage { 
-    height: 250px;
-    width: 768px;
-    padding-top: 120px;
-    padding-left: 40px;
-    background-image:url('../img/stage.png'); 
-}
-
 .goku { 
     width:108px; 
     height:115px;
     margin-left: 35px;
     transform: scaleX(-1);
-    background-image:url('../img/goku-sheet.png'); 
+    background-image:url('../images/goku-sheet.png'); 
 }
 
 /* 
