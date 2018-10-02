@@ -1,0 +1,44 @@
+* {box-sizing: border-box;}
+body, html{
+    margin: 0;
+    height: 100%;
+}
+.stage{
+    /* https://vignette.wikia.nocookie.net/streetfighter/images/3/37/Cammy%27s_stage%2C_English_Manor%2C_in_Street_Fighter_V..jpg/revision/latest?cb=20170927045101 */
+    background-image:url('http://imgs.abduzeedo.com/files/articles/wicked-fighting-game-background-gifs/E4nU7qja.gif');
+    min-height: 500px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+body > .mdl-color--grey-100{
+    margin-top: 88px;
+}
+.smash-icon{
+    top: 0;
+    width: 98px;
+}
+.font-size-3em{
+    font-size: 3em;
+}
+.top-position-uc{
+    top: 28px!important;
+}
+.h-300{
+    height: 300px;
+}
+.goku{
+    top: 67%;
+    right: 67%;
+    position: absolute;
+}
+
+@media screen and (max-width: 610px){
+    .top-position-uc{
+        top: 88px!important;
+    }
+    .height-uc {
+        height: 41px!important;
+    }
+}
