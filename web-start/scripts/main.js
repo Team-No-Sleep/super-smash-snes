@@ -17,121 +17,57 @@
 
 // Signs-in Friendly Chat.
 function signIn() {
-  var provider = new firebase.auth.GoogleAuthProvider();
-  firebase.auth().signInWithPopup(provider);
   // TODO 1: Sign in Firebase with credential from the Google user.
 }
 
 // Signs-out of Friendly Chat.
 function signOut() {
-  firebase.auth().signOut();
   // TODO 2: Sign out of Firebase.
 }
 
 // Initiate firebase auth.
 function initFirebaseAuth() {
   // TODO 3: Initialize Firebase.
-  firebase.auth().onAuthStateChanged(authStateObserver);
 }
 
 // Returns the signed-in user's profile Pic URL.
 function getProfilePicUrl() {
   // TODO 4: Return the user's profile pic URL.
-  return firebase.auth().currentUser.photoURL || '/images/profile_placeholder.png';
-
 }
 
 // Returns the signed-in user's display name.
 function getUserName() {
-  return firebase.auth().currentUser.displayName;
-
   // TODO 5: Return the user's display name.
 }
 
 // Returns true if a user is signed-in.
 function isUserSignedIn() {
   // TODO 6: Return true if a user is signed-in.
-  return !!firebase.auth().currentUser;
-
 }
 
 // Loads chat messages history and listens for upcoming ones.
 function loadMessages() {
   // TODO 7: Load and listens for new messages.
-  var callback = function(snap) {
-    var data = snap.val();
-    displayMessage(snap.key, data.name, data.text, data.profilePicUrl, data.imageUrl);
-  };
-
-  firebase.database().ref('/messages/').limitToLast(12).on('child_added', callback);
-  firebase.database().ref('/messages/').limitToLast(12).on('child_changed', callback);
 }
 
 // Saves a new message on the Firebase DB.
 function saveMessage(messageText) {
   // TODO 8: Push a new message to Firebase.
-  return firebase.database().ref('/messages/').push({
-    name: getUserName(),
-    text: messageText,
-    profilePicUrl: getProfilePicUrl()
-  }).catch(function(error) {
-    console.error('Error writing new message to Firebase Database', error);
-  });
 }
 
 // Saves a new message containing an image in Firebase.
 // This first saves the image in Firebase storage.
 function saveImageMessage(file) {
   // TODO 9: Posts a new image as a message.
-  firebase.database().ref('/messages/').push({
-    name: getUserName(),
-    imageUrl: LOADING_IMAGE_URL,
-    profilePicUrl: getProfilePicUrl()
-  }).then(function(messageRef) {
-    // 2 - Upload the image to Cloud Storage.
-    var filePath = firebase.auth().currentUser.uid + '/' + messageRef.key + '/' + file.name;
-    return firebase.storage().ref(filePath).put(file).then(function(fileSnapshot) {
-      // 3 - Generate a public URL for the file.
-      return fileSnapshot.ref.getDownloadURL().then((url) => {
-        // 4 - Update the chat message placeholder with the image's URL.
-        return messageRef.update({
-          imageUrl: url,
-          storageUri: fileSnapshot.metadata.fullPath
-        });
-      });
-    });
-  }).catch(function(error) {
-    console.error('There was an error uploading a file to Cloud Storage:', error);
-  });
 }
 
 // Saves the messaging device token to the datastore.
 function saveMessagingDeviceToken() {
   // TODO 10: Save the device token in the realtime datastore
-  firebase.messaging().getToken().then(function(currentToken) {
-    if (currentToken) {
-      console.log('Got FCM device token:', currentToken);
-      // Saving the Device Token to the datastore.
-      firebase.database().ref('/fcmTokens').child(currentToken)
-          .set(firebase.auth().currentUser.uid);
-    } else {
-      // Need to request permissions to show notifications.
-      requestNotificationsPermissions();
-    }
-  }).catch(function(error){
-    console.error('Unable to get messaging token.', error);
-  });
 }
 
 // Requests permissions to show notifications.
 function requestNotificationsPermissions() {
-  console.log('Requesting notifications permission...');
-  firebase.messaging().requestPermission().then(function() {
-    // Notification permission granted.
-    saveMessagingDeviceToken();
-  }).catch(function(error) {
-    console.error('Unable to get permission to notify.', error);
-  });
   // TODO 11: Request permissions to send notifications.
 }
 
