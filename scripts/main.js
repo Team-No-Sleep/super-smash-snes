@@ -273,17 +273,27 @@ function toggleButton() {
   }
 }
 
-// Checks that the Firebase SDK has been correctly setup and configured.
-function checkSetup() {
-  if (!window.firebase || !(firebase.app instanceof Function) || !firebase.app().options) {
-    window.alert('You have not configured and imported the Firebase SDK. ' +
-        'Make sure you go through the codelab setup instructions and make ' +
-        'sure you are running the codelab using `firebase serve`');
-  }
-}
+// // Checks that the Firebase SDK has been correctly setup and configured.
+// function checkSetup() {
+//   if (!window.firebase || !(firebase.app instanceof Function) || !firebase.app().options) {
+//     window.alert('You have not configured and imported the Firebase SDK. ' +
+//         'Make sure you go through the codelab setup instructions and make ' +
+//         'sure you are running the codelab using `firebase serve`');
+//   }
+// }
+// Initialize Firebase
+var config = {
+  apiKey: "AIzaSyB3XsVc-KBQ-2qELEg82RmcIShbGCFHhZE",
+  authDomain: "sprite-chat-cf53a.firebaseapp.com",
+  databaseURL: "https://sprite-chat-cf53a.firebaseio.com",
+  projectId: "sprite-chat-cf53a",
+  storageBucket: "sprite-chat-cf53a.appspot.com",
+  messagingSenderId: "465590087132"
+};
+firebase.initializeApp(config);
 
-// Checks that Firebase has been imported.
-checkSetup();
+// // Checks that Firebase has been imported.
+// checkSetup();
 
 // Shortcuts to DOM Elements.
 var messageListElement = document.getElementById('messages');
