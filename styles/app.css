@@ -1,0 +1,21 @@
+body > .container-fluid{
+    margin-top: 88px;
+}
+.smash-icon{
+    top: 0;
+    width: 98px;
+}
+.font-size-3em{
+    font-size: 3em;
+}
+.top-position-uc{
+    top: 28px!important;
+}
+@media screen and (max-width: 610px){
+    .top-position-uc{
+        top: 88px!important;
+    }
+    .height-uc {
+        height: 41px!important;
+    }
+}
