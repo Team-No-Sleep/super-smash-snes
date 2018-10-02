@@ -16,7 +16,7 @@
     width:108px; 
     height:115px;
     margin-left: 35px;
-    /* transform: scaleX(-1); */
+    transform: scaleX(-1);
     background-image:url('../img/goku-sheet.png'); 
 }
 
