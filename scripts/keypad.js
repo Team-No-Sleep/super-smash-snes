@@ -1,3 +1,6 @@
+// ==================
+//     GOKU GAMEPAD
+// ==================
 $(document).keypress(function(e){
     switch(e.which)
 		{
@@ -31,16 +34,66 @@ $(document).keypress(function(e){
             }, 1530);
             break;	
                     
-        // // user presses the "Left" key
-        case 81:	
-            // $('.idle').animate({"left": "+=10px" }, "fast" );
-            console.log('left');
+         // // user presses the "q" key 
+         case 113:	
+             $('.goku').css({"margin-left": "-=10px" });;
+             console.log('goku left')
+         break;
+
+         // // user presses the "e" key 
+         case 101:	
+             $('.goku').css({"margin-left": "+=10px" });
+             console.log('goku right')
+         break;
+     }
+});
+
+
+
+// ==================
+//     RYU GAMEPAD
+// ==================
+$(document).keypress(function(e){
+    switch(e.which)
+		{
+        // user presses the "j"
+        case 106:	
+            $('.ryu').addClass('ryu-punch');
+            $('.ryu').addClass('punch-p2');
+            setTimeout(function(e) { 
+                $('.ryu').removeClass('punch-p2'); 
+                $('.ryu').removeClass('ryu-punch'); 
+            }, 230);
+            break;	
+                    
+        // // user presses the "k" key
+        case 107:
+            $('.ryu').addClass('ryu-kick');
+            $('.ryu').addClass('kick-p2');
+            setTimeout(function(e) { 
+                $('.ryu').removeClass('kick-p2'); 
+                $('.ryu').removeClass('ryu-kick'); 
+            }, 540);
+            break;	
+                    
+        // // user presses the "l" key
+        case 108:	
+            $('.ryu').addClass('ryu-jump');
+            $('.ryu').addClass('jump-p2');
+            setTimeout(function(e) { 
+                $('.ryu').removeClass('jump-p2'); 
+                $('.ryu').removeClass('ryu-jump'); 
+            }, 870);
+            break;	
+                    
+        // // user presses the "u" key
+        case 117:	
+            $('.ryu').css({"margin-left": "-=10px" });
             break;
-        // // user presses the "Right" key 
-        case 69:	
-            console.log('right');
-            // $('.idle').animate({"right": "+=10px"}, "fast" );
+            
+        // // user presses the "o" key 
+        case 111:	
+            $('.ryu').css({"margin-left": "+=10px"});
             break;
         }
 });
-

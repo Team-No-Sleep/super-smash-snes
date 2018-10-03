@@ -56,7 +56,7 @@
 
 </head>
 
-<body>
+<body class="mdl-color--black">
   <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase.js"></script>
   <script>
     // Initialize Firebase
@@ -72,12 +72,12 @@
   </script>
   <header>
     <!-- Header section containing logo -->
-    <nav class="navbar navbar-expand-lg navbar-dark mdl-color--black py-0 fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark mdl-color--black py-0">
       <a class="navbar-brand mr-auto py-0 font-size-3em mt-2" href="#"><img src="images/smash_icon.png" class="img-fluid material-icons smash-icon" />
         <span class="mt-2">Smash SNES</span></a>
       <div id="user-container" class="top-position-uc height-uc">
         <div hidden id="user-pic"></div>
-        <div hidden id="user-name"></div>
+        <div hidden id="user-name" class="text-white"></div>
         <button hidden id="sign-out" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
           Sign-out
         </button>
@@ -87,16 +87,35 @@
       </div>
     </nav>
   </header>
-
   <div class=" mdl-color--grey-100">
-    <div class="container-fluid">
-      <p>Use the A, S, D, Q keys to have the player play</p>
+    <div class="stage">
+      <div class="goku idle"></div>
+      <div class="ryu idle-p2"></div>
     </div>
+<<<<<<< HEAD
     <div class="container-fluid stage">
       <div class="goku idle"></div>
+=======
+    <div class="container-fluid mdl-color--black">
+      <div class="row py-2 text-white align-items-center">
+        <div class="col-sm-5">
+          <p class="mb-0"><strong>Player 1:</strong> moves = ASD, walk = QE</p>
+        </div>
+        <div class="col-sm-5 text-right">
+          <p class="mb-0"><strong>Player 2:</strong> moves = JKL ,walk = UO</p>
+        </div>
+        <div class="col-sm-2 text-right">
+          <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample"
+            aria-expanded="false" aria-controls="collapseExample">
+            Chat Room
+          </button>
+        </div>
+      </div>
+>>>>>>> ffd65a6fa24906e036349a0fd9b3aa65bf43f424
     </div>
-    <div class="container-fluid px-0 d-none">
-      <div id="messages-card-container " class="border shadow mt-0 h-300">
+    
+    <div class="collapse" id="collapseExample">
+      <div id="messages-card-container " class="border shadow mt-0 h-255">
         <!-- Messages container -->
         <div id="messages-card">
           <div class="mdl-card__supporting-text mdl-color-text--grey-600">
@@ -149,7 +168,11 @@
   <!-- sprite 1 javascript files -->
   <script src="scripts/keypad.js"></script>
   <script src="scripts/sprite.js"></script>
+<<<<<<< HEAD
   <script src="scripts/sprite-P1.js"></script>
+=======
+  <!-- <script src="scripts/sprite-P1.js"></script> -->
+>>>>>>> ffd65a6fa24906e036349a0fd9b3aa65bf43f424
   <script src="scripts/main.js"></script>
 </body>
 
