@@ -142,7 +142,7 @@ main, #messages-card {
   top: -3px;
   position: relative;
   display: inline-block;
-  background-image: url('/images/profile_placeholder.png');
+  background-image: url('images/profile.png');
   background-repeat: no-repeat;
   width: 40px;
   height: 40px;
@@ -177,7 +177,7 @@ main, #messages-card {
   }
   #user-container {
     top: 72px;
-    background-color: rgb(3,155,229);
+    background-color:#000000;
     height: 38px;
     padding-top: 3px;
     padding-right: 2px;
