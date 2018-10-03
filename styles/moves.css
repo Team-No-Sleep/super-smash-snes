@@ -12,6 +12,17 @@
     background-image:url('../images/goku-sheet.png'); 
 }
 
+.ryu { 
+    width: 60px;
+    height: 101px;
+    margin-left: 555px;
+    margin-top: 330px;
+    position: absolute;
+    transform: scale(1.5);
+    /* transform: scaleX(-1); */
+    background-image:url('../images/ryu-sheet.png'); 
+}
+
 /* 
 ============
   HIT BOX
@@ -32,12 +43,38 @@
 }
 
 
+.ryu-idle {
+    background: url('../images/ryu-sheet.png') no-repeat -264px -124px;
+ }
+ .ryu-punch {
+    background: url('../images/ryu-sheet.png') no-repeat -482px -124px;
+    width: 74px;
+    height: 99px;
+ }
+ .ryu-kick {
+    background: url('../images/ryu-sheet.png') no-repeat -0px -0px;
+    width: 70px;
+    height: 90px;
+ }
+ .ryu-jump {
+    background: url('../images/ryu-sheet.png') no-repeat -0px -124px;
+    width: 60px;
+    height: 105px;
+ }
+ .ryu-walk {
+    background: url('../images/ryu-sheet.png') no-repeat -0px -278px;
+    width: 199px;
+    height: 91px;
+ }
+
+
 /* 
 ============
   ANIMATION
 ============
  */
 
+ /* GOKU */
 .idle { 
     animation: idle steps(3) 0.55s infinite; 
 }
@@ -80,5 +117,51 @@
     }
 }
 
+
+/* RYU */
+.idle-p2 { 
+    animation: idle-p2 steps(4) .75s infinite; 
+}
+@keyframes idle-p2 {
+    from { background-position: -264px -124px; }
+    to { background-position: -470px -124px; }
+}
+
+.punch-p2 { 
+    animation: punch-p2 steps(2) 0.25s infinite;
+
+}
+@keyframes punch-p2 {
+    from { background-position: -482px -124px; }
+    to { background-position: -607px -124px; }
+}
+
+.kick-p2 { 
+    animation: kick-p2 steps(4) 0.45s infinite; 
+}
+@keyframes kick-p2 {
+    from { background-position: 0px -25px; }
+    to { background-position: -297px -25px; }
+}
+
+.jump-p2 { 
+    animation: jump-p2 steps(4) 0.8s infinite;
+}
+@keyframes jump-p2 {
+    0% {    background-position: -0px -160px;
+    }
+    30% {   transform: translateY(-40px);
+        
+    }
+    50% {   transform: translateY(-80px);
+    }
+    75% {   transform: translateY(-40px);
+    }
+    85% {   transform: translateY(-25px);
+    }
+    100% {  background-position: -222px -160px;
+            transform: translateY(0px);
+    }
+}
 
 
