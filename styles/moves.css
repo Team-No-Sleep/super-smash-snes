@@ -5,21 +5,21 @@
 */
 
 .goku { 
-    width:108px; 
-    height:115px;
+    width:109px; 
+    height:121px;
     margin-left: 35px;
     transform: scaleX(-1);
-    background-image:url('../images/goku-sheet.png'); 
+    background-image:url('../images/goku-idle.png'); 
 }
 .ryu { 
-    width: 60px;
-    height: 101px;
+    width: 52px;
+    height: 106px;
     margin-left: 555px;
     /* margin-top: 280px; */
     position: absolute;
-    transform: scale(1.5);
-    /* transform: scaleX(-1); */
-    background-image:url('../images/ryu-sheet.png'); 
+    transform: scaleX(-1);
+    /* transform: scale(1.5); */
+    background-image:url('../images/ryu-idle.png'); 
 }
 
 /* 
@@ -43,42 +43,55 @@
 ============
  */
 
-.gokuPunch {
-    width:148px; 
-    height:124px;
+ .goku-idle {
+    background: url('../images/goku-idle.png') no-repeat;
+    width: 109px;
+    height: 121px;
+ }
+ .goku-punch {
+     background: url('../images/goku-punch.png') no-repeat;
+     width: 162px;
+     height: 130px;
+ }
+.goku-kick {
+    background: url('../images/goku-kick.png') no-repeat;
+    width: 159px;
+    height: 159px;
 }
-.gokuKick {
-    width:159px; 
-    height:155px;
+.goku-jump {
+    background: url('../images/goku-jump.png') no-repeat;
+    width: 146px;
+    height: 180px;
 }
-.gokuJump {
-    width:105px; 
-    height:165px;
+.goku-walk {
+    background: url('../images/goku-walk.png') no-repeat;
+    width: 120px;
+    height: 132px;
 }
 
 
 .ryu-idle {
-    background: url('../images/ryu-sheet.png') no-repeat -264px -124px;
+    background: url('../images/ryu-idle.png') no-repeat;
 }
 .ryu-punch {
-    background: url('../images/ryu-sheet.png') no-repeat -482px -124px;
-    width: 74px;
-    height: 99px;
+    background: url('../images/ryu-punch.png') no-repeat;
+    width: 90px;
+    height: 124px;
 }
 .ryu-kick {
-    background: url('../images/ryu-sheet.png') no-repeat -0px -0px;
+    background: url('../images/ryu-kick.png') no-repeat;
     width: 70px;
-    height: 90px;
+    height: 131px;
 }
 .ryu-jump {
-    background: url('../images/ryu-sheet.png') no-repeat -0px -124px;
-    width: 60px;
-    height: 105px;
+    background: url('../images/ryu-jump.png') no-repeat;
+    width: 57px;
+    height: 116px;
 }
 .ryu-walk {
-    background: url('../images/ryu-sheet.png') no-repeat -0px -278px;
-    width: 199px;
-    height: 91px;
+    background: url('../images/ryu-walk.png') no-repeat;
+    width: 49px;
+    height: 92px;
 }
 
 
@@ -89,46 +102,60 @@
  */
 
  /* GOKU */
-.idle { 
+.idle-p1 { 
     animation: idle steps(3) 0.55s infinite; 
 }
 @keyframes idle {
-    from { background-position: 0px -583px; }
-    to { background-position: -327px -583px; }
+    from { background-position: 0px -0px; }
+    to { background-position: -327px -0px; }
 }
 
-.punch { 
-    animation: punch steps(6) 0.65s infinite;
+.punch-p1 { 
+    animation: punch steps(6) 0.45s infinite;
 
 }
 @keyframes punch {
-    from { background-position: 0px -3535px; }
-    to { background-position: -920px -3535px; }
+    from { background-position: 0px -0px; }
+    to { background-position: -972px -0px; }
 }
 
-.kick { 
-    animation: kick steps(6) .47s infinite; 
+.kick-p1 { 
+    animation: kick-p1 steps(6) .50s infinite; 
 }
-@keyframes kick {
-    from { background-position: 0px -3220px; }
-    to { background-position: -966px -3220px; }
+@keyframes kick-p1 {
+    from { background-position: 0px -0px; }
+    to { background-position: -954px -0px; }
 }
 
-.jump { 
-    animation: jump steps(8) 1.45s infinite; 
+.jump-p1{ 
+    animation: jump steps(8) .85s infinite; 
 }
 @keyframes jump {
-    0% {    background-position: 0px -1070px;
+    0% {    background-position: 0px -0px;
+            transform: scaleX(-1);
+
     }
-    40% {   transform: translateY(10px);
+    25% {   transform: translateY(-100px);
+            transform: scaleX(-1);
+
     }
-    70% {   transform: translateY(-100px);
+    50% {   transform: translateY(-150px);
+            transform: scaleX(-1);
+
     }
-    75% {   transform: translateY(-50px);
+    75% {   transform: translateY(-100px);
+            transform: scaleX(-1);
+
     }
-    100% {  background-position: -855px -1070px;
-            transform: translateY(0px);
+    100% {  background-position: -1168px -0px;
     }
+}
+.walk-p1 { 
+    animation: walk-p1 steps(6) .50s infinite; 
+}
+@keyframes walk-p1 {
+    from { background-position: 0px -0px; }
+    to { background-position: -720px -0px; }
 }
 
 
@@ -137,8 +164,8 @@
     animation: idle-p2 steps(4) .75s infinite; 
 }
 @keyframes idle-p2 {
-    from { background-position: -264px -124px; }
-    to { background-position: -470px -124px; }
+    from { background-position: -0px -0px; }
+    to { background-position: -208px -0px; }
 }
 
 .punch-p2 { 
@@ -146,26 +173,45 @@
 
 }
 @keyframes punch-p2 {
-    from { background-position: -482px -124px; }
-    to { background-position: -607px -124px; }
+    from { background-position: -0px -0px; }
+    to { background-position: -180px -0px; }
 }
 
 .kick-p2 { 
-    animation: kick-p2 steps(4) 0.45s infinite; 
+    animation: kick-p2 steps(7) 0.75s infinite; 
 }
 @keyframes kick-p2 {
-    from { background-position: 0px -25px; }
-    to { background-position: -297px -25px; }
+    0% {    background-position: 0px -0px;
+            transform: scale(1.5);  
+            
+    }
+    25% {transform: scale(1.5);   
+        transform: translateY(-15px);
+            
+    }
+    50% {   
+        transform: translateY(-30px);
+        transform: scale(1.5);
+            
+    }
+    75% {  
+        transform: translateY(-15px);
+        transform: scale(1.5); 
+            
+    }
+    100% {  transform: scale(1.5);
+            background-position: -490px -0px;
+            transform: translateY(0px);
+    }
 }
 
 .jump-p2 { 
     animation: jump-p2 steps(4) 0.8s infinite;
 }
 @keyframes jump-p2 {
-    0% {    background-position: -0px -160px;
+    0% {    background-position: -0px -0px;
     }
     30% {   transform: translateY(-40px);
-        
     }
     50% {   transform: translateY(-80px);
     }
@@ -173,9 +219,16 @@
     }
     85% {   transform: translateY(-25px);
     }
-    100% {  background-position: -222px -160px;
+    100% {  background-position: -228px -0px;
             transform: translateY(0px);
     }
+}
+.walk-p2 { 
+    animation: walk-p2 steps(4) .45s infinite; 
+}
+@keyframes walk-p2 {
+    from { background-position: -0px -0px; }
+    to { background-position: -196px -0px; }
 }
 
 
