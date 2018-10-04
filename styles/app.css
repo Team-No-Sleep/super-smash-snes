@@ -4,12 +4,11 @@ body, html{
     height: 100%;
 }
 .stage{
-    /* https://vignette.wikia.nocookie.net/streetfighter/images/3/37/Cammy%27s_stage%2C_English_Manor%2C_in_Street_Fighter_V..jpg/revision/latest?cb=20170927045101 */
     background-image:url('http://imgs.abduzeedo.com/files/articles/wicked-fighting-game-background-gifs/E4nU7qja.gif');
-    min-height: 408px;
+    min-height: 520px;
     background-position: center;
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: cover;
     position: relative;
 }
 .smash-icon{
@@ -26,11 +25,32 @@ body, html{
     height: 255px;
 }
 .goku{
-    top: 61%;
+    top: 68%;
     right: 67%;
     position: absolute;
 }
-
+.ryu{
+    top: 68%;
+    right: 34%;
+    position: absolute;
+}
+.counter-container{
+    position: relative;
+}
+.counter-img{
+    display: block;
+    width: 100%;
+    height: auto;
+}
+.counter-text{
+    position: absolute;
+    bottom: 3px;
+    width: 100%;
+    transition: .5s ease;    
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
 @media screen and (max-width: 610px){
     .top-position-uc{
         top: 88px!important;
