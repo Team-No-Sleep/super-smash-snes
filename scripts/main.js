@@ -334,7 +334,7 @@ loadMessages();
 
 // // Gets Link for Theme Song
 var audioElement = document.createElement("audio");
-audioElement.setAttribute("src", "sounds/theme-song.mp3");
+audioElement.setAttribute("src", "sounds/SNES.mp3");
 
 // Theme Button
 $(".sound-on").on("click", function () {
