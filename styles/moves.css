@@ -16,12 +16,27 @@
     width: 60px;
     height: 101px;
     margin-left: 555px;
-    margin-top: 330px;
+    margin-top: 280px;
     position: absolute;
     transform: scale(1.5);
     /* transform: scaleX(-1); */
     background-image:url('../images/ryu-sheet.png'); 
 }
+
+/* 
+================
+  COLLISION BOX
+================
+ */
+
+.collision-p1 {
+    background-color:red;
+}
+
+.collision-p2 {
+    background-color: blue;
+}
+
 
 /* 
 ============
@@ -45,27 +60,27 @@
 
 .ryu-idle {
     background: url('../images/ryu-sheet.png') no-repeat -264px -124px;
- }
- .ryu-punch {
+}
+.ryu-punch {
     background: url('../images/ryu-sheet.png') no-repeat -482px -124px;
     width: 74px;
     height: 99px;
- }
- .ryu-kick {
+}
+.ryu-kick {
     background: url('../images/ryu-sheet.png') no-repeat -0px -0px;
     width: 70px;
     height: 90px;
- }
- .ryu-jump {
+}
+.ryu-jump {
     background: url('../images/ryu-sheet.png') no-repeat -0px -124px;
     width: 60px;
     height: 105px;
- }
- .ryu-walk {
+}
+.ryu-walk {
     background: url('../images/ryu-sheet.png') no-repeat -0px -278px;
     width: 199px;
     height: 91px;
- }
+}
 
 
 /* 
