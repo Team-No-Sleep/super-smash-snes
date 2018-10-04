@@ -1,10 +1,64 @@
+// =======================
+//   COLLISION DETECTOR
+// =======================
+var collisionBox = {
+    ifHasContact: function (collisionBoxOne, collisionBoxTwo){
+        var collisionBox1 = $(collisionBoxOne);
+        var collisionBox2 = $(collisionBoxTwo);
+        
+        //collisionBox1 contact dimenstions
+        var collisionBox1x = collisionBox1.offset().left;
+        var collisionBox1y = collisionBox1.offset().top;
+        var collisionBox1w = collisionBox1.width();
+        var collisionBox1h = collisionBox1.height();
+        
+        //collisionBox2 contact dimensions
+        var collisionBox2x = collisionBox2.offset().left;
+        var collisionBox2y = collisionBox2.offset().top;
+        var collisionBox2w = collisionBox2.width();
+        var collisionBox2h = collisionBox2.height();
+        
+        if( collisionBox1y+collisionBox1h < collisionBox2y ||
+            collisionBox1y > collisionBox2y+collisionBox2h ||
+            collisionBox1x > collisionBox2x+collisionBox2w ||
+            collisionBox1x+collisionBox1w < collisionBox2x ){
+            return false;
+        }else{
+            return true;   
+        };
+    },
+
+    //this is for visual testing of collision; plaed in both Gamepads
+    checkContact: function() {
+        $('.collision-p1').each(function(){
+            if(collisionBox.ifHasContact('.collision-p2',$(this))){
+                $(this).css({backgroundColor:'green'});
+            } else {
+                $(this).css({backgroundColor:'red'});
+            }
+        });
+        $('.collision-p2').each(function(){
+            if(collisionBox.ifHasContact('.collision-p1',$(this))){
+                $(this).css({backgroundColor:'yellow'});
+            } else {
+                $(this).css({backgroundColor:'blue'});
+            }
+        });
+
+    },
+};
+
+
 // ==================
 //     GOKU GAMEPAD
 // ==================
-$(document).keypress(function(e){
+$(document).keyup(function(e){
+    //comment out this collisionBox object after testing
+    collisionBox.checkContact();
+    
     switch(e.which)
 		{
-        // user presses the "a"
+        // user presses the "a" PUNCH key
         case 97:	
             $('.goku').addClass('punch');
             $('.goku').addClass('gokuPunch');
@@ -14,7 +68,7 @@ $(document).keypress(function(e){
             }, 830);
             break;	
                     
-        // // user presses the "s" key
+        // user presses the "s" KICK key
         case 115:
             $('.goku').addClass('kick');
             $('.goku').addClass('gokuKick');
@@ -24,7 +78,7 @@ $(document).keypress(function(e){
             }, 530);
             break;	
                     
-        // // user presses the "d" key
+        // user presses the "d" JUMP key
         case 100:	
             $('.goku').addClass('jump');
             $('.goku').addClass('gokuJump');
@@ -34,16 +88,14 @@ $(document).keypress(function(e){
             }, 1530);
             break;	
                     
-         // // user presses the "q" key 
+         // user presses the "q" WALK LEFT key 
          case 113:	
              $('.goku').css({"margin-left": "-=10px" });;
-             console.log('goku left')
          break;
 
-         // // user presses the "e" key 
+         // user presses the "e"  WALK RIGHT key
          case 101:	
              $('.goku').css({"margin-left": "+=10px" });
-             console.log('goku right')
          break;
      }
 });
@@ -54,9 +106,12 @@ $(document).keypress(function(e){
 //     RYU GAMEPAD
 // ==================
 $(document).keypress(function(e){
+    //comment out this collisionBox object after testing
+    collisionBox.checkContact();
+
     switch(e.which)
 		{
-        // user presses the "j"
+        // user presses the "j" PUNCH key
         case 106:	
             $('.ryu').addClass('ryu-punch');
             $('.ryu').addClass('punch-p2');
@@ -66,7 +121,7 @@ $(document).keypress(function(e){
             }, 230);
             break;	
                     
-        // // user presses the "k" key
+        // user presses the "k" KICK key
         case 107:
             $('.ryu').addClass('ryu-kick');
             $('.ryu').addClass('kick-p2');
@@ -76,7 +131,7 @@ $(document).keypress(function(e){
             }, 540);
             break;	
                     
-        // // user presses the "l" key
+        // user presses the "l" JUMP key
         case 108:	
             $('.ryu').addClass('ryu-jump');
             $('.ryu').addClass('jump-p2');
@@ -86,12 +141,12 @@ $(document).keypress(function(e){
             }, 870);
             break;	
                     
-        // // user presses the "u" key
+        // user presses the "u" WALK LEFT key
         case 117:	
             $('.ryu').css({"margin-left": "-=10px" });
             break;
             
-        // // user presses the "o" key 
+        // user presses the "o" WALK RIGHT key 
         case 111:	
             $('.ryu').css({"margin-left": "+=10px"});
             break;
