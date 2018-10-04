@@ -43,6 +43,7 @@
   <link rel="stylesheet" href="styles/main.css">
   <link rel="stylesheet" href="styles/app.css" />
   <link rel="stylesheet" href="styles/moves.css" />
+  <link rel="stylesheet" href="styles/style.css" />
 
 </head>
 
@@ -78,10 +79,54 @@
     </nav>
   </header>
   <div class=" mdl-color--grey-100">
+    <!-- don't remove yet -->
+    <div class="container-fluid d-none">
+      <h3>Buttons for visual aid/testing</h3>
+      <button class="newGame">Reset Health Bar</button>
+      <div class="gamePad add-damage"></div>
+      <div>Damage = 10</div>
+    </div>
+    <!-- stops here -->
     <div class="stage">
+      <div class="row align-items-center mx-auto">
+        <div class="col-sm-1">
+          <img src="images/goku_hbi.png" class="img-fluid" />
+        </div>
+        <div class="col text-right">
+            <p class="text-white">11400</p>
+          <div class="health-box">
+            <div class="health-bar-red"></div>
+            <div class="health-bar-combine"></div>
+            <div class="health-bar"></div>
+            <div class="health-bar-text"></div>
+          </div>
+        </div>
+        <div class="col-sm-1">
+          <div class="counter-container">
+              <img src="images/counter_box.png" class="img-fluid counter-img" />
+            <div class="counter-text">
+              <p>98</p>
+            </div>
+          </div>
+          
+        </div>
+        <div class="col">
+          <p class="text-white">136900</p>
+          <div class="health-box">
+            <div class="health-bar-red"></div>
+            <div class="health-bar-combine"></div>
+            <div class="health-bar"></div>
+            <div class="health-bar-text"></div>
+          </div>
+        </div>
+        <div class="col-sm-1">
+          <img src="images/ryu_hbi.png" class="img-fluid" />
+        </div>
+      </div>
       <div class="collision-p1 goku idle"></div>
       <div class="collision-p2 ryu idle-p2"></div>
     </div>
+
     <div class="container-fluid mdl-color--black">
       <div class="row py-2 text-white align-items-center">
         <div class="col-sm-5">
@@ -100,7 +145,6 @@
         </div>
       </div>
     </div>
-    
     <div class="collapse" id="collapseExample">
       <div id="messages-card-container " class="border shadow mt-0 h-255">
         <!-- Messages container -->
@@ -146,7 +190,7 @@
   <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-firestore.js"></script>
   <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-messaging.js"></script>
   <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-functions.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase.js"></script> -->
+  <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
     crossorigin="anonymous"></script>
@@ -155,7 +199,9 @@
   <!-- sprite 1 javascript files -->
   <script src="scripts/keypad.js"></script>
   <script src="scripts/sprite.js"></script>
-  <script src="scripts/sprite-P1.js"></script>
+  <!-- healthbar -->
+  <script src="scripts/healthbar.js"></script>
+  <!-- <script src="scripts/sprite-P1.js"></script> -->
   <script src="scripts/main.js"></script>
 </body>
 

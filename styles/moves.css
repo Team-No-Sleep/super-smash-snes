@@ -11,12 +11,11 @@
     transform: scaleX(-1);
     background-image:url('../images/goku-sheet.png'); 
 }
-
 .ryu { 
     width: 60px;
     height: 101px;
     margin-left: 555px;
-    margin-top: 280px;
+    /* margin-top: 280px; */
     position: absolute;
     transform: scale(1.5);
     /* transform: scaleX(-1); */

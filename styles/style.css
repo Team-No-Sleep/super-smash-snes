@@ -27,17 +27,17 @@
 */
 
 .health-box {
-    background-color: #ccc;
+    background-color: black;
     height: 30px;
-    width: 500px;
-    border: solid 1px #aaa;
+    /* width: 500px; */
+    border: solid 4px black;
   }
   
   .health-bar {
     background-color: yellow;
     height: 100%;
     position: relative;
-    bottom: 56px;
+    bottom: 22px;
   }
   
   .health-bar-red {
@@ -48,10 +48,10 @@
   }
   
   .health-bar-combine {
-    height: 28px;
+    height: 0;
   }
   
   .health-bar-text {
     position: relative;
-    bottom: 80px;
+    bottom: 43px;
   }
