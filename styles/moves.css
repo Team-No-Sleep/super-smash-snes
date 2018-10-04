@@ -36,6 +36,14 @@
     background-color: blue;
 }
 
+.toggleGokuHit {
+    background-color: purple;
+}
+
+.toggleRyuHit {
+    background-color: orange;
+}
+
 
 /* 
 ============
@@ -133,19 +141,15 @@
 @keyframes jump {
     0% {    background-position: 0px -0px;
             transform: scaleX(-1);
-
     }
     25% {   transform: translateY(-100px);
             transform: scaleX(-1);
-
     }
     50% {   transform: translateY(-150px);
             transform: scaleX(-1);
-
     }
     75% {   transform: translateY(-100px);
             transform: scaleX(-1);
-
     }
     100% {  background-position: -1168px -0px;
     }
@@ -182,25 +186,14 @@
 }
 @keyframes kick-p2 {
     0% {    background-position: 0px -0px;
-            transform: scale(1.5);  
-            
     }
-    25% {transform: scale(1.5);   
-        transform: translateY(-15px);
-            
+    25% {   transform: translateY(-15px);
     }
-    50% {   
-        transform: translateY(-30px);
-        transform: scale(1.5);
-            
+    50% {   transform: translateY(-30px);
     }
-    75% {  
-        transform: translateY(-15px);
-        transform: scale(1.5); 
-            
+    75% {   transform: translateY(-15px);
     }
-    100% {  transform: scale(1.5);
-            background-position: -490px -0px;
+    100% {  background-position: -490px -0px;
             transform: translateY(0px);
     }
 }
