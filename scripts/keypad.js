@@ -36,7 +36,7 @@ function playJab(){
 // ==================
 $(document).keydown(function(event){
     //comment out this collisionBox object after testing
-    collisionTester.checkContact();
+    collisionQuery.checkContact();
     
     switch(event.which)
 		{
@@ -77,7 +77,7 @@ $(document).keydown(function(event){
 // ==================
 $(window).keydown(function(event){
     //comment out this collisionTester object after testing
-    collisionTester.checkContact();
+    collisionQuery.checkContact();
 
     switch(event.which)
 		{

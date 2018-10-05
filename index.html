@@ -102,14 +102,14 @@
             <img id="ryuImg" src="images/ryu_hbi.png" />
             <p><strong>Ryu</strong></p>
         </div>
-        <div class="health-box">
+        <!-- why is this here? <div class="health-box">
           <div class="health-bar-red"></div>
           <div class="health-bar-combine"></div>
           <div class="health-bar"></div>
           <div class="health-bar-text"></div>
-        </div>
+        </div> -->
       </div>
-      <div class="row align-items-center mx-auto">
+      <div id="healthBar" class="row align-items-center mx-auto d-none">
         <div class="col-sm-1">
           <img src="images/goku_hbi.png" class="img-fluid" />
         </div>
@@ -143,8 +143,8 @@
           <img src="images/ryu_hbi.png" class="img-fluid" />
         </div>
       </div>
-      <div class="collision-p1 goku idle-p1"></div>
-      <div class="collision-p2 ryu idle-p2"></div>
+      <div id="gokuSprite" class="collision-p1 goku idle-p1 d-none"></div>
+      <div id="ryuSprite" class="collision-p2 ryu idle-p2 d-none"></div>
     </div>
 
     <div class="container-fluid mdl-color--black">
