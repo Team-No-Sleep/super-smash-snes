@@ -35,22 +35,22 @@ var collisionBox = {
 //Comment out what you want to see: colors, logs, or both
 var collisionQA = {
     logGokuCollision: function () {
-        $(this).css({backgroundColor:'green'});
+        $('.goku').css({backgroundColor:'green'});
         // console.log('Goku hitbox: ', hitbox);
     },
     logGokuSafe: function () {
-        $(this).css({backgroundColor:'red'});
+        $('.goku').css({backgroundColor:'red'});
     },
     logRyuCollision: function() {
-        $(this).css({backgroundColor:'yellow'});
+        $('.ryu').css({backgroundColor:'yellow'});
         // console.log('Ryu hitbox: ', hitbox);
     },
     logRyuSafe: function () {
-        $(this).css({backgroundColor:'blue'});
+        $('.ryu').css({backgroundColor:'blue'});
     },
     hitBoxCheck: $(window).keydown(function () {
         if(collision === true) {
-            // console.log('collision confirmed: ', collision);
+            console.log('collision confirmed: ', collision);
             return collision
         };
     }),
@@ -73,7 +73,7 @@ var collisionQuery = {
         hitbox      = false;
         collisionQA.logGokuSafe();
     },
-    ryuCollisionPositive: function (params) {
+    ryuCollisionPositive: function () {
         collision   = true;
         hitbox      = true;
         collisionQA.logRyuCollision();
@@ -145,6 +145,93 @@ var hitboxQA = {
     },
 };
 
+
+
+//HEALTHBAR
+    let maxHitPoints = 0, curHitPoints = maxHitPoints;
+    var healthbar = {
+        generateHitPoints: function() {
+            maxHitPoints = 100;
+            $('.maxHitPoints').text(maxHitPoints);
+        },
+        assignDamageValue: function() {
+            $('.gamePad').each(function() {
+                var damageValue = 10;
+                $(this).val(damageValue);
+            });
+        },
+        countDamage: function(userSelection) {
+            damage = +$(userSelection).val();
+            $('.damage').text(damage);
+        },
+        applyDamageRyu: function(curHitPoints) {
+            //Removes a correct percentage ratio of hitpoints when 
+            //applying different amounts of damage
+            var hpToPercentRatio = curHitPoints * (100 / maxHitPoints);
+            $(".health-bar-text-p2").html(curHitPoints + ' HP');
+            $(".health-bar-red-p2").animate({
+                'width': hpToPercentRatio + "%"
+            }, 700);
+            $(".health-bar-p2").animate({
+                'width': hpToPercentRatio + "%"
+            }, 500);
+        },
+        applyDamageGoku: function(curHitPoints) {
+            //Removes a correct percentage ratio of hitpoints when 
+            //applying different amounts of damage
+            var hpToPercentRatio = curHitPoints * (100 / maxHitPoints);
+            $(".health-bar-text").html(curHitPoints + ' HP');
+            $(".health-bar-red").animate({
+                'width': hpToPercentRatio + "%"
+            }, 700);
+            $(".health-bar").animate({
+                'width': hpToPercentRatio + "%"
+            }, 500);
+        },
+        resetHealthBar: function () {
+            curHitPoints = maxHitPoints;
+            //Goku
+            $(".health-bar-text").html(curHitPoints + ' HP');
+            $('.health-bar-red').css('width', '100%');
+            $('.health-bar').css('width', '100%');
+            //RYU
+            $(".health-bar-text-p2").html(curHitPoints + ' HP');
+            $('.health-bar-red-p2').css('width', '100%');
+            $('.health-bar-p2').css('width', '100%');
+        },
+        resetGame: function() {
+            this.generateHitPoints();
+            this.assignDamageValue();
+            $('.damage').text(' ');
+            this.resetHealthBar();
+        },
+    };
+
+    var eventHandlers = {
+        damageMonitor: function() {
+            healthbar.countDamage(this);
+        },
+        applyDamageRyu: function(damage) {
+            curHitPoints = curHitPoints - damage;
+            healthbar.applyDamageRyu(curHitPoints);
+        },
+        applyDamageGoku: function(damage) {
+            curHitPoints = curHitPoints - damage;
+            healthbar.applyDamageGoku(curHitPoints);
+        },
+        intializeGameClick: $('.newGame').click(function() {
+            healthbar.resetGame();
+            $(".health-bar-text").html(curHitPoints + ' HP');
+            $(".health-bar-text-p2").html(curHitPoints + ' HP');
+        }),
+        intializeGame: function() {
+            healthbar.resetGame();
+            $(".health-bar-text").html(curHitPoints + ' HP');
+            $(".health-bar-text-p2").html(curHitPoints + ' HP');
+        },
+    };eventHandlers.intializeGame();
+
+
 // =============
 //    HIT BOX
 // =============
@@ -157,12 +244,15 @@ $(window).keydown(function(event){
             if (collision && hitbox) {
                 hitboxQA.gokuPunch();
                 healthCounter.applyDamageRyu();
+                eventHandlers.applyDamageRyu(5);
+                //if punch lands, an ouch sound effect plays
             }break;	
         // user presses the "S" KICK key
         case 83:
             if (collision && hitbox) {
                 hitboxQA.gokuKick();
                 healthCounter.applyDamageRyu();
+                eventHandlers.applyDamageRyu(10);
             }break;	
 	
         //RYU HIT DETECT
@@ -171,12 +261,14 @@ $(window).keydown(function(event){
             if (collision && hitbox) {
                 hitboxQA.ryuPunch();
                 healthCounter.applyDamageGoku();
+                eventHandlers.applyDamageGoku(5);
             }break;	
         // user presses the "K" KICK key
         case 75:
             if (collision && hitbox) {
                 hitboxQA.ryuKick();
                 healthCounter.applyDamageGoku();
+                eventHandlers.applyDamageGoku(10);
             }break;	
         }
 });
