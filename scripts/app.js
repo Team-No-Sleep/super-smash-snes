@@ -76,3 +76,39 @@ var lossCount;
 $(document).ready(function () {
     //$("#instructions").addClass("d-none");
 });
+
+// Functions
+// ======================
+// On Click
+
+//showcase goku info when the user clicks the character
+$("#gokuChar").on("click", function (event) {
+    // Prevent the page from refreshing
+    event.preventDefault();
+
+    //shows healthbar
+    $("#healthBar").removeClass("d-none");
+    //shows goku sprite
+    $("#gokuSprite").removeClass("d-none");
+    //shows ryu sprite
+    $("#ryuSprite").removeClass("d-none");
+
+    //hide instructions again
+    $("#content").addClass("d-none");
+});
+
+//showcase ryu info when the user clicks the character
+$("#ryuChar").on("click", function (event) {
+    // Prevent the page from refreshing
+    event.preventDefault();
+    
+    //shows healthbar
+    $("#healthBar").removeClass("d-none");
+    //shows ryu sprite
+    $("#ryuSprite").removeClass("d-none");
+    //shows goku sprite
+    $("#gokuSprite").removeClass("d-none");
+    //hide instructions again
+    $("#content").addClass("d-none");
+    
+});
