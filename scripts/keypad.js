@@ -1,60 +1,9 @@
-// =======================
-//   COLLISION DETECTOR
-// =======================
-var collisionBox = {
-    ifHasContact: function (collisionBoxOne, collisionBoxTwo){
-        var collisionBox1 = $(collisionBoxOne);
-        var collisionBox2 = $(collisionBoxTwo);
-        
-        //collisionBox1 contact dimenstions
-        var collisionBox1x = collisionBox1.offset().left;
-        var collisionBox1y = collisionBox1.offset().top;
-        var collisionBox1w = collisionBox1.width();
-        var collisionBox1h = collisionBox1.height();
-        
-        //collisionBox2 contact dimensions
-        var collisionBox2x = collisionBox2.offset().left;
-        var collisionBox2y = collisionBox2.offset().top;
-        var collisionBox2w = collisionBox2.width();
-        var collisionBox2h = collisionBox2.height();
-        
-        if( collisionBox1y+collisionBox1h < collisionBox2y ||
-            collisionBox1y > collisionBox2y+collisionBox2h ||
-            collisionBox1x > collisionBox2x+collisionBox2w ||
-            collisionBox1x+collisionBox1w < collisionBox2x ){
-            return false;
-        }else{
-            return true;   
-        };
-    },
-
-    //this is for visual testing of collision; plaed in both Gamepads
-    checkContact: function() {
-        $('.collision-p1').each(function(){
-            if(collisionBox.ifHasContact('.collision-p2',$(this))){
-                $(this).css({backgroundColor:'green'});
-            } else {
-                $(this).css({backgroundColor:'red'});
-            }
-        });
-        $('.collision-p2').each(function(){
-            if(collisionBox.ifHasContact('.collision-p1',$(this))){
-                $(this).css({backgroundColor:'yellow'});
-            } else {
-                $(this).css({backgroundColor:'blue'});
-            }
-        });
-
-    },
-};
-
-
 // ==================
 //     GOKU GAMEPAD
 // ==================
 $(document).keydown(function(event){
     //comment out this collisionBox object after testing
-    collisionBox.checkContact();
+    collisionTester.checkContact();
     
     switch(event.which)
 		{
@@ -94,8 +43,8 @@ $(document).keydown(function(event){
 //     RYU GAMEPAD
 // ==================
 $(window).keydown(function(event){
-    //comment out this collisionBox object after testing
-    collisionBox.checkContact();
+    //comment out this collisionTester object after testing
+    collisionTester.checkContact();
 
     switch(event.which)
 		{
@@ -135,10 +84,10 @@ $(window).keydown(function(event){
 //    WALKING
 // =============
 
-//GOKUWALK
+// GOKUWALK
 var gokuWalk = {
     player: $(".goku"),
-    speed: 0.5,
+    speed: 2,
     direction: {
         left: false,
         right: false,
@@ -175,7 +124,7 @@ setInterval(gokuWalk.move, 1);
 //RYUWALK
 var ryuWalk = {
     player: $(".ryu"),
-    speed: 0.5,
+    speed: 2,
     direction: {
         left: false,
         right: false,
