@@ -99,9 +99,14 @@
             <img id="ryuImg" src="images/ryu_hbi.png" />
             <p><strong>Ryu</strong></p>
         </div>
-
+        <div class="health-box">
+          <div class="health-bar-red"></div>
+          <div class="health-bar-combine"></div>
+          <div class="health-bar"></div>
+          <div class="health-bar-text"></div>
+        </div>
       </div>
-      <div class="row align-items-center mx-auto d-none">
+      <div class="row align-items-center mx-auto">
         <div class="col-sm-1">
           <img src="images/goku_hbi.png" class="img-fluid" />
         </div>
@@ -121,23 +126,22 @@
               <p>98</p>
             </div>
           </div>
-
         </div>
         <div class="col">
           <p class="text-white">136900</p>
-          <div class="health-box">
-            <div class="health-bar-red"></div>
-            <div class="health-bar-combine"></div>
-            <div class="health-bar"></div>
-            <div class="health-bar-text"></div>
+          <div class="health-box-p2">
+            <div class="health-bar-red-p2"></div>
+            <div class="health-bar-combine-p2"></div>
+            <div class="health-bar-p2"></div>
+            <div class="health-bar-text-p2"></div>
           </div>
         </div>
         <div class="col-sm-1">
           <img src="images/ryu_hbi.png" class="img-fluid" />
         </div>
       </div>
-      <div class="collision-p1 goku idle-p1 d-none"></div>
-      <div class="collision-p2 ryu idle-p2 d-none"></div>
+      <div class="collision-p1 goku idle-p1"></div>
+      <div class="collision-p2 ryu idle-p2"></div>
     </div>
 
     <div class="container-fluid mdl-color--black">
@@ -214,7 +218,7 @@
   <script src="scripts/sprite.js"></script>
   <script src="scripts/collision.js"></script>
   <!-- healthbar -->
-  <script src="scripts/healthbar.js"></script>
+  <!-- <script src="scripts/healthbar.js"></script> -->
   <!-- <script src="scripts/sprite-P1.js"></script> -->
   <script src="scripts/main.js"></script>
   <script src="scripts/app.js"></script>

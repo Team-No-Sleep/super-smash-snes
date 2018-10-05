@@ -1,7 +1,6 @@
 $(document).ready(function() {
     let maxHitPoints = 0, curHitPoints = maxHitPoints;
-    //add window to game instead of var to let it attach to the window
-     var game = {
+    var healthbar = {
         generateHitPoints: function() {
             maxHitPoints = 100;
             $('.maxHitPoints').text(maxHitPoints);
@@ -44,14 +43,14 @@ $(document).ready(function() {
 
     var eventHandlers = {
         damageMonitor: $('.gamePad').click(function() {
-            game.countDamage(this);
+            healthbar.countDamage(this);
         }),
         applyDamage: $('.add-damage').click(function() {
             curHitPoints = curHitPoints - damage;
-            game.applyDamage(curHitPoints);
+            healthbar.applyDamage(curHitPoints);
         }),
         intializeGame: $('.newGame').click(function() {
-            game.resetGame();
+            healthbar.resetGame();
             $(".health-bar-text").html(curHitPoints + ' HP');
         }),
     };
