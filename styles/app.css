@@ -1,89 +1,92 @@
-* {box-sizing: border-box;}
-body, html{
-    margin: 0;
-    height: 100%;
+* {
+  box-sizing: border-box;
 }
-.stage{
-    background-image:url('http://imgs.abduzeedo.com/files/articles/wicked-fighting-game-background-gifs/E4nU7qja.gif');
-    min-height: 520px;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
+body,
+html {
+  margin: 0;
+  height: 100%;
 }
-#content{
-    position: absolute;
-    bottom: 18%;
-    background: rgb(0, 0, 0); /* Fallback color */
-    background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
-    color: #f1f1f1;
-    width: 100%;
-    padding: 20px;
+.stage {
+  background-image: url("http://imgs.abduzeedo.com/files/articles/wicked-fighting-game-background-gifs/E4nU7qja.gif");
+  min-height: 520px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
 }
-.icon-sizing{
-    font-size: 21px!important;
+#content {
+  position: absolute;
+  bottom: 18%;
+  background: rgb(0, 0, 0); /* Fallback color */
+  background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
+  color: #f1f1f1;
+  width: 100%;
+  padding: 20px;
 }
-.smash-icon{
-    top: 0;
-    width: 98px;
+.icon-sizing {
+  font-size: 21px !important;
 }
-.font-size-3em{
-    font-size: 3em;
+.smash-icon {
+  top: 0;
+  width: 98px;
 }
-.top-position-uc{
-    top: 28px!important;
+.font-size-3em {
+  font-size: 3em;
 }
-.h-255{
-    height: 255px;
+.top-position-uc {
+  top: 28px !important;
 }
-.goku{
-    top: 68%;
-    right: 67%;
-    position: absolute;
+.h-255 {
+  height: 255px;
 }
-#gokuChar:hover, #ryuChar:hover{
-    background: rgba(255, 255, 255, 0.5); /* Black background with 0.5 opacity */
+.goku {
+  top: 68%;
+  right: 67%;
+  position: absolute;
 }
-.ryu{
-    top: 68%;
-    right: 34%;
-    position: absolute;
+#gokuChar:hover,
+#ryuChar:hover {
+  background: rgba(255, 255, 255, 0.5); /* Black background with 0.5 opacity */
 }
-.counter-container{
-    position: relative;
+.ryu {
+  top: 68%;
+  right: 34%;
+  position: absolute;
 }
-.counter-img{
-    display: block;
-    width: 100%;
-    height: auto;
+.counter-container {
+  position: relative;
 }
-.counter-text{
-    position: absolute;
-    bottom: 3px;
-    width: 100%;
-    transition: .5s ease;    
-    color: white;
-    padding: 20px;
-    text-align: center;
+.counter-img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
-@media screen and (max-width: 610px){
-    .top-position-uc{
-        top: 88px!important;
-    }
-    .height-uc {
-        height: 41px!important;
-    }
+.counter-text {
+  position: absolute;
+  bottom: 3px;
+  width: 100%;
+  transition: 0.5s ease;
+  color: white;
+  padding: 20px;
+  text-align: center;
 }
-
-li{
-    font-family: 'depixelbreitfett';
-    font-size: 12px;
-    line-height: 2.5;
+@media screen and (max-width: 610px) {
+  .top-position-uc {
+    top: 88px !important;
+  }
+  .height-uc {
+    height: 41px !important;
+  }
 }
-.logo{
-    color: orange;
-    font-family: 'depixelbreitfett';
+li {
+  font-family: "depixelbreitfett";
+  font-size: 12px;
+  line-height: 2.5;
 }
-p{
-    font-family: 'depixelbreitfett';
+.logo {
+  color: orange;
+  font-family: "depixelbreitfett";
+}
+p {
+  font-family: "depixelbreitfett";
 }
