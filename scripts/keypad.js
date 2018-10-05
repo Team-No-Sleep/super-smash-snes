@@ -1,3 +1,36 @@
+//sound effect from sound.js library
+var hadouken = "hadouken";var punch = "punch";var cut ="cut";var jab ="jab";
+var cross = "cross";
+function loadSound(){
+    createjs.Sound.registerSound("sounds/hadouken.mp3",hadouken);
+    createjs.Sound.registerSound("sounds/cross.mp3",cross);
+    createjs.Sound.registerSound("sounds/punch.mp3",punch);
+    createjs.Sound.registerSound("sounds/cut.mp3",cut);
+    createjs.Sound.registerSound("sounds/jab.mp3",jab);
+}
+loadSound();
+function playHadouken(){
+    createjs.Sound.play(hadouken);
+}
+function playCross(){
+    createjs.Sound.play(cross);
+}
+function playPunch(){
+    createjs.Sound.play(punch);
+}
+function playCut(){
+    createjs.Sound.play(cut);
+}
+function playJab(){
+    createjs.Sound.play(jab);
+}
+// playHadouken();
+// playCross();
+// playCut();
+// playJab();
+// playPunch();
+
+
 // ==================
 //     GOKU GAMEPAD
 // ==================
