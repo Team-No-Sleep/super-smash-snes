@@ -3,7 +3,7 @@
 // ==================
 $(document).keydown(function(event){
     //comment out this collisionBox object after testing
-    collisionQuery.checkContact();
+    collisionTester.checkContact();
     
     switch(event.which)
 		{
@@ -36,7 +36,7 @@ $(document).keydown(function(event){
                 $('.goku').removeClass('goku-jump'); 
             }, 830);
             break;	
-        }
+         }
 });
 
 // ==================
@@ -44,7 +44,7 @@ $(document).keydown(function(event){
 // ==================
 $(window).keydown(function(event){
     //comment out this collisionTester object after testing
-    collisionQuery.checkContact();
+    collisionTester.checkContact();
 
     switch(event.which)
 		{
@@ -84,83 +84,8 @@ $(window).keydown(function(event){
 //    WALKING
 // =============
 
-// // walkGamePad
-// var walkGamePad = {
-//     player: $(".goku"),
-//     speed: 2,
-//     direction: {
-//         left: false,
-//         right: false,
-//     },
-//     keyDown: $(document).keydown(function(event) {
-//         var keycode = event.keyCode;
-//         event.preventDefault();
-//         if (keycode === 81) walkGamePad.direction.left = true;
-//         if (keycode === 69) walkGamePad.direction.right = true;
-//     }),
-//     keyUp: $(document).keyup(function(event) {
-//         var keycode = event.keyCode;
-//         event.preventDefault();
-//         if (keycode === 81) walkGamePad.direction.left = false;
-//         if (keycode === 69) walkGamePad.direction.right = false;
-//     }), 
-//     animateGo: $(document).keydown(function() {
-//         if (walkGamePad.direction.left === true || walkGamePad.direction.right === true) {
-//             walkGamePad.player.addClass('goku-walk walk-p1');
-//         } 
-//     }),
-//     animateStop: $(document).keyup(function() {
-//         if (walkGamePad.direction.left === false || walkGamePad.direction.right === false) {
-//             walkGamePad.player.removeClass('goku-walk walk-p1');
-//         };
-//     }),
-//     move: function() {
-//         if (walkGamePad.direction.left) walkGamePad.player.css("left", (walkGamePad.player.position().left - walkGamePad.speed) + "px");
-//         if (walkGamePad.direction.right) walkGamePad.player.css("left", (walkGamePad.player.position().left + walkGamePad.speed) + "px");
-//     },
-// };
-// setInterval(walkGamePad.move, 1);
-
-// //RYUWALK
-// var ryuWalk = {
-//     player: $(".ryu"),
-//     speed: 2,
-//     direction: {
-//         left: false,
-//         right: false,
-//     },
-//     keyDown: $(document).keydown(function(event) {
-//         var keycode = event.keyCode;
-//         event.preventDefault();
-//         if (keycode === 85) ryuWalk.direction.left = true;
-//         if (keycode === 79) ryuWalk.direction.right = true;
-//     }), 
-//     keyUp: $(document).keyup(function(event) {
-//         var keycode = event.keyCode;
-//         event.preventDefault();
-//         if (keycode === 85) ryuWalk.direction.left = false;
-//         if (keycode === 79) ryuWalk.direction.right = false;
-//     }),
-//     animateGo: $(document).keydown(function() {
-//         if (ryuWalk.direction.left === true || ryuWalk.direction.right === true) {
-//             ryuWalk.player.addClass('ryu-walk walk-p1');
-//         } 
-//     }),
-//     animateStop: $(document).keyup(function() {
-//         if (ryuWalk.direction.left === false || ryuWalk.direction.right === false) {
-//             ryuWalk.player.removeClass('ryu-walk walk-p1');
-//         };
-//     }),
-//     move: function() {
-//         if (ryuWalk.direction.left) ryuWalk.player.css("left", (ryuWalk.player.position().left - ryuWalk.speed) + "px");
-//         if (ryuWalk.direction.right) ryuWalk.player.css("left", (ryuWalk.player.position().left + ryuWalk.speed) + "px");
-//     },
-// };setInterval(ryuWalk.move, 1);
-
-
-
-// walkGamePad
-var walkGamePad = {
+// GOKUWALK
+var gokuWalk = {
     player: $(".goku"),
     speed: 2,
     direction: {
@@ -170,41 +95,31 @@ var walkGamePad = {
     keyDown: $(document).keydown(function(event) {
         var keycode = event.keyCode;
         event.preventDefault();
-        if (keycode === 81) walkGamePad.direction.left = true;
-        if (keycode === 69) walkGamePad.direction.right = true;
-        if (keycode === 85) ryuWalk.direction.left = true;
-        if (keycode === 79) ryuWalk.direction.right = true;
+        if (keycode === 81) gokuWalk.direction.left = true;
+        if (keycode === 69) gokuWalk.direction.right = true;
     }),
     keyUp: $(document).keyup(function(event) {
         var keycode = event.keyCode;
         event.preventDefault();
-        if (keycode === 81) walkGamePad.direction.left = false;
-        if (keycode === 69) walkGamePad.direction.right = false;
-        if (keycode === 85) ryuWalk.direction.left = false;
-        if (keycode === 79) ryuWalk.direction.right = false;
+        if (keycode === 81) gokuWalk.direction.left = false;
+        if (keycode === 69) gokuWalk.direction.right = false;
     }), 
     animateGo: $(document).keydown(function() {
-        if (walkGamePad.direction.left === true || walkGamePad.direction.right === true) {
-            walkGamePad.player.addClass('goku-walk walk-p1');
-        }
-        if (ryuWalk.direction.left === true || ryuWalk.direction.right === true) {
-            ryuWalk.player.addClass('ryu-walk walk-p1');
-        }  
+        if (gokuWalk.direction.left === true || gokuWalk.direction.right === true) {
+            gokuWalk.player.addClass('goku-walk walk-p1');
+        } 
     }),
     animateStop: $(document).keyup(function() {
-        if (walkGamePad.direction.left === false || walkGamePad.direction.right === false) {
-            walkGamePad.player.removeClass('goku-walk walk-p1');
-        }
-        if (ryuWalk.direction.left === false || ryuWalk.direction.right === false) {
-            ryuWalk.player.removeClass('ryu-walk walk-p1');
-        }
+        if (gokuWalk.direction.left === false || gokuWalk.direction.right === false) {
+            gokuWalk.player.removeClass('goku-walk walk-p1');
+        };
     }),
     move: function() {
-        if (walkGamePad.direction.left) walkGamePad.player.css("left", (walkGamePad.player.position().left - walkGamePad.speed) + "px");
-        if (walkGamePad.direction.right) walkGamePad.player.css("left", (walkGamePad.player.position().left + walkGamePad.speed) + "px");
+        if (gokuWalk.direction.left) gokuWalk.player.css("left", (gokuWalk.player.position().left - gokuWalk.speed) + "px");
+        if (gokuWalk.direction.right) gokuWalk.player.css("left", (gokuWalk.player.position().left + gokuWalk.speed) + "px");
     },
 };
-setInterval(walkGamePad.move, 1);
+setInterval(gokuWalk.move, 1);
 
 //RYUWALK
 var ryuWalk = {
@@ -214,25 +129,23 @@ var ryuWalk = {
         left: false,
         right: false,
     },
-    // keyDown: $(document).keydown(function(event) {
-    //     var keycode = event.keyCode;
-    //     event.preventDefault();
-    // if (keycode === 85) ryuWalk.direction.left = true;
-    // if (keycode === 79) ryuWalk.direction.right = true;
-    
-    // }), 
-    // keyUp: $(document).keyup(function(event) {
-        //     var keycode = event.keyCode;
-        //     event.preventDefault();
-        // if (keycode === 85) ryuWalk.direction.left = false;
-        // if (keycode === 79) ryuWalk.direction.right = false;
-        
-    // }),
-    // animateGo: $(document).keydown(function() {
-    //     if (ryuWalk.direction.left === true || ryuWalk.direction.right === true) {
-    //         ryuWalk.player.addClass('ryu-walk walk-p1');
-    //     } 
-    // }),
+    keyDown: $(document).keydown(function(event) {
+        var keycode = event.keyCode;
+        event.preventDefault();
+        if (keycode === 85) ryuWalk.direction.left = true;
+        if (keycode === 79) ryuWalk.direction.right = true;
+    }), 
+    keyUp: $(document).keyup(function(event) {
+        var keycode = event.keyCode;
+        event.preventDefault();
+        if (keycode === 85) ryuWalk.direction.left = false;
+        if (keycode === 79) ryuWalk.direction.right = false;
+    }),
+    animateGo: $(document).keydown(function() {
+        if (ryuWalk.direction.left === true || ryuWalk.direction.right === true) {
+            ryuWalk.player.addClass('ryu-walk walk-p1');
+        } 
+    }),
     animateStop: $(document).keyup(function() {
         if (ryuWalk.direction.left === false || ryuWalk.direction.right === false) {
             ryuWalk.player.removeClass('ryu-walk walk-p1');
