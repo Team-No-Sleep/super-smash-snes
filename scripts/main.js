@@ -1,4 +1,4 @@
-/**
+/* /**
  * Copyright 2015 Google Inc. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-'use strict';
+"use strict";
 
 // Signs-in Friendly Chat.
 function signIn() {
@@ -36,7 +36,7 @@ function initFirebaseAuth() {
 
 // Returns the signed-in user's profile Pic URL.
 function getProfilePicUrl() {
-  return firebase.auth().currentUser.photoURL || 'images/profile.png';
+  return firebase.auth().currentUser.photoURL || "images/profile.png";
 }
 
 // Returns the signed-in user's display name.
@@ -54,77 +54,118 @@ function loadMessages() {
   // Loads the last 12 messages and listen for new ones.
   var callback = function(snap) {
     var data = snap.val();
-    displayMessage(snap.key, data.name, data.text, data.profilePicUrl, data.imageUrl);
+    displayMessage(
+      snap.key,
+      data.name,
+      data.text,
+      data.profilePicUrl,
+      data.imageUrl
+    );
   };
 
-  database.ref('/messages/').limitToLast(12).on('child_added', callback);
-  database.ref('/messages/').limitToLast(12).on('child_changed', callback);
+  database
+    .ref("/messages/")
+    .limitToLast(12)
+    .on("child_added", callback);
+  database
+    .ref("/messages/")
+    .limitToLast(12)
+    .on("child_changed", callback);
 }
 
 // Saves a new message on the Firebase DB.
 function saveMessage(messageText) {
   // Add a new message entry to the Firebase database.
-  return database.ref('/messages/').push({
-    name: getUserName(),
-    text: messageText,
-    profilePicUrl: getProfilePicUrl()
-  }).catch(function(error) {
-    console.error('Error writing new message to Firebase Database', error);
-  });
+  return database
+    .ref("/messages/")
+    .push({
+      name: getUserName(),
+      text: messageText,
+      profilePicUrl: getProfilePicUrl()
+    })
+    .catch(function(error) {
+      console.error("Error writing new message to Firebase Database", error);
+    });
 }
 
 // Saves a new message containing an image in Firebase.
 // This first saves the image in Firebase storage.
 function saveImageMessage(file) {
   // 1 - We add a message with a loading icon that will get updated with the shared image.
-  database.ref('/messages/').push({
-    name: getUserName(),
-    imageUrl: LOADING_IMAGE_URL,
-    profilePicUrl: getProfilePicUrl()
-  }).then(function(messageRef) {
-    // 2 - Upload the image to Cloud Storage.
-    var filePath = firebase.auth().currentUser.uid + '/' + messageRef.key + '/' + file.name;
-    return firebase.storage().ref(filePath).put(file).then(function(fileSnapshot) {
-      // 3 - Generate a public URL for the file.
-      return fileSnapshot.ref.getDownloadURL().then((url) => {
-        // 4 - Update the chat message placeholder with the image’s URL.
-        return messageRef.update({
-          imageUrl: url,
-          storageUri: fileSnapshot.metadata.fullPath
+  database
+    .ref("/messages/")
+    .push({
+      name: getUserName(),
+      imageUrl: LOADING_IMAGE_URL,
+      profilePicUrl: getProfilePicUrl()
+    })
+    .then(function(messageRef) {
+      // 2 - Upload the image to Cloud Storage.
+      var filePath =
+        firebase.auth().currentUser.uid +
+        "/" +
+        messageRef.key +
+        "/" +
+        file.name;
+      return firebase
+        .storage()
+        .ref(filePath)
+        .put(file)
+        .then(function(fileSnapshot) {
+          // 3 - Generate a public URL for the file.
+          return fileSnapshot.ref.getDownloadURL().then(url => {
+            // 4 - Update the chat message placeholder with the image’s URL.
+            return messageRef.update({
+              imageUrl: url,
+              storageUri: fileSnapshot.metadata.fullPath
+            });
+          });
         });
-      });
+    })
+    .catch(function(error) {
+      console.error(
+        "There was an error uploading a file to Cloud Storage:",
+        error
+      );
     });
-  }).catch(function(error) {
-    console.error('There was an error uploading a file to Cloud Storage:', error);
-  });
 }
 
 // Saves the messaging device token to the datastore.
 function saveMessagingDeviceToken() {
-  firebase.messaging().getToken().then(function(currentToken) {
-    if (currentToken) {
-      console.log('Got FCM device token:', currentToken);
-      // Saving the Device Token to the datastore.
-      database.ref('/fcmTokens').child(currentToken)
+  firebase
+    .messaging()
+    .getToken()
+    .then(function(currentToken) {
+      if (currentToken) {
+        console.log("Got FCM device token:", currentToken);
+        // Saving the Device Token to the datastore.
+        database
+          .ref("/fcmTokens")
+          .child(currentToken)
           .set(firebase.auth().currentUser.uid);
-    } else {
-      // Need to request permissions to show notifications.
-      requestNotificationsPermissions();
-    }
-  }).catch(function(error){
-    console.error('Unable to get messaging token.', error);
-  });
+      } else {
+        // Need to request permissions to show notifications.
+        requestNotificationsPermissions();
+      }
+    })
+    .catch(function(error) {
+      console.error("Unable to get messaging token.", error);
+    });
 }
 
 // Requests permissions to show notifications.
 function requestNotificationsPermissions() {
-  console.log('Requesting notifications permission...');
-  firebase.messaging().requestPermission().then(function() {
-    // Notification permission granted.
-    saveMessagingDeviceToken();
-  }).catch(function(error) {
-    console.error('Unable to get permission to notify.', error);
-  });
+  console.log("Requesting notifications permission...");
+  firebase
+    .messaging()
+    .requestPermission()
+    .then(function() {
+      // Notification permission granted.
+      saveMessagingDeviceToken();
+    })
+    .catch(function(error) {
+      console.error("Unable to get permission to notify.", error);
+    });
 }
 
 // Triggered when a file is selected via the media picker.
@@ -136,9 +177,9 @@ function onMediaFileSelected(event) {
   imageFormElement.reset();
 
   // Check if the file is an image.
-  if (!file.type.match('image.*')) {
+  if (!file.type.match("image.*")) {
     var data = {
-      message: 'You can only share images',
+      message: "You can only share images",
       timeout: 2000
     };
     signInSnackbarElement.MaterialSnackbar.showSnackbar(data);
@@ -165,33 +206,35 @@ function onMessageFormSubmit(e) {
 
 // Triggers when the auth state change for instance when the user signs-in or signs-out.
 function authStateObserver(user) {
-  if (user) { // User is signed in!
+  if (user) {
+    // User is signed in!
     // Get the signed-in user's profile pic and name.
     var profilePicUrl = getProfilePicUrl();
     var userName = getUserName();
 
     // Set the user's profile pic and name.
-    userPicElement.style.backgroundImage = 'url(' + profilePicUrl + ')';
+    userPicElement.style.backgroundImage = "url(" + profilePicUrl + ")";
     userNameElement.textContent = userName;
 
     // Show user's profile and sign-out button.
-    userNameElement.removeAttribute('hidden');
-    userPicElement.removeAttribute('hidden');
-    signOutButtonElement.removeAttribute('hidden');
+    userNameElement.removeAttribute("hidden");
+    userPicElement.removeAttribute("hidden");
+    signOutButtonElement.removeAttribute("hidden");
 
     // Hide sign-in button.
-    signInButtonElement.setAttribute('hidden', 'true');
+    signInButtonElement.setAttribute("hidden", "true");
 
     // We save the Firebase Messaging Device token and enable notifications.
     saveMessagingDeviceToken();
-  } else { // User is signed out!
+  } else {
+    // User is signed out!
     // Hide user's profile and sign-out button.
-    userNameElement.setAttribute('hidden', 'true');
-    userPicElement.setAttribute('hidden', 'true');
-    signOutButtonElement.setAttribute('hidden', 'true');
+    userNameElement.setAttribute("hidden", "true");
+    userPicElement.setAttribute("hidden", "true");
+    signOutButtonElement.setAttribute("hidden", "true");
 
     // Show sign-in button.
-    signInButtonElement.removeAttribute('hidden');
+    signInButtonElement.removeAttribute("hidden");
   }
 }
 
@@ -204,7 +247,7 @@ function checkSignedInWithMessage() {
 
   // Display a message to the user using a Toast.
   var data = {
-    message: 'You must sign-in first',
+    message: "You must sign-in first",
     timeout: 2000
   };
   signInSnackbarElement.MaterialSnackbar.showSnackbar(data);
@@ -213,52 +256,56 @@ function checkSignedInWithMessage() {
 
 // Resets the given MaterialTextField.
 function resetMaterialTextfield(element) {
-  element.value = '';
+  element.value = "";
   element.parentNode.MaterialTextfield.boundUpdateClassesHandler();
 }
 
 // Template for messages.
 var MESSAGE_TEMPLATE =
-    '<div class="message-container">' +
-      '<div class="spacing"><div class="pic"></div></div>' +
-      '<div class="message"></div>' +
-      '<div class="name"></div>' +
-    '</div>';
+  '<div class="message-container">' +
+  '<div class="spacing"><div class="pic"></div></div>' +
+  '<div class="message"></div>' +
+  '<div class="name"></div>' +
+  "</div>";
 
 // A loading image URL.
-var LOADING_IMAGE_URL = 'https://www.google.com/images/spin-32.gif?a';
+var LOADING_IMAGE_URL = "https://www.google.com/images/spin-32.gif?a";
 
 // Displays a Message in the UI.
 function displayMessage(key, name, text, picUrl, imageUrl) {
   var div = document.getElementById(key);
   // If an element for that message does not exists yet we create it.
   if (!div) {
-    var container = document.createElement('div');
+    var container = document.createElement("div");
     container.innerHTML = MESSAGE_TEMPLATE;
     div = container.firstChild;
-    div.setAttribute('id', key);
+    div.setAttribute("id", key);
     messageListElement.appendChild(div);
   }
   if (picUrl) {
-    div.querySelector('.pic').style.backgroundImage = 'url(' + picUrl + ')';
+    div.querySelector(".pic").style.backgroundImage = "url(" + picUrl + ")";
   }
-  div.querySelector('.name').textContent = name;
-  var messageElement = div.querySelector('.message');
-  if (text) { // If the message is text.
+  div.querySelector(".name").textContent = name;
+  var messageElement = div.querySelector(".message");
+  if (text) {
+    // If the message is text.
     messageElement.textContent = text;
     // Replace all line breaks by <br>.
-    messageElement.innerHTML = messageElement.innerHTML.replace(/\n/g, '<br>');
-  } else if (imageUrl) { // If the message is an image.
-    var image = document.createElement('img');
-    image.addEventListener('load', function() {
+    messageElement.innerHTML = messageElement.innerHTML.replace(/\n/g, "<br>");
+  } else if (imageUrl) {
+    // If the message is an image.
+    var image = document.createElement("img");
+    image.addEventListener("load", function() {
       messageListElement.scrollTop = messageListElement.scrollHeight;
     });
-    image.src = imageUrl + '&' + new Date().getTime();
-    messageElement.innerHTML = '';
+    image.src = imageUrl + "&" + new Date().getTime();
+    messageElement.innerHTML = "";
     messageElement.appendChild(image);
   }
   // Show the card fading-in and scroll to view the new message.
-  setTimeout(function() {div.classList.add('visible')}, 1);
+  setTimeout(function() {
+    div.classList.add("visible");
+  }, 1);
   messageListElement.scrollTop = messageListElement.scrollHeight;
   messageInputElement.focus();
 }
@@ -267,9 +314,9 @@ function displayMessage(key, name, text, picUrl, imageUrl) {
 // fields.
 function toggleButton() {
   if (messageInputElement.value) {
-    submitButtonElement.removeAttribute('disabled');
+    submitButtonElement.removeAttribute("disabled");
   } else {
-    submitButtonElement.setAttribute('disabled', 'true');
+    submitButtonElement.setAttribute("disabled", "true");
   }
 }
 
@@ -297,34 +344,34 @@ firebase.initializeApp(config);
 //create a variable to reference the database
 window.database = firebase.database();
 // Shortcuts to DOM Elements.
-var messageListElement = document.getElementById('messages');
-var messageFormElement = document.getElementById('message-form');
-var messageInputElement = document.getElementById('message');
-var submitButtonElement = document.getElementById('submit');
-var imageButtonElement = document.getElementById('submitImage');
-var imageFormElement = document.getElementById('image-form');
-var mediaCaptureElement = document.getElementById('mediaCapture');
-var userPicElement = document.getElementById('user-pic');
-var userNameElement = document.getElementById('user-name');
-var signInButtonElement = document.getElementById('sign-in');
-var signOutButtonElement = document.getElementById('sign-out');
-var signInSnackbarElement = document.getElementById('must-signin-snackbar');
+var messageListElement = document.getElementById("messages");
+var messageFormElement = document.getElementById("message-form");
+var messageInputElement = document.getElementById("message");
+var submitButtonElement = document.getElementById("submit");
+var imageButtonElement = document.getElementById("submitImage");
+var imageFormElement = document.getElementById("image-form");
+var mediaCaptureElement = document.getElementById("mediaCapture");
+var userPicElement = document.getElementById("user-pic");
+var userNameElement = document.getElementById("user-name");
+var signInButtonElement = document.getElementById("sign-in");
+var signOutButtonElement = document.getElementById("sign-out");
+var signInSnackbarElement = document.getElementById("must-signin-snackbar");
 
 // Saves message on form submit.
-messageFormElement.addEventListener('submit', onMessageFormSubmit);
-signOutButtonElement.addEventListener('click', signOut);
-signInButtonElement.addEventListener('click', signIn);
+messageFormElement.addEventListener("submit", onMessageFormSubmit);
+signOutButtonElement.addEventListener("click", signOut);
+signInButtonElement.addEventListener("click", signIn);
 
 // Toggle for the button.
-messageInputElement.addEventListener('keyup', toggleButton);
-messageInputElement.addEventListener('change', toggleButton);
+messageInputElement.addEventListener("keyup", toggleButton);
+messageInputElement.addEventListener("change", toggleButton);
 
 // Events for image upload.
-imageButtonElement.addEventListener('click', function(e) {
+imageButtonElement.addEventListener("click", function(e) {
   e.preventDefault();
   mediaCaptureElement.click();
 });
-mediaCaptureElement.addEventListener('change', onMediaFileSelected);
+mediaCaptureElement.addEventListener("change", onMediaFileSelected);
 
 // initialize Firebase
 initFirebaseAuth();
@@ -332,15 +379,15 @@ initFirebaseAuth();
 // We load currently existing chat messages and listen to new ones.
 loadMessages();
 
-
 // // Gets Link for Theme Song
 var audioElement = document.createElement("audio");
 audioElement.setAttribute("src", "sounds/SNES.mp3");
 
 // Theme Button
-$(".sound-on").on("click", function () {
-    audioElement.play();
+$(".sound-on").on("click", function() {
+  audioElement.play();
 });
-$(".sound-off").on("click", function () {
-    audioElement.pause();
+$(".sound-off").on("click", function() {
+  audioElement.pause();
 });
+ */
