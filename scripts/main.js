@@ -57,14 +57,14 @@ function loadMessages() {
     displayMessage(snap.key, data.name, data.text, data.profilePicUrl, data.imageUrl);
   };
 
-  firebase.database().ref('/messages/').limitToLast(12).on('child_added', callback);
-  firebase.database().ref('/messages/').limitToLast(12).on('child_changed', callback);
+  database.ref('/messages/').limitToLast(12).on('child_added', callback);
+  database.ref('/messages/').limitToLast(12).on('child_changed', callback);
 }
 
 // Saves a new message on the Firebase DB.
 function saveMessage(messageText) {
   // Add a new message entry to the Firebase database.
-  return firebase.database().ref('/messages/').push({
+  return database.ref('/messages/').push({
     name: getUserName(),
     text: messageText,
     profilePicUrl: getProfilePicUrl()
@@ -77,7 +77,7 @@ function saveMessage(messageText) {
 // This first saves the image in Firebase storage.
 function saveImageMessage(file) {
   // 1 - We add a message with a loading icon that will get updated with the shared image.
-  firebase.database().ref('/messages/').push({
+  database.ref('/messages/').push({
     name: getUserName(),
     imageUrl: LOADING_IMAGE_URL,
     profilePicUrl: getProfilePicUrl()
@@ -105,7 +105,7 @@ function saveMessagingDeviceToken() {
     if (currentToken) {
       console.log('Got FCM device token:', currentToken);
       // Saving the Device Token to the datastore.
-      firebase.database().ref('/fcmTokens').child(currentToken)
+      database.ref('/fcmTokens').child(currentToken)
           .set(firebase.auth().currentUser.uid);
     } else {
       // Need to request permissions to show notifications.
@@ -294,7 +294,8 @@ firebase.initializeApp(config);
 
 // // Checks that Firebase has been imported.
 // checkSetup();
-
+//create a variable to reference the database
+window.database = firebase.database();
 // Shortcuts to DOM Elements.
 var messageListElement = document.getElementById('messages');
 var messageFormElement = document.getElementById('message-form');
