@@ -21,11 +21,14 @@
 
 - Nice-To-Haves
   * emojis for chat
-  * theme music generated from an api
   * opening game page
   * medals for winners
   
  ### Part 1- Street-Fight Game as a glance:
+ ### Highlights of our game feature
+  * Live chat
+  * animated backgrounds
+  * 
   
   #### Instructions:
   * Log in
@@ -34,11 +37,16 @@
   * Win and earn prices
   * Tap chatbox to start a conversation.
   
- ### Materials used, Copyrights and Acknowledgements
+  
+ ### Material and Tools
+  * Node.js
+  * [Sound.js](https://www.createjs.com/soundjs)
   * [Material Design Lite](https://github.com/google/material-design-lite)
   * [Google Firebase Plaform](https://firebase.google.com)
   * [Sprite.js library](https://spritejs.readthedocs.io/en/latest/)
-  * [Privacy](https://termsfeed.com/privacy-policy/6cf81f38974eab1bf5dc46b1e06725e6)
+ 
+  ### Copyrights and Acknowledgements
+   * [Privacy](https://termsfeed.com/privacy-policy/6cf81f38974eab1bf5dc46b1e06725e6)
   * [Terms & conditions](https://termsfeed.com/terms-conditions/0014ae28a1cef6301fb4b9fb42109b40)
   
   
