@@ -295,7 +295,8 @@ firebase.initializeApp(config);
 // // Checks that Firebase has been imported.
 // checkSetup();
 //create a variable to reference the database
-window.database = firebase.database();
+var database = firebase.database();
+
 // Shortcuts to DOM Elements.
 var messageListElement = document.getElementById('messages');
 var messageFormElement = document.getElementById('message-form');
