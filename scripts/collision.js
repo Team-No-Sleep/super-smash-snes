@@ -124,7 +124,8 @@ var collisionQuery = {
 
 
 //HEALTHBAR
-    let maxHitPoints = 0, curHitPoints = maxHitPoints;
+    let maxGokuHitPoints = 0, curGokuHitPoints = maxGokuHitPoints;
+    let maxRyuHitPoints = 0, curRyuHitPoints = maxRyuHitPoints;
     var healthbar = {
         generateHitPoints: function() {
             maxHitPoints = 100;
