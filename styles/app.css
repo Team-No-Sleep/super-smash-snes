@@ -74,13 +74,16 @@ body, html{
         height: 41px!important;
     }
 }
-body{
-    font-family: 'depixelbreitfett';
-}
+
 li{
+    font-family: 'depixelbreitfett';
     font-size: 12px;
     line-height: 2.5;
 }
 .logo{
     color: orange;
+    font-family: 'depixelbreitfett';
+}
+p{
+    font-family: 'depixelbreitfett';
 }
