@@ -1,6 +1,7 @@
 $(document).ready(function() {
     let maxHitPoints = 0, curHitPoints = maxHitPoints;
-    var game = {
+    //add window to game instead of var to let it attach to the window
+     var game = {
         generateHitPoints: function() {
             maxHitPoints = 100;
             $('.maxHitPoints').text(maxHitPoints);
