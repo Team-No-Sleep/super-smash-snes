@@ -5,35 +5,37 @@ var characters = starterCharacters();
 
 //hols characters data
 function starterCharacters() {
-    //characters set
-    return [
-        {//first character
-            name: "Goku",
-            charAttributes: {
-                //current health points
-                hPoints: 20000,
-                //max health points
-                maxHPoints: 20000,
-                //attack points
-                attackPwr: 800
-            },
-            //characters icon
-            img: "images/goku_hbi.png"
-        },
-        {//second character
-            name: "Ryu",
-            charAttributes: {
-                //current health points
-                hPoints: 30000,
-                //max health points
-                maxHPoints : 30000,
-                //attack points
-                attackPwr: 800
-            },
-            //characters icon
-            img: "images/ryu_hbi.png"
-        }
-    ];
+  //characters set
+  return [
+    {
+      //first character
+      name: "Goku",
+      charAttributes: {
+        //current health points
+        hPoints: 20000,
+        //max health points
+        maxHPoints: 20000,
+        //attack points
+        attackPwr: 800
+      },
+      //characters icon
+      img: "images/goku_hbi.png"
+    },
+    {
+      //second character
+      name: "Ryu",
+      charAttributes: {
+        //current health points
+        hPoints: 30000,
+        //max health points
+        maxHPoints: 30000,
+        //attack points
+        attackPwr: 800
+      },
+      //characters icon
+      img: "images/ryu_hbi.png"
+    }
+  ];
 }
 
 //initialize player 1
@@ -73,8 +75,8 @@ var lossCount;
 //declare a winner of the game if the either player win 3 rounds in a row
 
 //loads jQuery after the document is already loaded
-$(document).ready(function () {
-    //$("#instructions").addClass("d-none");
+$(document).ready(function() {
+  //$("#instructions").addClass("d-none");
 });
 
 // Functions
@@ -82,33 +84,32 @@ $(document).ready(function () {
 // On Click
 
 //showcase goku info when the user clicks the character
-$("#gokuChar").on("click", function (event) {
-    // Prevent the page from refreshing
-    event.preventDefault();
+$("#gokuChar").on("click", function(event) {
+  // Prevent the page from refreshing
+  event.preventDefault();
 
-    //shows healthbar
-    $("#healthBar").removeClass("d-none");
-    //shows goku sprite
-    $("#gokuSprite").removeClass("d-none");
-    //shows ryu sprite
-    $("#ryuSprite").removeClass("d-none");
+  //shows healthbar
+  $("#healthBar").removeClass("d-none");
+  //shows goku sprite
+  $("#gokuSprite").removeClass("d-none");
+  //shows ryu sprite
+  $("#ryuSprite").removeClass("d-none");
 
-    //hide instructions again
-    $("#content").addClass("d-none");
+  //hide instructions again
+  $("#content").addClass("d-none");
 });
 
 //showcase ryu info when the user clicks the character
-$("#ryuChar").on("click", function (event) {
-    // Prevent the page from refreshing
-    event.preventDefault();
-    
-    //shows healthbar
-    $("#healthBar").removeClass("d-none");
-    //shows ryu sprite
-    $("#ryuSprite").removeClass("d-none");
-    //shows goku sprite
-    $("#gokuSprite").removeClass("d-none");
-    //hide instructions again
-    $("#content").addClass("d-none");
-    
+$("#ryuChar").on("click", function(event) {
+  // Prevent the page from refreshing
+  event.preventDefault();
+
+  //shows healthbar
+  $("#healthBar").removeClass("d-none");
+  //shows ryu sprite
+  $("#ryuSprite").removeClass("d-none");
+  //shows goku sprite
+  $("#gokuSprite").removeClass("d-none");
+  //hide instructions again
+  $("#content").addClass("d-none");
 });

@@ -37,12 +37,6 @@ function playKick() {
 function playJump() {
   createjs.Sound.play(jump);
 }
-// playHadouken();
-// playCross();
-// playCut();
-// playJab();
-// playPunch();
-
 // ==================
 //     GOKU GAMEPAD
 // ==================
@@ -89,7 +83,7 @@ $(document).keydown(function(event) {
 // ==================
 //     RYU GAMEPAD
 // ==================
-$(window).keydown(function(event) {
+$(document).keydown(function(event) {
   //comment out this collisionTester object after testing
   collisionQuery.checkContact();
 
@@ -225,3 +219,4 @@ var ryuWalk = {
   }
 };
 setInterval(ryuWalk.move, 1);
+
