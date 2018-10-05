@@ -1,5 +1,3 @@
-
-
 //sound effect from sound.js library
 var hadouken = "hadouken";
 var punch = "punch";
@@ -39,12 +37,6 @@ function playKick() {
 function playJump() {
   createjs.Sound.play(jump);
 }
-// playHadouken();
-// playCross();
-// playCut();
-// playJab();
-// playPunch();
-
 // ==================
 //     GOKU GAMEPAD
 // ==================
