@@ -1,3 +1,5 @@
+
+
 //sound effect from sound.js library
 var hadouken = "hadouken";
 var punch = "punch";
@@ -89,7 +91,7 @@ $(document).keydown(function(event) {
 // ==================
 //     RYU GAMEPAD
 // ==================
-$(window).keydown(function(event) {
+$(document).keydown(function(event) {
   //comment out this collisionTester object after testing
   collisionQuery.checkContact();
 
@@ -225,3 +227,4 @@ var ryuWalk = {
   }
 };
 setInterval(ryuWalk.move, 1);
+
