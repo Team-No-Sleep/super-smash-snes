@@ -11,6 +11,18 @@ body, html{
     background-size: cover;
     position: relative;
 }
+#content{
+    position: absolute;
+    bottom: 18%;
+    background: rgb(0, 0, 0); /* Fallback color */
+    background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
+    color: #f1f1f1;
+    width: 100%;
+    padding: 20px;
+}
+.icon-sizing{
+    font-size: 21px!important;
+}
 .smash-icon{
     top: 0;
     width: 98px;
@@ -28,6 +40,9 @@ body, html{
     top: 68%;
     right: 67%;
     position: absolute;
+}
+#gokuChar:hover, #ryuChar:hover{
+    background: rgba(255, 255, 255, 0.5); /* Black background with 0.5 opacity */
 }
 .ryu{
     top: 68%;
@@ -58,4 +73,14 @@ body, html{
     .height-uc {
         height: 41px!important;
     }
+}
+body{
+    font-family: 'depixelbreitfett';
+}
+li{
+    font-size: 12px;
+    line-height: 2.5;
+}
+.logo{
+    color: orange;
 }
