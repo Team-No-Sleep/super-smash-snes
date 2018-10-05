@@ -18,10 +18,10 @@ var collisionBox = {
         var collisionBox2w = collisionBox2.width();
         var collisionBox2h = collisionBox2.height();
         
-        if( collisionBox1y + collisionBox1h < collisionBox2y ||
-            collisionBox1y > collisionBox2y + collisionBox2h ||
-            collisionBox1x > collisionBox2x + collisionBox2w ||
-            collisionBox1x + collisionBox1w < collisionBox2x ){
+        if( collisionBox1y+collisionBox1h < collisionBox2y ||
+            collisionBox1y > collisionBox2y+collisionBox2h ||
+            collisionBox1x > collisionBox2x+collisionBox2w ||
+            collisionBox1x+collisionBox1w < collisionBox2x ){
             return false;
         }else{
             return true;   
@@ -59,8 +59,8 @@ var collisionQA = {
 // ==========================
 //   COLLISION CONFIRMATION
 // ==========================
-var collision   = false;
-var hitbox      = false;
+var collision = false;
+var hitbox = false;
 
 var collisionQuery = {
     gokuCollisionPositive: function () {
@@ -83,67 +83,43 @@ var collisionQuery = {
         hitbox      = false;
         collisionQA.logRyuSafe();
     },
+
     checkContact: function() {
         $('.collision-p1').each(function(){
             if(collisionBox.ifHasContact('.collision-p2',$(this))){
-                collisionQuery.gokuCollisionPositive();
+                $(this).css({backgroundColor:'green'});
+                collision = true;
+                hitbox = true;
+                console.log('Goku hitbox: ', hitbox);
             } else {
-                collisionQuery.gokuCollisionNegative();
+                $(this).css({backgroundColor:'red'});
+                collision = false;
+                hitbox = false;
             }
         });
         $('.collision-p2').each(function(){
             if(collisionBox.ifHasContact('.collision-p1',$(this))){
-                collisionQuery.ryuCollisionPositive();
+                $(this).css({backgroundColor:'yellow'});
+                collision = true;
+                hitbox = true;
+                console.log('Ryu hitbox: ', hitbox);
             } else {
-                collisionQuery.ryuCollisionNegative();
+                $(this).css({backgroundColor:'blue'});
+                collision = false;
+                hitbox = false;
             }
         });
     },
 
-};
+    hitBoxCheck: $(window).keydown(function () {
+            if(collision === true) {
+                console.log('collision confirmed: ', collision);
+                return collision
+            };
+    }),
+}
 
 
-//this is to test a pseudo integration of health damage
-var healthCounter = {
-    gokuHealth  : 100,
-    ryuHealth   : 100,
-    damage      : 10,
-    
-    applyDamageRyu: function () {
-        this.ryuHealth = this.ryuHealth - this.damage;
-        return this.ryuHealth;
-        },
-    applyDamageGoku: function () {
-            this.gokuHealth = this.gokuHealth - this.damage;
-            return this.gokuHealth;
-        },
-    };
-    console.log('Starting RYU health: ', healthCounter.ryuHealth);
-    console.log('Starting GOKU health: ', healthCounter.gokuHealth);
-    console.log('Damage = ', healthCounter.damage);
-
-// ==================
-// HITBOX QA TESTING
-// ==================
-
-var hitboxQA = {
-    gokuPunch: function () {
-        $('.goku').css('background-color', 'orange');
-        console.log('Current RYU health: ', healthCounter.ryuHealth);
-    },
-    gokuKick: function () {
-        $('.goku').css('background-color', 'orange');
-        console.log('Current RYU health: ', healthCounter.ryuHealth);
-    },
-    ryuPunch: function () {
-        $('.ryu').css('background-color', 'purple');
-        console.log('Current GOKU haelth: ', healthCounter.gokuHealth);
-    },
-    ryuKick: function () {
-        $('.ryu').css('background-color', 'purple');
-        console.log('Current GOKU haelth: ', healthCounter.gokuHealth);
-    },
-};
 
 
 
@@ -235,11 +211,14 @@ var hitboxQA = {
 // =============
 //    HIT BOX
 // =============
+
 $(window).keydown(function(event){
     switch(event.which)
         {
-        //GOKU HIT DETECT
-        //user presses the "A" PUNCH key
+        // =================
+        //   GOKU HIT DETECT
+        // =================
+        // user presses the "A" PUNCH key
         case 65:
             if (collision && hitbox) {
                 hitboxQA.gokuPunch();
@@ -255,8 +234,10 @@ $(window).keydown(function(event){
                 eventHandlers.applyDamageRyu(10);
             }break;	
 	
-        //RYU HIT DETECT
-        //user presses the "J" PUNCH key
+        // =================
+        //   RYU HIT DETECT
+        // =================
+        // user presses the "j" PUNCH key
         case 74:	
             if (collision && hitbox) {
                 hitboxQA.ryuPunch();
@@ -272,4 +253,3 @@ $(window).keydown(function(event){
             }break;	
         }
 });
-

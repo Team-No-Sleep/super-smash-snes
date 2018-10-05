@@ -3,7 +3,7 @@
 // ==================
 $(document).keydown(function(event){
     //comment out this collisionBox object after testing
-    collisionQuery.checkContact();
+    collisionTester.checkContact();
     
     switch(event.which)
 		{
@@ -44,7 +44,7 @@ $(document).keydown(function(event){
 // ==================
 $(window).keydown(function(event){
     //comment out this collisionTester object after testing
-    collisionQuery.checkContact();
+    collisionTester.checkContact();
 
     switch(event.which)
 		{
