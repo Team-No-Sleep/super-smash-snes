@@ -34,21 +34,21 @@ var collisionBox = {
 // ====================
 // COLLISION QA TESTING
 // ====================
-//Comment out what you want to see: colors, logs, or both
+// //Comment out what you want to see: colors, logs, or both
 var collisionQA = {
   logGokuCollision: function() {
-    $(".goku").css({ backgroundColor: "green" });
+    // $(".goku").css({ backgroundColor: "green" });
     // console.log('Goku hitbox: ', hitbox);
   },
   logGokuSafe: function() {
-    $(".goku").css({ backgroundColor: "red" });
+    // $(".goku").css({ backgroundColor: "red" });
   },
   logRyuCollision: function() {
-    $(".ryu").css({ backgroundColor: "yellow" });
+    // $(".ryu").css({ backgroundColor: "yellow" });
     // console.log('Ryu hitbox: ', hitbox);
   },
   logRyuSafe: function() {
-    $(".ryu").css({ backgroundColor: "blue" });
+    // $(".ryu").css({ backgroundColor: "blue" });
   },
   hitBoxCheck: $(window).keydown(function() {
     if (collision === true) {
