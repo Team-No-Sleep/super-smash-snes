@@ -3,26 +3,17 @@
 //initialize player 1
 var goku = null;
 
-//initialize data for player1
-var gokuData = null;
-
-//reference to player 1
-var initGoku = null;
-
 //initialize player 2
 var ryu = null;
 
-//initialize data for player2
-var ryuData = null;
-
-//reference to player 2
-var initRyu = null;
+//tracks current fighter
+var myFighter = null;
 
 //wins count
-var winCount;
+var winCount = 0;
 
 //loss count
-var lossCount;
+var lossCount = 0;
 
 //  Variable that will hold the setInterval that runs the countdown
 var intervalId;
@@ -42,10 +33,6 @@ var clockRunning = false;
 
 //declare a winner of the game if the either player win 3 rounds in a row
 
-//loads jQuery after the document is already loaded
-$(document).ready(function () {
-    //$("#instructions").addClass("d-none");
-});
 
 // Functions
 // ======================
@@ -68,7 +55,6 @@ function characterHandlers() {
                 if (snapshot.val() !== null) {
                     return;
                 }
-
                 //handles player1 name selection
                 goku = userNameElement.textContent;
 
@@ -97,6 +83,9 @@ function characterHandlers() {
 
                 //make the fake function call the real function
                 recordGokusKeyPad = recordGokusKeyPadReal;
+
+                //current fighter
+                myFighter = "goku";
             }
         );
     });
@@ -140,6 +129,9 @@ function characterHandlers() {
 
                 //make the fake function call the real function
                 recordRyusKeyPad = recordRyusKeyPadReal;
+
+                //current fighter
+                myFighter = "ryu";
             }
         );
     });
@@ -165,8 +157,8 @@ database.ref("/players/goku").on("value", function (snapshot) {
     } else {
         //reset game when goku is not present
         if (goku !== null && ryu !== null) {
-            //call reset
-            resetFightArena("Goku Forfeits!");
+            //reset fight arena based on timer running out, declare a winner and don't reset arena
+            resetFightArena("Goku Forfeits!", "ryu", true);
         }
 
         //handles player1 name updates
@@ -203,8 +195,8 @@ database.ref("/players/ryu").on("value", function (snapshot) {
     } else {
         //reset game when ryu is not present
         if (ryu !== null && goku !== null) {
-            //call reset
-            resetFightArena("Ryu Forfeits!");
+            //reset fight arena based on timer running out, declare a winner and don't reset arena
+            resetFightArena("Ryu Forfeits!", "goku", true);
         }
 
         //handles player2 name updates
@@ -229,6 +221,18 @@ function maybeStartTimer() {
         countdown.start();
     }
 }
+//sets who won
+database.ref("/wins/").on("value", function (snapshot) {
+    //whenever win count changes the html gets updated
+    console.log(snapshot.val());
+    if(snapshot.val() === null){
+        return;
+    }
+
+    //update html
+     $("#gokuWinCount").text(snapshot.val().goku);
+     $("#ryuWinCount").text(snapshot.val().ryu);
+});
 
 //show fighting arena
 function revealFigthingArena() {
@@ -282,10 +286,45 @@ function keyPadInputs(snapshot) {
 }
 
 //reset function
-function resetFightArena(message) {
+function resetFightArena(message, winner, fullReset) {
     //reset characters values
     goku = null;
     ryu = null;
+
+    //for testing
+    console.log("winner: " + winner);
+
+    //stop timer
+    countdown.stop();
+
+    //makes the current fighter still standing the winner
+    if (myFighter === winner) {
+        //read current value
+        database.ref("/wins/").once("value").then(function (snapshot) {
+            //holds current winner
+            let tempWinner = winner;
+
+            //for testing
+            console.log("winner: " + winner);
+
+            //holds current wins
+            let tempWins = snapshot.val();
+
+            //updates current wins for each player
+            if (tempWins === null) {
+                tempWins = {
+                    goku: 0,
+                    ryu: 0
+                };
+            }
+
+            //wins are increased
+            tempWins[winner] += 1;
+
+            //update database
+            database.ref("/wins/").update(tempWins);
+        });
+    }
 
     //showcase victories and forfeits messages
     $("#displayMessage").text(message);
@@ -382,20 +421,18 @@ var countdown = {
             //stop countdown
             countdown.stop();
 
-            //reset fight arena
-            resetFightArena("Time Up!");
-            //display the winner of the round
-            //rightAndWrong();
+            //figure out who the winner is
+            let winner = "";
 
-            //delaying showing the winner of the round to the user and restart the round again
-            //setTimeout(initGame, 2000);
-
-            //keep track of the unanswered questions
-            //countUnansweredAnswers++;
-
-            //keep track of number of questions answered
-            //countQuestion++;
-
+            if (healthCounter.gokuHealth > healthCounter.ryuHealth) {
+                winner = "goku";
+            } else if (healthCounter.gokuHealth === healthCounter.ryuHealth) {
+                winner = null;
+            } else {
+                winner = "ryu";
+            }
+            //reset fight arena based on timer running out, declare a winner and don't reset arena
+            resetFightArena("Time Up!", winner, false);
         }
     }
 };
