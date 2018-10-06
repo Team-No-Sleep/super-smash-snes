@@ -137,13 +137,13 @@ var gokuWalk = {
   },
   keyDown: $(document).keydown(function(event) {
     var keycode = event.keyCode;
-    event.preventDefault();
+    // event.preventDefault();
     if (keycode === 81) gokuWalk.direction.left = true;
     if (keycode === 69) gokuWalk.direction.right = true;
   }),
   keyUp: $(document).keyup(function(event) {
     var keycode = event.keyCode;
-    event.preventDefault();
+    // event.preventDefault();
     if (keycode === 81) gokuWalk.direction.left = false;
     if (keycode === 69) gokuWalk.direction.right = false;
   }),
@@ -185,13 +185,13 @@ var ryuWalk = {
   },
   keyDown: $(document).keydown(function(event) {
     var keycode = event.keyCode;
-    event.preventDefault();
+    // event.preventDefault();
     if (keycode === 85) ryuWalk.direction.left = true;
     if (keycode === 79) ryuWalk.direction.right = true;
   }),
   keyUp: $(document).keyup(function(event) {
     var keycode = event.keyCode;
-    event.preventDefault();
+    // event.preventDefault();
     if (keycode === 85) ryuWalk.direction.left = false;
     if (keycode === 79) ryuWalk.direction.right = false;
   }),
@@ -217,6 +217,6 @@ var ryuWalk = {
         ryuWalk.player.position().left + ryuWalk.speed + "px"
       );
   }
-};
+} ;
 setInterval(ryuWalk.move, 1);
 
