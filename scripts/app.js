@@ -1,66 +1,72 @@
 //set up/initialize global variables for winning/loosing the round (winCount, loseCount, player1BaseHealthPoints, player2BaseHealthPoints, player1CurrentHealthPoints, player2HealthPoints, player1AttackPoints, player2AttackPoints)
 
-//initialize characters attributes
-var characters = starterCharacters();
+// //initialize characters attributes
+// var characters = starterCharacters();
 
-//hols characters data
-function starterCharacters() {
-  //characters set
-  return [
-    {
-      //first character
-      name: "Goku",
-      charAttributes: {
-        //current health points
-        hPoints: 20000,
-        //max health points
-        maxHPoints: 20000,
-        //attack points
-        attackPwr: 800
-      },
-      //characters icon
-      img: "images/goku_hbi.png"
-    },
-    {
-      //second character
-      name: "Ryu",
-      charAttributes: {
-        //current health points
-        hPoints: 30000,
-        //max health points
-        maxHPoints: 30000,
-        //attack points
-        attackPwr: 800
-      },
-      //characters icon
-      img: "images/ryu_hbi.png"
-    }
-  ];
-}
+// //hols characters data
+// function starterCharacters() {
+//     //characters set
+//     return [
+//         {
+//             //first character
+//             name: "Goku",
+//             charAttributes: {
+//                 //current health points
+//                 hPoints: 20000,
+//                 //max health points
+//                 maxHPoints: 20000,
+//                 //attack points
+//                 attackPwr: 800
+//             },
+//             //characters icon
+//             img: "images/goku_hbi.png"
+//         },
+//         {
+//             //second character
+//             name: "Ryu",
+//             charAttributes: {
+//                 //current health points
+//                 hPoints: 30000,
+//                 //max health points
+//                 maxHPoints: 30000,
+//                 //attack points
+//                 attackPwr: 800
+//             },
+//             //characters icon
+//             img: "images/ryu_hbi.png"
+//         }
+//     ];
+// }
 
 //initialize player 1
-var player1 = null;
+var goku = null;
 
 //initialize data for player1
-var player1Data = null;
+var gokuData = null;
 
 //reference to player 1
-var initPlayer1 = null;
+var initGoku = null;
 
 //initialize player 2
-var player2 = null;
+var ryu = null;
 
 //initialize data for player2
-var player2Data = null;
+var ryuData = null;
 
 //reference to player 2
-var initPlayer2 = null;
+var initRyu = null;
 
 //wins count
 var winCount;
 
 //loss count
 var lossCount;
+
+//  Variable that will hold the setInterval that runs the countdown
+var intervalId;
+
+// prevents the clock from being sped up unnecessarily
+var clockRunning = false;
 
 //player 1 attacks player2 the attack happens with attacks points reduces health points by the number of attack points then player2 attacks player 1 the same way therefore attack points reduces health points by the number of attack points.
 
@@ -75,41 +81,214 @@ var lossCount;
 //declare a winner of the game if the either player win 3 rounds in a row
 
 //loads jQuery after the document is already loaded
-// $(document).ready(function() {
-//   //$("#instructions").addClass("d-none");
-// });
+$(document).ready(function () {
+    //$("#instructions").addClass("d-none");
+});
 
 // Functions
 // ======================
 // On Click
 
-//showcase goku info when the user clicks the character
-$("#gokuChar").on("click", function(event) {
-  // Prevent the page from refreshing
-  event.preventDefault();
+//make handlers for click handlers for goku and ryu
+function characterHandlers() {
+    $("#gokuImg").addClass("should-hover");
+    $("#ryuImg").addClass("should-hover");
 
-  //shows healthbar
-  $("#healthBar").removeClass("d-none");
-  //shows goku sprite
-  $("#gokuSprite").removeClass("d-none");
-  //shows ryu sprite
-  $("#ryuSprite").removeClass("d-none");
+    //showcase goku info when the user clicks the character
+    $("#gokuChar").on("click", function (event) {
+        // Prevent the page from refreshing
+        event.preventDefault();
 
-  //hide instructions again
-  $("#content").addClass("d-none");
+        //check there is not already a player online
+        database.ref("/players/goku").once("value").then(
+            function (snapshot) {
+                //check that no other player has chosen goku
+                if (snapshot.val() !== null) {
+                    return;
+                }
+
+                //handles player1 name selection
+                goku = userNameElement.textContent;
+
+                //update html
+                $("#player1").text(goku);
+
+                //hide instructions
+                revealFigthingArena();
+
+                //handles data deletion when player leaves
+                database.ref("/players/goku").onDisconnect().remove();
+
+                //change what is saved in firebase
+                database.ref("/players").update({
+                    goku: goku
+                });
+            }
+        );
+    });
+
+    //showcase ryu info when the user clicks the character
+    $("#ryuChar").on("click", function (event) {
+        // Prevent the page from refreshing
+        event.preventDefault();
+        //check there is not already a player online
+        database.ref("/players/ryu").once("value").then(
+            function (snapshot) {
+                //check that no other player has chosen goku
+                if (snapshot.val() !== null) {
+                    return;
+                }
+                //handles player1 name selection
+                ryu = userNameElement.textContent;
+
+                //update html
+                $("#player2").text(ryu);
+
+                //hide instructions
+                revealFigthingArena();
+
+                //handles data deletion when player leaves
+                database.ref("/players/ryu").onDisconnect().remove();
+
+                //change what is saved in firebase
+                database.ref("/players").update({
+                    ryu: ryu
+                });
+            }
+        );
+    });
+    //handles timer
+    countdown.reset();
+    countdown.start();
+}
+// Firebase is always watching for changes to the data on the character goku.
+// When changes occurs it will print them to console and html
+database.ref("/players/goku").on("value", function (snapshot) {
+
+    // Print the initial data to the console.
+    console.log(snapshot.val());
+
+    //update local variables with database data
+    if(snapshot.val() !== null){
+        //handles player1 name updates
+        goku = snapshot.val();
+
+        //update html
+        $("#player1").text(goku);
+        
+    } else{
+        //handles player1 name updates
+        goku = null;
+        
+        //update html
+        $("#player1").text("Player1");
+    }
+    // If any errors are experienced, log them to console.
+}, function (errorObject) {
+    console.log("The read failed: " + errorObject.code);
 });
 
-//showcase ryu info when the user clicks the character
-$("#ryuChar").on("click", function(event) {
-  // Prevent the page from refreshing
-  event.preventDefault();
+// Firebase is always watching for changes to the data on the character ryu.
+// When changes occurs it will print them to console and html
+database.ref("/players/ryu").on("value", function (snapshot) {
 
-  //shows healthbar
-  $("#healthBar").removeClass("d-none");
-  //shows ryu sprite
-  $("#ryuSprite").removeClass("d-none");
-  //shows goku sprite
-  $("#gokuSprite").removeClass("d-none");
-  //hide instructions again
-  $("#content").addClass("d-none");
+    // Print the initial data to the console.
+    console.log(snapshot.val());
+
+    //update local variables with database data
+    if(snapshot.val() !== null){
+        //handles player2 name updates
+        ryu = snapshot.val();
+
+        //update html
+        $("#player2").text(ryu);
+        
+    } else{
+        //handles player2 name updates
+        ryu = null;
+
+        //update html
+        $("#player2").text("Player2");
+    }
+
+    // If any errors are experienced, log them to console.
+}, function (errorObject) {
+    console.log("The read failed: " + errorObject.code);
 });
+
+//show fighting arena
+function revealFigthingArena() {
+    //shows healthbar
+    $("#healthBar").removeClass("d-none");
+
+    //shows goku sprite
+    $("#gokuSprite").removeClass("d-none");
+
+    //shows ryu sprite
+    $("#ryuSprite").removeClass("d-none");
+
+    //hide instructions again
+    $("#content").addClass("d-none");
+}
+// coundown object
+var countdown = {
+    //countdown time initialized
+    time: 59,
+
+    //resets countdown
+    reset: function () {
+        //resets countdown time
+        countdown.time = 59;
+
+        //change the html to read the current countdown time
+        $("#countDown").text("59");
+
+    },
+    //starts the countdown
+    start: function () {
+        // use setInterval to start the count here and set the clock to running.
+        if (!clockRunning) {
+            //start countdown
+            intervalId = setInterval(countdown.count, 1000);
+
+            //the countdown has started
+            clockRunning = true;
+        }
+    },
+    //stops countdown
+    stop: function () {
+        // use clearInterval to stop the count here and set the clock to not be running.
+        //reset interval
+        clearInterval(intervalId);
+
+        //stop the countdown
+        clockRunning = false;
+    },
+    //keep track of the countdown
+    count: function () {
+        // decrease time by 1
+        countdown.time--;
+
+        // update html with the current countdown
+        $("#countDown").text(countdown.time);
+
+        //if count <= 0 then the countdown has reached the end, declare a winner of the round and restart the counter
+        if (countdown.time <= 0) {
+            //stop countdown
+            countdown.stop();
+
+            //display the winner of the round
+            //rightAndWrong();
+
+            //delaying showing the winner of the round to the user and restart the round again
+            //setTimeout(initGame, 2000);
+
+            //keep track of the unanswered questions
+            //countUnansweredAnswers++;
+
+            //keep track of number of questions answered
+            //countQuestion++;
+
+        }
+    }
+};

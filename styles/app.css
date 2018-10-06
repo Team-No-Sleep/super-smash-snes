@@ -44,9 +44,15 @@ html {
   right: 67%;
   position: absolute;
 }
-#gokuChar:hover,
-#ryuChar:hover {
-  background: rgba(255, 255, 255, 0.5); /* Black background with 0.5 opacity */
+#gokuImg,
+#ryuImg {
+    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(100%);
+}
+#gokuImg.should-hover:hover,
+#ryuImg.should-hover:hover {
+    -webkit-filter: grayscale(0%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(0%);
 }
 .ryu {
   top: 68%;

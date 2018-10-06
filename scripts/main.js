@@ -210,7 +210,10 @@ function authStateObserver(user) {
     // User is signed in!
     // Get the signed-in user's profile pic and name.
     var profilePicUrl = getProfilePicUrl();
-    var userName = getUserName();
+    let userName = getUserName();
+    
+    //handles
+    characterHandlers();
 
     // Set the user's profile pic and name.
     userPicElement.style.backgroundImage = "url(" + profilePicUrl + ")";
@@ -342,7 +345,8 @@ firebase.initializeApp(config);
 // // Checks that Firebase has been imported.
 // checkSetup();
 //create a variable to reference the database
-window.database = firebase.database();
+ var database = firebase.database();
+
 // Shortcuts to DOM Elements.
 var messageListElement = document.getElementById("messages");
 var messageFormElement = document.getElementById("message-form");
@@ -378,16 +382,3 @@ initFirebaseAuth();
 
 // We load currently existing chat messages and listen to new ones.
 loadMessages();
-
-// // Gets Link for Theme Song
-var audioElement = document.createElement("audio");
-audioElement.setAttribute("src", "sounds/SNES.mp3");
-
-// Theme Button
-$(".sound-on").on("click", function() {
-  audioElement.play();
-});
-$(".sound-off").on("click", function() {
-  audioElement.pause();
-});
- 

@@ -94,11 +94,11 @@
           </ul>
         </div>
         <div id="gokuChar" class="col-sm-4 text-center">
-          <img id="gokuImg" src="images/goku_hbi.png" />
+          <img id="gokuImg" src="images/goku_hbi.png" class="img-fluid"/>
           <p><strong>Goku</strong></p>
         </div>
         <div id="ryuChar" class="col-sm-4 text-center">
-          <img id="ryuImg" src="images/ryu_hbi.png" />
+          <img id="ryuImg" src="images/ryu_hbi.png" class="img-fluid"/>
           <p><strong>Ryu</strong></p>
         </div>
         <!-- why is this here? <div class="health-box">
@@ -125,7 +125,7 @@
           <div class="counter-container">
             <img src="images/counter_box.png" class="img-fluid counter-img" />
             <div class="counter-text">
-              <p>98</p>
+              <p id="countDown"></p>
             </div>
           </div>
         </div>
@@ -149,10 +149,10 @@
     <div class="container-fluid mdl-color--black">
       <div class="row py-2 text-white align-items-center">
         <div class="col-sm-5">
-          <p class="mb-0"><strong>Player 1:</strong> moves = ASD, walk = QE</p>
+          <p class="mb-0"><strong id="player1">Player1</strong>: moves = ASD, walk = QE</p>
         </div>
         <div class="col-sm-5 text-right">
-          <p class="mb-0"><strong>Player 2:</strong> moves = JKL ,walk = UO</p>
+          <p class="mb-0"><strong id="player2">Player2</strong>: moves = JKL , walk = UO</p>
         </div>
         <div class="col-sm-2 text-right">
           <button class="material-icons" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false"
@@ -217,9 +217,10 @@
     crossorigin="anonymous"></script>
   <!-- sprite javascript files -->
   <script src="scripts/keypad.js"></script>
-  <script src="scripts/sprite.js"></script>
+ 
   <script src="scripts/collision.js"></script>
   <!-- healthbar -->
+  <!-- <script src="scripts/sprite.js"></script> -->
   <!-- <script src="scripts/healthbar.js"></script> -->
   <!-- <script src="scripts/sprite-P1.js"></script> -->
   <script src="scripts/main.js"></script>
