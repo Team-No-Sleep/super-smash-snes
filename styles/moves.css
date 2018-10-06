@@ -83,8 +83,8 @@
     background: url('../images/ryu-punch.png') no-repeat;
     width: 228px;
     height: 306px;
-    /* right: 42%; */
-    /* left: 62%; */
+    left: 64%;
+    margin-left: -50px;
     top: 44%;
 }
 .ryu-kick {
@@ -92,14 +92,12 @@
     width: 228px;
     height: 360px;
     top: 30%;
-
 }
 .ryu-jump {
     background: url('../images/ryu-jump.png') no-repeat;
     width: 165px;
     height: 342px;
     top: 27%;
-
 }
 .ryu-walk {
     background: url('../images/ryu-walk.png') no-repeat;
@@ -134,7 +132,7 @@
     animation: punch steps(6) 0.45s infinite;
 }
 @keyframes punch {
-    from { background-position: 0px -10px; }
+    from { background-position: -0px -10px; }
     to { background-position: -2004px -10px; }
 }
 .kick-p1 { 
@@ -154,7 +152,7 @@
     }
 }
 .walk-p1 { 
-    animation: walk-p1 steps(6) .50s infinite; 
+    animation: walk-p1 steps(6) .30s infinite; 
 }
 @keyframes walk-p1 {
     from { background-position: 0px -5px; }
@@ -179,7 +177,6 @@
 }
 .punch-p2 { 
     animation: punch-p2 steps(2) 0.25s infinite;
-
 }
 @keyframes punch-p2 {
     from { background-position: -0px -10px; }
