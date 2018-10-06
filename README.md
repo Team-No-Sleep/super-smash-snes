@@ -27,9 +27,9 @@
  ## Part 1- Street-Fight Game as a glance:
 
  ### Highlights of our game feature
- ![Authentication](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Sign-in via Google Account")
+ ![Authentication](images/login.png "Sign-in via Google Account")
 
- ![Live Chat](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Chat with your opponent")
+ ![Live Chat](images/chat.png "Chat with your opponent")
 
   
   #### Instructions:
