@@ -1,43 +1,5 @@
 //set up/initialize global variables for winning/loosing the round (winCount, loseCount, player1BaseHealthPoints, player2BaseHealthPoints, player1CurrentHealthPoints, player2HealthPoints, player1AttackPoints, player2AttackPoints)
 
-// //initialize characters attributes
-// var characters = starterCharacters();
-
-// //hols characters data
-// function starterCharacters() {
-//     //characters set
-//     return [
-//         {
-//             //first character
-//             name: "Goku",
-//             charAttributes: {
-//                 //current health points
-//                 hPoints: 20000,
-//                 //max health points
-//                 maxHPoints: 20000,
-//                 //attack points
-//                 attackPwr: 800
-//             },
-//             //characters icon
-//             img: "images/goku_hbi.png"
-//         },
-//         {
-//             //second character
-//             name: "Ryu",
-//             charAttributes: {
-//                 //current health points
-//                 hPoints: 30000,
-//                 //max health points
-//                 maxHPoints: 30000,
-//                 //attack points
-//                 attackPwr: 800
-//             },
-//             //characters icon
-//             img: "images/ryu_hbi.png"
-//         }
-//     ];
-// }
-
 //initialize player 1
 var goku = null;
 
@@ -181,9 +143,6 @@ function characterHandlers() {
             }
         );
     });
-    //handles timer
-    countdown.reset();
-    countdown.start();
 }
 // Firebase is always watching for changes to the data on the character goku.
 // When changes occurs it will print them to console and html
@@ -196,6 +155,9 @@ database.ref("/players/goku").on("value", function (snapshot) {
     if (snapshot.val() !== null) {
         //handles player1 name updates
         goku = snapshot.val();
+
+        //set timer
+        maybeStartTimer();
 
         //update html
         $("#player1").text(goku);
@@ -232,6 +194,9 @@ database.ref("/players/ryu").on("value", function (snapshot) {
         //handles player2 name updates
         ryu = snapshot.val();
 
+        //set timer
+        maybeStartTimer();
+
         //update html
         $("#player2").text(ryu);
 
@@ -254,6 +219,16 @@ database.ref("/players/ryu").on("value", function (snapshot) {
 }, function (errorObject) {
     console.log("The read failed: " + errorObject.code);
 });
+
+//look out for both players to be in the game and start the timer
+function maybeStartTimer() {
+    //start timer
+    if (ryu !== null && goku !== null) {
+        //handles timer
+        countdown.reset();
+        countdown.start();
+    }
+}
 
 //show fighting arena
 function revealFigthingArena() {
@@ -308,6 +283,10 @@ function keyPadInputs(snapshot) {
 
 //reset function
 function resetFightArena(message) {
+    //reset characters values
+    goku = null;
+    ryu = null;
+
     //showcase victories and forfeits messages
     $("#displayMessage").text(message);
 
@@ -403,6 +382,8 @@ var countdown = {
             //stop countdown
             countdown.stop();
 
+            //reset fight arena
+            resetFightArena("Time Up!");
             //display the winner of the round
             //rightAndWrong();
 
