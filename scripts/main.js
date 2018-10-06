@@ -382,3 +382,15 @@ initFirebaseAuth();
 
 // We load currently existing chat messages and listen to new ones.
 loadMessages();
+
+// // Gets Link for Theme Song
+var audioElement = document.createElement("audio");
+audioElement.setAttribute("src", "sounds/SNES.mp3");
+
+// Theme Button
+$(".sound-on").on("click", function() {
+  audioElement.play();
+});
+$(".sound-off").on("click", function() {
+  audioElement.pause();
+});

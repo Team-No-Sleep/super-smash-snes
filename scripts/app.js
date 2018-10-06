@@ -116,12 +116,21 @@ function characterHandlers() {
                 //hide instructions
                 revealFigthingArena();
 
-                //handles data deletion when player leaves
+                //handles data deletion of player name when player leaves
                 database.ref("/players/goku").onDisconnect().remove();
+
+                //handles data deletion of keypad when player leaves
+                database.ref("/keypad").onDisconnect().remove();
 
                 //change what is saved in firebase
                 database.ref("/players").update({
                     goku: goku
+                });
+
+                // Firebase is always watching for changes to the data on the character goku keypad.
+                // When changes occurs it will print them to console and html
+                database.ref("/keypad/ryu/").on("child_added", keyPadInputs, function (errorObject) {
+                    console.log("The read failed: " + errorObject.code);
                 });
             }
         );
@@ -147,12 +156,21 @@ function characterHandlers() {
                 //hide instructions
                 revealFigthingArena();
 
-                //handles data deletion when player leaves
+                //handles data deletion of player name when player leaves
                 database.ref("/players/ryu").onDisconnect().remove();
+
+                //handles data deletion of keypad when player leaves
+                database.ref("/keypad").onDisconnect().remove();
 
                 //change what is saved in firebase
                 database.ref("/players").update({
                     ryu: ryu
+                });
+
+                // Firebase is always watching for changes to the data on the character goku keypad.
+                // When changes occurs it will print them to console and html
+                database.ref("/keypad/goku/").on("child_added", keyPadInputs, function (errorObject) {
+                    console.log("The read failed: " + errorObject.code);
                 });
             }
         );
@@ -169,17 +187,17 @@ database.ref("/players/goku").on("value", function (snapshot) {
     console.log(snapshot.val());
 
     //update local variables with database data
-    if(snapshot.val() !== null){
+    if (snapshot.val() !== null) {
         //handles player1 name updates
         goku = snapshot.val();
 
         //update html
         $("#player1").text(goku);
-        
-    } else{
+
+    } else {
         //handles player1 name updates
         goku = null;
-        
+
         //update html
         $("#player1").text("Player1");
     }
@@ -196,14 +214,14 @@ database.ref("/players/ryu").on("value", function (snapshot) {
     console.log(snapshot.val());
 
     //update local variables with database data
-    if(snapshot.val() !== null){
+    if (snapshot.val() !== null) {
         //handles player2 name updates
         ryu = snapshot.val();
 
         //update html
         $("#player2").text(ryu);
-        
-    } else{
+
+    } else {
         //handles player2 name updates
         ryu = null;
 
@@ -229,7 +247,37 @@ function revealFigthingArena() {
 
     //hide instructions again
     $("#content").addClass("d-none");
+
+    //remove keypad data
+    database.ref("/keypad/").remove();
 }
+//records key ups
+function recordGokusKeyPad(keyType, keyCode) {
+    //change what is saved in firebase
+    database.ref("/keypad/goku/").push({
+        keyType: keyType,
+        keyCode: keyCode
+    });
+}
+//records key ups
+function recordRyusKeyPad(keyType, keyCode) {
+    //change what is saved in firebase
+    database.ref("/keypad/ryu/").push({
+        keyType: keyType,
+        keyCode: keyCode
+    });
+}
+
+//receives key pad inputs
+function keyPadInputs(snapshot) {
+    // Print the initial data to the console.
+    console.log(snapshot.val());
+
+    // dispatch keyboard events
+    document.dispatchEvent(new KeyboardEvent(snapshot.val().keyType, { 'keyCode': snapshot.val().keyCode }));
+}
+
+//records key downs
 // coundown object
 var countdown = {
     //countdown time initialized
