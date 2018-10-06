@@ -85,14 +85,10 @@ html {
   }
 }
 li {
-  font-family: "depixelbreitfett";
   font-size: 12px;
   line-height: 2.5;
 }
 .logo {
-  color: orange;
-  font-family: "depixelbreitfett";
+  color: #be6c8d;
 }
-p {
-  font-family: "depixelbreitfett";
-}
+

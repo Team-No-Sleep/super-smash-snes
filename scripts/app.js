@@ -201,11 +201,19 @@ database.ref("/players/goku").on("value", function (snapshot) {
         $("#player1").text(goku);
 
     } else {
+        //reset game when goku is not present
+        if (goku === null) {
+            //call reset
+            resetFightArena();
+        }
+
         //handles player1 name updates
         goku = null;
 
         //update html
         $("#player1").text("Player1");
+
+
     }
     // If any errors are experienced, log them to console.
 }, function (errorObject) {
@@ -228,11 +236,20 @@ database.ref("/players/ryu").on("value", function (snapshot) {
         $("#player2").text(ryu);
 
     } else {
+        //reset game when goku is not present
+        if (ryu === null) {
+            //call reset
+            resetFightArena();
+        }
+
         //handles player2 name updates
         ryu = null;
 
         //update html
         $("#player2").text("Player2");
+
+        //call reset
+        resetFightArena();
     }
 
     // If any errors are experienced, log them to console.
@@ -257,6 +274,7 @@ function revealFigthingArena() {
     //remove keypad data
     database.ref("/keypad/").remove();
 }
+
 //records key ups
 function recordGokusKeyPadReal(keyType, keyCode) {
     //change what is saved in firebase
@@ -267,10 +285,9 @@ function recordGokusKeyPadReal(keyType, keyCode) {
 }
 
 //this is a fake function
-function recordGokusKeyPad(keyType, keyCode){}
+function recordGokusKeyPad(keyType, keyCode) { }
 
-
-//records key ups
+//records keys
 function recordRyusKeyPadReal(keyType, keyCode) {
     //change what is saved in firebase
     database.ref("/keypad/ryu/").push({
@@ -278,8 +295,9 @@ function recordRyusKeyPadReal(keyType, keyCode) {
         keyCode: keyCode
     });
 }
+
 //this is a fake function
-function recordRyusKeyPad(keyType, keyCode){}
+function recordRyusKeyPad(keyType, keyCode) { }
 
 //receives key pad inputs
 function keyPadInputs(snapshot) {
@@ -290,7 +308,47 @@ function keyPadInputs(snapshot) {
     document.dispatchEvent(new KeyboardEvent(snapshot.val().keyType, { 'keyCode': snapshot.val().keyCode }));
 }
 
-//records key downs
+//reset function
+function resetFightArena() {
+    //remove healthbar
+    $("#healthBar").addClass("d-none");
+
+    //remove goku sprite
+    $("#gokuSprite").addClass("d-none");
+
+    //remove ryu sprite
+    $("#ryuSprite").addClass("d-none");
+
+    //remove instructions again
+    $("#content").removeClass("d-none");
+
+    //remove keypad data
+    database.ref("/keypad/").remove();
+
+    //remove players
+    database.ref("/players/").remove();
+
+    //reset game healthbars
+    healthbar.resetGame();
+
+    //reset goku's keypad
+    recordGokusKeyPad = function () { };
+
+    //reset ryu's keypad
+    recordRyusKeyPad = function () { };
+
+    //removes all callbacks for goku
+    database.ref("/keypad/goku/").off();
+
+    //removes all callbacks for ryu
+    database.ref("/keypad/ryu/").off();
+
+    //reset goku positioning
+    $("#gokuSprite").removeAttr("style");
+
+    //reset ryu positioning
+    $("#ryuSprite").removeAttr("style");
+}
 // coundown object
 var countdown = {
     //countdown time initialized
