@@ -202,9 +202,9 @@ database.ref("/players/goku").on("value", function (snapshot) {
 
     } else {
         //reset game when goku is not present
-        if (goku === null) {
+        if (goku !== null && ryu !== null) {
             //call reset
-            resetFightArena();
+            resetFightArena("Goku Forfeits!");
         }
 
         //handles player1 name updates
@@ -236,10 +236,10 @@ database.ref("/players/ryu").on("value", function (snapshot) {
         $("#player2").text(ryu);
 
     } else {
-        //reset game when goku is not present
-        if (ryu === null) {
+        //reset game when ryu is not present
+        if (ryu !== null && goku !== null) {
             //call reset
-            resetFightArena();
+            resetFightArena("Ryu Forfeits!");
         }
 
         //handles player2 name updates
@@ -248,8 +248,6 @@ database.ref("/players/ryu").on("value", function (snapshot) {
         //update html
         $("#player2").text("Player2");
 
-        //call reset
-        resetFightArena();
     }
 
     // If any errors are experienced, log them to console.
@@ -309,7 +307,13 @@ function keyPadInputs(snapshot) {
 }
 
 //reset function
-function resetFightArena() {
+function resetFightArena(message) {
+    //showcase victories and forfeits messages
+    $("#displayMessage").text(message);
+
+    //unhide message area
+    $("#displayMessage").removeClass("d-none");
+
     //remove healthbar
     $("#healthBar").addClass("d-none");
 
@@ -322,32 +326,35 @@ function resetFightArena() {
     //remove instructions again
     $("#content").removeClass("d-none");
 
-    //remove keypad data
-    database.ref("/keypad/").remove();
+    //clear choices
+    setTimeout(function () {
+        //remove keypad data
+        database.ref("/keypad/").remove();
 
-    //remove players
-    database.ref("/players/").remove();
+        //remove players
+        database.ref("/players/").remove();
 
-    //reset game healthbars
-    healthbar.resetGame();
+        //reset game healthbars
+        healthbar.resetGame();
 
-    //reset goku's keypad
-    recordGokusKeyPad = function () { };
+        //reset goku's keypad
+        recordGokusKeyPad = function () { };
 
-    //reset ryu's keypad
-    recordRyusKeyPad = function () { };
+        //reset ryu's keypad
+        recordRyusKeyPad = function () { };
 
-    //removes all callbacks for goku
-    database.ref("/keypad/goku/").off();
+        //removes all callbacks for goku
+        database.ref("/keypad/goku/").off();
 
-    //removes all callbacks for ryu
-    database.ref("/keypad/ryu/").off();
+        //removes all callbacks for ryu
+        database.ref("/keypad/ryu/").off();
 
-    //reset goku positioning
-    $("#gokuSprite").removeAttr("style");
+        //reset goku positioning
+        $("#gokuSprite").removeAttr("style");
 
-    //reset ryu positioning
-    $("#ryuSprite").removeAttr("style");
+        //reset ryu positioning
+        $("#ryuSprite").removeAttr("style");
+    }, 5000);
 }
 // coundown object
 var countdown = {
