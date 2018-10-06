@@ -246,7 +246,7 @@ eventHandlers.intializeGame();
 // =============
 //    HIT BOX
 // =============
-$(window).keydown(function(event) {
+$(document).keydown(function(event) {
   switch (event.which) {
     //GOKU HIT DETECT
     //user presses the "A" PUNCH key
