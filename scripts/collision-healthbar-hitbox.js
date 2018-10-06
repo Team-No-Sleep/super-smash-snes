@@ -185,10 +185,14 @@ var eventHandlers = {
   applyDamageRyu: function(damage) {
     curHitPoints = curHitPoints - damage;
     healthbar.applyDamageRyu(curHitPoints);
+    //reset the fighting arena when ryu has been defeated
+    if(curHitPoints <= 0){resetFightArena("Goku Wins!");}
   },
   applyDamageGoku: function(damage) {
     curHitPoints = curHitPoints - damage;
     healthbar.applyDamageGoku(curHitPoints);
+    //reset the fighting arena when goku has been defeated
+    if(curHitPoints <= 0){resetFightArena("Ryu Wins!");}
   },
   intializeGameClick: $(".newGame").click(function() {
     healthbar.resetGame();

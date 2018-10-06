@@ -1,43 +1,5 @@
 //set up/initialize global variables for winning/loosing the round (winCount, loseCount, player1BaseHealthPoints, player2BaseHealthPoints, player1CurrentHealthPoints, player2HealthPoints, player1AttackPoints, player2AttackPoints)
 
-// //initialize characters attributes
-// var characters = starterCharacters();
-
-// //hols characters data
-// function starterCharacters() {
-//     //characters set
-//     return [
-//         {
-//             //first character
-//             name: "Goku",
-//             charAttributes: {
-//                 //current health points
-//                 hPoints: 20000,
-//                 //max health points
-//                 maxHPoints: 20000,
-//                 //attack points
-//                 attackPwr: 800
-//             },
-//             //characters icon
-//             img: "images/goku_hbi.png"
-//         },
-//         {
-//             //second character
-//             name: "Ryu",
-//             charAttributes: {
-//                 //current health points
-//                 hPoints: 30000,
-//                 //max health points
-//                 maxHPoints: 30000,
-//                 //attack points
-//                 attackPwr: 800
-//             },
-//             //characters icon
-//             img: "images/ryu_hbi.png"
-//         }
-//     ];
-// }
-
 //initialize player 1
 var goku = null;
 
@@ -181,9 +143,6 @@ function characterHandlers() {
             }
         );
     });
-    //handles timer
-    countdown.reset();
-    countdown.start();
 }
 // Firebase is always watching for changes to the data on the character goku.
 // When changes occurs it will print them to console and html
@@ -197,14 +156,17 @@ database.ref("/players/goku").on("value", function (snapshot) {
         //handles player1 name updates
         goku = snapshot.val();
 
+        //set timer
+        maybeStartTimer();
+
         //update html
         $("#player1").text(goku);
 
     } else {
         //reset game when goku is not present
-        if (goku === null) {
+        if (goku !== null && ryu !== null) {
             //call reset
-            resetFightArena();
+            resetFightArena("Goku Forfeits!");
         }
 
         //handles player1 name updates
@@ -232,14 +194,17 @@ database.ref("/players/ryu").on("value", function (snapshot) {
         //handles player2 name updates
         ryu = snapshot.val();
 
+        //set timer
+        maybeStartTimer();
+
         //update html
         $("#player2").text(ryu);
 
     } else {
-        //reset game when goku is not present
-        if (ryu === null) {
+        //reset game when ryu is not present
+        if (ryu !== null && goku !== null) {
             //call reset
-            resetFightArena();
+            resetFightArena("Ryu Forfeits!");
         }
 
         //handles player2 name updates
@@ -248,14 +213,22 @@ database.ref("/players/ryu").on("value", function (snapshot) {
         //update html
         $("#player2").text("Player2");
 
-        //call reset
-        resetFightArena();
     }
 
     // If any errors are experienced, log them to console.
 }, function (errorObject) {
     console.log("The read failed: " + errorObject.code);
 });
+
+//look out for both players to be in the game and start the timer
+function maybeStartTimer() {
+    //start timer
+    if (ryu !== null && goku !== null) {
+        //handles timer
+        countdown.reset();
+        countdown.start();
+    }
+}
 
 //show fighting arena
 function revealFigthingArena() {
@@ -309,7 +282,17 @@ function keyPadInputs(snapshot) {
 }
 
 //reset function
-function resetFightArena() {
+function resetFightArena(message) {
+    //reset characters values
+    goku = null;
+    ryu = null;
+
+    //showcase victories and forfeits messages
+    $("#displayMessage").text(message);
+
+    //unhide message area
+    $("#displayMessage").removeClass("d-none");
+
     //remove healthbar
     $("#healthBar").addClass("d-none");
 
@@ -322,32 +305,35 @@ function resetFightArena() {
     //remove instructions again
     $("#content").removeClass("d-none");
 
-    //remove keypad data
-    database.ref("/keypad/").remove();
+    //clear choices
+    setTimeout(function () {
+        //remove keypad data
+        database.ref("/keypad/").remove();
 
-    //remove players
-    database.ref("/players/").remove();
+        //remove players
+        database.ref("/players/").remove();
 
-    //reset game healthbars
-    healthbar.resetGame();
+        //reset game healthbars
+        healthbar.resetGame();
 
-    //reset goku's keypad
-    recordGokusKeyPad = function () { };
+        //reset goku's keypad
+        recordGokusKeyPad = function () { };
 
-    //reset ryu's keypad
-    recordRyusKeyPad = function () { };
+        //reset ryu's keypad
+        recordRyusKeyPad = function () { };
 
-    //removes all callbacks for goku
-    database.ref("/keypad/goku/").off();
+        //removes all callbacks for goku
+        database.ref("/keypad/goku/").off();
 
-    //removes all callbacks for ryu
-    database.ref("/keypad/ryu/").off();
+        //removes all callbacks for ryu
+        database.ref("/keypad/ryu/").off();
 
-    //reset goku positioning
-    $("#gokuSprite").removeAttr("style");
+        //reset goku positioning
+        $("#gokuSprite").removeAttr("style");
 
-    //reset ryu positioning
-    $("#ryuSprite").removeAttr("style");
+        //reset ryu positioning
+        $("#ryuSprite").removeAttr("style");
+    }, 5000);
 }
 // coundown object
 var countdown = {
@@ -396,6 +382,8 @@ var countdown = {
             //stop countdown
             countdown.stop();
 
+            //reset fight arena
+            resetFightArena("Time Up!");
             //display the winner of the round
             //rightAndWrong();
 

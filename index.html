@@ -80,7 +80,7 @@
     </div>
     <!-- stops here -->
     <div class="stage">
-      <div id="content" class="row mx-auto text-white align-items-center d-none">
+      <div id="content" class="row mx-auto text-white align-items-center">
         <div class="col-sm-4">
           <ul id="instructions" class="list-unstyled">
             <li><span class="badge badge-dark badge-pill mr-2">1</span> To get started please sign in with your google
@@ -91,6 +91,7 @@
             <li><span class="badge badge-dark badge-pill mr-2">4</span> To play/stop our theme song use <span class="material-icons icon-sizing">volume_up</span>
               <span class="material-icons icon-sizing">volume_off</span></li>
           </ul>
+          <h1 id="displayMessage" class="d-none"></h1>
         </div>
         <div id="gokuChar" class="col-sm-4 text-center">
           <img id="gokuImg" src="images/goku_hbi.png" class="img-fluid"/>
@@ -101,7 +102,7 @@
           <p><strong>Ryu</strong></p>
         </div>
       </div>
-      <div id="healthBar" class="row align-items-center mx-auto">
+      <div id="healthBar" class="row align-items-center mx-auto d-none">
         <div class="col-sm-1">
           <img src="images/goku_hbi.png" class="img-fluid" />
         </div>
@@ -136,8 +137,8 @@
         </div>
       </div>
       <!-- <div id="gokuSprite" class="goku goku-idle idle-p1"></div> -->
-      <div id="gokuSprite" class="collision-p1 goku goku-idle idle-p1"></div>
-      <div id="ryuSprite" class="collision-p2 ryu ryu-idle idle-p2"></div>
+      <div id="gokuSprite" class="collision-p1 goku goku-idle idle-p1 d-none"></div>
+      <div id="ryuSprite" class="collision-p2 ryu ryu-idle idle-p2 d-none"></div>
       <!-- <div id="ryuSprite" class="ryu ryu-idle idle-p2"></div> -->
     </div>
 
