@@ -75,9 +75,9 @@ var lossCount;
 //declare a winner of the game if the either player win 3 rounds in a row
 
 //loads jQuery after the document is already loaded
-$(document).ready(function() {
-  //$("#instructions").addClass("d-none");
-});
+// $(document).ready(function() {
+//   //$("#instructions").addClass("d-none");
+// });
 
 // Functions
 // ======================
