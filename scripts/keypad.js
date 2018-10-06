@@ -110,9 +110,13 @@ $(document).keydown(function (event) {
         //database call to record the press of the keytype and the keycode
         recordRyusKeyPad("keydown", 74);
         playPunch();
+        $(".ryu").removeClass("ryu-idle");
+        $(".ryu").removeClass("idle-p2");
         $(".ryu").addClass("ryu-punch");
         $(".ryu").addClass("punch-p2");
         setTimeout(function (event) {
+          $(".ryu").addClass("ryu-idle");
+          $(".ryu").addClass("idle-p2");
           $(".ryu").removeClass("punch-p2");
           $(".ryu").removeClass("ryu-punch");
         }, 230);
@@ -154,7 +158,7 @@ $(document).keydown(function (event) {
 var walk = {
 	goku: $(".goku"),
 	ryu: $(".ryu"),
-	speed: 3,
+	speed: 2,
 	gokuLeftKeyToggle  : false,
 	gokuRightKeyToggle : false,
 	ryuLeftKeyToggle   : false,

@@ -35,32 +35,32 @@ var collisionBox = {
 // COLLISION QA TESTING
 // ====================
 // //Comment out what you want to see: colors, logs, or both
-var collisionQA = {
-  logGokuCollision: function() {
-    // $(".goku").css({ backgroundColor: "green" });
-    $(".goku").css({ backgroundColor: "none" });
-    // console.log('Goku hitbox: ', hitbox);
-  },
-  logGokuSafe: function() {
-    // $(".goku").css({ backgroundColor: "red" });
-    $(".goku").css({ backgroundColor: "none" });
-  },
-  logRyuCollision: function() {
-    // $(".ryu").css({ backgroundColor: "yellow" });
-    $(".ryu").css({ backgroundColor: "none" });
-    // console.log('Ryu hitbox: ', hitbox);
-  },
-  logRyuSafe: function() {
-    // $(".ryu").css({ backgroundColor: "blue" });
-    $(".ryu").css({ backgroundColor: "none" });
-  },
-  hitBoxCheck: $(window).keydown(function() {
-    if (collision === true) {
-      console.log("collision confirmed: ", collision);
-      return collision;
-    }
-  })
-};
+// var collisionQA = {
+//   logGokuCollision: function() {
+//     // $(".goku").css({ backgroundColor: "green" });
+//     $(".goku").css({ backgroundColor: "none" });
+//     // console.log('Goku hitbox: ', hitbox);
+//   },
+//   logGokuSafe: function() {
+//     // $(".goku").css({ backgroundColor: "red" });
+//     $(".goku").css({ backgroundColor: "none" });
+//   },
+//   logRyuCollision: function() {
+//     // $(".ryu").css({ backgroundColor: "yellow" });
+//     $(".ryu").css({ backgroundColor: "none" });
+//     // console.log('Ryu hitbox: ', hitbox);
+//   },
+//   logRyuSafe: function() {
+//     // $(".ryu").css({ backgroundColor: "blue" });
+//     $(".ryu").css({ backgroundColor: "none" });
+//   },
+//   hitBoxCheck: $(window).keydown(function() {
+//     if (collision === true) {
+//       console.log("collision confirmed: ", collision);
+//       return collision;
+//     }
+//   })
+// };
 
 // ==========================
 //   COLLISION CONFIRMATION
@@ -72,22 +72,22 @@ var collisionQuery = {
   gokuCollisionPositive: function() {
     collision = true;
     hitbox = true;
-    collisionQA.logGokuCollision();
+    // collisionQA.logGokuCollision();
   },
   gokuCollisionNegative: function() {
     collision = false;
     hitbox = false;
-    collisionQA.logGokuSafe();
+    // collisionQA.logGokuSafe();
   },
   ryuCollisionPositive: function() {
     collision = true;
     hitbox = true;
-    collisionQA.logRyuCollision();
+    // collisionQA.logRyuCollision();
   },
   ryuCollisionNegative: function() {
     collision = false;
     hitbox = false;
-    collisionQA.logRyuSafe();
+    // collisionQA.logRyuSafe();
   },
   checkContact: function() {
     $(".collision-p1").each(function() {
@@ -110,8 +110,8 @@ var collisionQuery = {
 //==================
 //    HEALTHBAR
 //==================
-let maxHitPoints = 0,
-  curHitPoints = maxHitPoints;
+let maxHitPoints = 0, curHitPoints = maxHitPoints;
+// let maxHitPoints = 0, curHitPoints = maxHitPoints;
 var healthbar = {
   generateHitPoints: function() {
     maxHitPoints = 100;
@@ -123,26 +123,22 @@ var healthbar = {
       $(this).val(damageValue);
     });
   },
-  countDamage: function(userSelection) {
-    damage = +$(userSelection).val();
-    $(".damage").text(damage);
-  },
+  // countDamage: function(userSelection) {
+  //   damage = +$(userSelection).val();
+  //   $(".damage").text(damage);
+  // },
   applyDamageRyu: function(curHitPoints) {
     //Removes a correct percentage ratio of hitpoints when
     //applying different amounts of damage
     var hpToPercentRatio = curHitPoints * (100 / maxHitPoints);
     $(".health-bar-text-p2").html(curHitPoints + " HP");
     $(".health-bar-red-p2").animate(
-      {
-        width: hpToPercentRatio + "%"
-      },
-      700
+      {width: hpToPercentRatio + "%"
+      },700
     );
     $(".health-bar-p2").animate(
-      {
-        width: hpToPercentRatio + "%"
-      },
-      500
+      {width: hpToPercentRatio + "%"
+      },500
     );
   },
   applyDamageGoku: function(curHitPoints) {
@@ -151,16 +147,12 @@ var healthbar = {
     var hpToPercentRatio = curHitPoints * (100 / maxHitPoints);
     $(".health-bar-text").html(curHitPoints + " HP");
     $(".health-bar-red").animate(
-      {
-        width: hpToPercentRatio + "%"
-      },
-      700
+      {width: hpToPercentRatio + "%"
+      },700
     );
     $(".health-bar").animate(
-      {
-        width: hpToPercentRatio + "%"
-      },
-      500
+      {width: hpToPercentRatio + "%"
+      },500
     );
   },
   resetHealthBar: function() {
@@ -183,9 +175,9 @@ var healthbar = {
 };
 
 var eventHandlers = {
-  damageMonitor: function() {
-    healthbar.countDamage(this);
-  },
+  // damageMonitor: function() {
+  //   healthbar.countDamage(this);
+  // },
   applyDamageRyu: function(damage) {
     curHitPoints = curHitPoints - damage;
     healthbar.applyDamageRyu(curHitPoints);
