@@ -103,49 +103,9 @@ var collisionQuery = {
   }
 };
 
-//this is to test a pseudo integration of health damage
-var healthCounter = {
-  gokuHealth: 100,
-  ryuHealth: 100,
-  damage: 10,
-
-  applyDamageRyu: function() {
-    this.ryuHealth = this.ryuHealth - this.damage;
-    return this.ryuHealth;
-  },
-  applyDamageGoku: function() {
-    this.gokuHealth = this.gokuHealth - this.damage;
-    return this.gokuHealth;
-  }
-};
-console.log("Starting RYU health: ", healthCounter.ryuHealth);
-console.log("Starting GOKU health: ", healthCounter.gokuHealth);
-console.log("Damage = ", healthCounter.damage);
-
-// ==================
-// HITBOX QA TESTING
-// ==================
-
-var hitboxQA = {
-  gokuPunch: function() {
-    $(".goku").css("background-color", "orange");
-    console.log("Current RYU health: ", healthCounter.ryuHealth);
-  },
-  gokuKick: function() {
-    $(".goku").css("background-color", "orange");
-    console.log("Current RYU health: ", healthCounter.ryuHealth);
-  },
-  ryuPunch: function() {
-    $(".ryu").css("background-color", "purple");
-    console.log("Current GOKU haelth: ", healthCounter.gokuHealth);
-  },
-  ryuKick: function() {
-    $(".ryu").css("background-color", "purple");
-    console.log("Current GOKU haelth: ", healthCounter.gokuHealth);
-  }
-};
-
-//HEALTHBAR
+//==================
+//    HEALTHBAR
+//==================
 let maxHitPoints = 0,
   curHitPoints = maxHitPoints;
 var healthbar = {
@@ -243,6 +203,25 @@ var eventHandlers = {
 };
 eventHandlers.intializeGame();
 
+// ==================
+// HITBOX QA TESTING
+// ==================
+
+var hitboxQA = {
+  gokuPunch: function() {
+    $(".goku").css("background-color", "orange");
+  },
+  gokuKick: function() {
+    $(".goku").css("background-color", "orange");
+  },
+  ryuPunch: function() {
+    $(".ryu").css("background-color", "purple");
+  },
+  ryuKick: function() {
+    $(".ryu").css("background-color", "purple");
+  }
+};
+
 // =============
 //    HIT BOX
 // =============
@@ -253,17 +232,16 @@ $(document).keydown(function(event) {
     case 65:
       if (collision && hitbox) {
         hitboxQA.gokuPunch();
-        healthCounter.applyDamageRyu();
         eventHandlers.applyDamageRyu(5);
-        //if punch lands, an ouch sound effect plays
+				$(".ryu").addClass("ryu-damaged damaged-p2");
       }
       break;
     // user presses the "S" KICK key
     case 83:
       if (collision && hitbox) {
         hitboxQA.gokuKick();
-        healthCounter.applyDamageRyu();
         eventHandlers.applyDamageRyu(10);
+				$(".ryu").addClass("ryu-damaged damaged-p2");
       }
       break;
 
@@ -272,17 +250,59 @@ $(document).keydown(function(event) {
     case 74:
       if (collision && hitbox) {
         hitboxQA.ryuPunch();
-        healthCounter.applyDamageGoku();
         eventHandlers.applyDamageGoku(5);
+				$(".goku").addClass("goku-damaged damaged-p1");
       }
       break;
     // user presses the "K" KICK key
     case 75:
       if (collision && hitbox) {
         hitboxQA.ryuKick();
-        healthCounter.applyDamageGoku();
         eventHandlers.applyDamageGoku(10);
+				$(".goku").addClass("goku-damaged damaged-p1");
       }
       break;
   }
+});
+
+$(document).keyup(function (event) {
+	switch (event.which) {
+		//GOKU DAMAGE DETECT
+		//user presses the "A" PUNCH key
+		case 65:
+			if (collision && hitbox) {
+				setTimeout(function (event) {
+					$(".ryu").removeClass("ryu-damaged damaged-p2");
+				}, 150);
+				break;
+			}
+			break;
+			// user presses the "S" KICK key
+		case 83:
+			if (collision && hitbox) {
+				setTimeout(function (event) {
+					$(".ryu").removeClass("ryu-damaged damaged-p2");
+				}, 150);
+				break;
+			}
+			break;
+
+			//RYU DAMAGE DETECT
+			//user presses the "J" PUNCH key
+		case 74:
+			if (collision && hitbox) {
+				setTimeout(function (event) {
+					$(".goku").removeClass("goku-damaged damaged-p1");
+				}, 100);
+			}
+			break;
+			// user presses the "K" KICK key
+		case 75:
+			if (collision && hitbox) {
+				setTimeout(function (event) {
+					$(".goku").removeClass("goku-damaged damaged-p1");
+				}, 100);
+			}
+			break;
+	}
 });

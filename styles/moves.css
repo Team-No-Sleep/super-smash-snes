@@ -3,28 +3,13 @@
   SPRITES
 ============ 
 */
-
 .goku { 
-    width:109px; 
-    height:121px;
-    margin-left: 35px;
     transform: scaleX(-1);
-    background-image:url('../images/goku-idle.png'); 
 }
 .ryu { 
-    width: 52px;
-    height: 106px;
-    margin-left: 555px;
-    /* margin-top: 280px; */
-    position: absolute;
     transform: scaleX(-1);
     /* transform: scale(1.5); */
-    background-image:url('../images/ryu-idle.png'); 
 }
-
-/* .transform-p1 {
-    
-} */
 
 /* 
 ================
@@ -61,34 +46,48 @@
     height: 121px;
  }
  .goku-punch {
-     background: url('../images/goku-punch.png') no-repeat;
-     width: 162px;
-     height: 130px;
- }
+    background: url('../images/goku-punch.png') no-repeat;
+    width: 162px;
+    height: 112px;
+    top: 68%;
+    right: 67%;
+}
 .goku-kick {
     background: url('../images/goku-kick.png') no-repeat;
     width: 159px;
     height: 159px;
+    margin-right: -40px;
+    top: 62%;
 }
 .goku-jump {
     background: url('../images/goku-jump.png') no-repeat;
     width: 146px;
     height: 180px;
+    top: 58%;
 }
 .goku-walk {
     background: url('../images/goku-walk.png') no-repeat;
     width: 120px;
     height: 132px;
 }
+.goku-damaged {
+    background: url('../images/goku-damaged.png') no-repeat;
+    width: 103px;
+    height: 155px;
+    top: 62%;
+}
 
 
 .ryu-idle {
     background: url('../images/ryu-idle.png') no-repeat;
+    width: 52px;
+    height: 106px;
 }
 .ryu-punch {
     background: url('../images/ryu-punch.png') no-repeat;
-    width: 90px;
-    height: 124px;
+    width: 75px;
+    height: 97px;
+    left: 61%;
 }
 .ryu-kick {
     background: url('../images/ryu-kick.png') no-repeat;
@@ -104,6 +103,13 @@
     background: url('../images/ryu-walk.png') no-repeat;
     width: 49px;
     height: 92px;
+}
+.ryu-damaged {
+    background: url('../images/ryu-damaged.png') no-repeat;
+    width: 56px;
+    height: 85px;
+    left: 62%;
+    top: 69%;
 }
 
 
@@ -121,16 +127,14 @@
     from { background-position: 0px -0px; }
     to { background-position: -327px -0px; }
 }
-
 .punch-p1 { 
     animation: punch steps(6) 0.45s infinite;
 
 }
 @keyframes punch {
-    from { background-position: 0px -0px; }
-    to { background-position: -972px -0px; }
+    from { background-position: 0px -10px; }
+    to { background-position: -972px -10px; }
 }
-
 .kick-p1 { 
     animation: kick-p1 steps(6) .50s infinite; 
 }
@@ -138,22 +142,11 @@
     from { background-position: 0px -0px; }
     to { background-position: -954px -0px; }
 }
-
 .jump-p1{ 
     animation: jump steps(8) .85s infinite; 
 }
 @keyframes jump {
     0% {    background-position: 0px -0px;
-            transform: scaleX(-1);
-    }
-    25% {   transform: translateY(-100px);
-            transform: scaleX(-1);
-    }
-    50% {   transform: translateY(-150px);
-            transform: scaleX(-1);
-    }
-    75% {   transform: translateY(-100px);
-            transform: scaleX(-1);
     }
     100% {  background-position: -1168px -0px;
     }
@@ -162,8 +155,15 @@
     animation: walk-p1 steps(6) .50s infinite; 
 }
 @keyframes walk-p1 {
+    from { background-position: 0px -5px; }
+    to { background-position: -720px -5px; }
+}
+.damaged-p1 { 
+    animation: damaged-p1 steps(2) .25s infinite; 
+}
+@keyframes damaged-p1 {
     from { background-position: 0px -0px; }
-    to { background-position: -720px -0px; }
+    to { background-position: -206px -0px; }
 }
 
 
@@ -175,49 +175,30 @@
     from { background-position: -0px -0px; }
     to { background-position: -208px -0px; }
 }
-
 .punch-p2 { 
     animation: punch-p2 steps(2) 0.25s infinite;
 
 }
 @keyframes punch-p2 {
-    from { background-position: -0px -0px; }
-    to { background-position: -180px -0px; }
+    from { background-position: -15px -10px; }
+    to { background-position: -180px -10px; }
 }
-
 .kick-p2 { 
-    animation: kick-p2 steps(7) 0.75s infinite; 
+    animation: kick-p2 steps(7) 0.55s infinite; 
 }
 @keyframes kick-p2 {
-    0% {    background-position: 0px -0px;
+    0% {    background-position: 0px -12px;
     }
-    25% {   transform: translateY(-15px);
-    }
-    50% {   transform: translateY(-30px);
-    }
-    75% {   transform: translateY(-15px);
-    }
-    100% {  background-position: -490px -0px;
-            transform: translateY(0px);
+    100% {  background-position: -490px -12px;
     }
 }
-
 .jump-p2 { 
     animation: jump-p2 steps(4) 0.8s infinite;
 }
 @keyframes jump-p2 {
-    0% {    background-position: -0px -0px;
+    0% {    background-position: -0px -5px;
     }
-    30% {   transform: translateY(-40px);
-    }
-    50% {   transform: translateY(-80px);
-    }
-    75% {   transform: translateY(-40px);
-    }
-    85% {   transform: translateY(-25px);
-    }
-    100% {  background-position: -228px -0px;
-            transform: translateY(0px);
+    100% {  background-position: -228px -5px;
     }
 }
 .walk-p2 { 
@@ -227,5 +208,11 @@
     from { background-position: -0px -0px; }
     to { background-position: -196px -0px; }
 }
-
+.damaged-p2 { 
+    animation: damaged-p2 steps(2) .25s infinite; 
+}
+@keyframes damaged-p2 {
+    from { background-position: -0px -0px; }
+    to { background-position: -113px -0px; }
+}
 

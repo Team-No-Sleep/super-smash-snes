@@ -81,7 +81,7 @@
     </div>
     <!-- stops here -->
     <div class="stage">
-      <div id="content" class="row mx-auto text-white align-items-center">
+      <div id="content" class="row mx-auto text-white align-items-center d-none">
         <div class="col-sm-4">
           <ul class="list-unstyled">
             <li><span class="badge badge-dark badge-pill mr-2">1</span> To get started please sign in with your google
@@ -101,14 +101,8 @@
           <img id="ryuImg" src="images/ryu_hbi.png" class="img-fluid"/>
           <p><strong>Ryu</strong></p>
         </div>
-        <!-- why is this here? <div class="health-box">
-          <div class="health-bar-red"></div>
-          <div class="health-bar-combine"></div>
-          <div class="health-bar"></div>
-          <div class="health-bar-text"></div>
-        </div> -->
       </div>
-      <div id="healthBar" class="row align-items-center mx-auto d-none">
+      <div id="healthBar" class="row align-items-center mx-auto">
         <div class="col-sm-1">
           <img src="images/goku_hbi.png" class="img-fluid" />
         </div>
@@ -142,8 +136,10 @@
           <img src="images/ryu_hbi.png" class="img-fluid" />
         </div>
       </div>
-      <div id="gokuSprite" class="collision-p1 goku idle-p1 d-none"></div>
-      <div id="ryuSprite" class="collision-p2 ryu idle-p2 d-none"></div>
+      <!-- <div id="gokuSprite" class="goku goku-idle idle-p1"></div> -->
+      <div id="gokuSprite" class="collision-p1 goku goku-idle idle-p1"></div>
+      <div id="ryuSprite" class="collision-p2 ryu ryu-idle idle-p2"></div>
+      <!-- <div id="ryuSprite" class="ryu ryu-idle idle-p2"></div> -->
     </div>
 
     <div class="container-fluid mdl-color--black">
@@ -217,12 +213,8 @@
     crossorigin="anonymous"></script>
   <!-- sprite javascript files -->
   <script src="scripts/keypad.js"></script>
- 
-  <script src="scripts/collision.js"></script>
+  <script src="scripts/collision-healthbar-hitbox.js"></script>
   <!-- healthbar -->
-  <!-- <script src="scripts/sprite.js"></script> -->
-  <!-- <script src="scripts/healthbar.js"></script> -->
-  <!-- <script src="scripts/sprite-P1.js"></script> -->
   <script src="scripts/main.js"></script>
   <script src="scripts/app.js"></script>
 </body>
