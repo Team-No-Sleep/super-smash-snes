@@ -62,6 +62,12 @@ var winCount;
 //loss count
 var lossCount;
 
+//  Variable that will hold the setInterval that runs the countdown
+var intervalId;
+
+// prevents the clock from being sped up unnecessarily
+var clockRunning = false;
+
 //player 1 attacks player2 the attack happens with attacks points reduces health points by the number of attack points then player2 attacks player 1 the same way therefore attack points reduces health points by the number of attack points.
 
 //update/reduce health bars based on the attacks from player1 and player2
@@ -82,12 +88,20 @@ $(document).ready(function() {
 // Functions
 // ======================
 // On Click
-
 //showcase goku info when the user clicks the character
 $("#gokuChar").on("click", function(event) {
   // Prevent the page from refreshing
   event.preventDefault();
-
+  if(userNameElement.textContent !== ""){
+      let player1 = userNameElement.textContent;
+  } else{
+      let player1 = "Goku";
+      let player2 = "Ryu";
+      $("#player1").text(player1);
+      $("#player2").text(player2);
+      countdown.reset();
+      countdown.start();
+  }
   //shows healthbar
   $("#healthBar").removeClass("d-none");
   //shows goku sprite
@@ -103,7 +117,14 @@ $("#gokuChar").on("click", function(event) {
 $("#ryuChar").on("click", function(event) {
   // Prevent the page from refreshing
   event.preventDefault();
-
+  if(userNameElement.textContent !== ""){
+    let player1 = userNameElement.textContent;
+} else{
+    let player1 = "Ryu";
+    let player2 = "Goku"
+    $("#player1").text(player2);
+    $("#player2").text(player1);
+}
   //shows healthbar
   $("#healthBar").removeClass("d-none");
   //shows ryu sprite
@@ -113,3 +134,65 @@ $("#ryuChar").on("click", function(event) {
   //hide instructions again
   $("#content").addClass("d-none");
 });
+// coundown object
+var countdown = {
+    //countdown time initialized
+    time: 59,
+
+    //resets countdown
+    reset: function () {
+        //resets countdown time
+        countdown.time = 59;
+
+        //change the html to read the current countdown time
+        $("#countDown").text("59");
+
+    },
+    //starts the countdown
+    start: function () {
+        // use setInterval to start the count here and set the clock to running.
+        if (!clockRunning) {
+            //start countdown
+            intervalId = setInterval(countdown.count, 1000);
+
+            //the countdown has started
+            clockRunning = true;
+        }
+    },
+    //stops countdown
+    stop: function () {
+        // use clearInterval to stop the count here and set the clock to not be running.
+        //reset interval
+        clearInterval(intervalId);
+
+        //stop the countdown
+        clockRunning = false;
+    },
+    //keep track of the countdown
+    count: function () {
+        // decrease time by 1
+        countdown.time--;
+
+        // update html with the current countdown
+        $("#countDown").text(countdown.time);
+
+        //if count <= 0 then the countdown has reached the end, show the right/wrong answers and restart the timer
+        if (countdown.time <= 0) {
+            //stop countdown
+            countdown.stop();
+
+            //display the right and wrong answers
+            //rightAndWrong();
+
+            //delaying showing the answer to the user and initialize the game again
+            setTimeout(initGame, 2000);
+
+            //keep track of the unanswered questions
+            countUnansweredAnswers++;
+
+            //keep track of number of questions answered
+            countQuestion++;
+
+        }
+    }
+};

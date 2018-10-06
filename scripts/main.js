@@ -210,7 +210,7 @@ function authStateObserver(user) {
     // User is signed in!
     // Get the signed-in user's profile pic and name.
     var profilePicUrl = getProfilePicUrl();
-    var userName = getUserName();
+    let userName = getUserName();
 
     // Set the user's profile pic and name.
     userPicElement.style.backgroundImage = "url(" + profilePicUrl + ")";
@@ -342,7 +342,7 @@ firebase.initializeApp(config);
 // // Checks that Firebase has been imported.
 // checkSetup();
 //create a variable to reference the database
-var database = firebase.database();
+window.database = firebase.database();
 
 // Shortcuts to DOM Elements.
 var messageListElement = document.getElementById("messages");
@@ -380,15 +380,52 @@ initFirebaseAuth();
 // We load currently existing chat messages and listen to new ones.
 loadMessages();
 
-// // Gets Link for Theme Song
-var audioElement = document.createElement("audio");
-audioElement.setAttribute("src", "sounds/SNES.mp3");
+// //should be moved back to app.js if possible
+// // Functions
+// // ======================
+// // On Click
+// var name = "";
+// //showcase goku info when the user clicks the character
+// $("#gokuChar").on("click", function(event) {
+//   // Prevent the page from refreshing
+//   event.preventDefault();
+//   let name = userNameElement.textContent;
+//   console.log(name);
+//   //shows healthbar
+//   $("#healthBar").removeClass("d-none");
+//   //shows goku sprite
+//   $("#gokuSprite").removeClass("d-none");
+//   //shows ryu sprite
+//   $("#ryuSprite").removeClass("d-none");
 
-// Theme Button
-$(".sound-on").on("click", function() {
-  audioElement.play();
-});
-$(".sound-off").on("click", function() {
-  audioElement.pause();
-});
+//   //hide instructions again
+//   $("#content").addClass("d-none");
+// });
+
+// //showcase ryu info when the user clicks the character
+// $("#ryuChar").on("click", function(event) {
+//   // Prevent the page from refreshing
+//   event.preventDefault();
+
+//   //shows healthbar
+//   $("#healthBar").removeClass("d-none");
+//   //shows ryu sprite
+//   $("#ryuSprite").removeClass("d-none");
+//   //shows goku sprite
+//   $("#gokuSprite").removeClass("d-none");
+//   //hide instructions again
+//   $("#content").addClass("d-none");
+// });
+
+// // // Gets Link for Theme Song
+// var audioElement = document.createElement("audio");
+// audioElement.setAttribute("src", "sounds/SNES.mp3");
+
+// // Theme Button
+// $(".sound-on").on("click", function() {
+//   audioElement.play();
+// });
+// $(".sound-off").on("click", function() {
+//   audioElement.pause();
+// });
  
