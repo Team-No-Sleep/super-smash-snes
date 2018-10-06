@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-html, body {
-  font-family: 'Roboto', 'Helvetica', sans-serif;
+html, body, .mdl-button {
+  font-family: 'Press Start 2P', cursive !important;
 }
 main, #messages-card {
   height: 100%;
