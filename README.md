@@ -1,7 +1,7 @@
 # Smash-SNES
 
 
-### Part 1- our MVP:
+## Part 1- our MVP:
 
 
 
@@ -24,11 +24,13 @@
   * opening game page
   * medals for winners
   
- ### Part 1- Street-Fight Game as a glance:
+ ## Part 1- Street-Fight Game as a glance:
+
  ### Highlights of our game feature
-  * Live chat
-  * animated backgrounds
-  * 
+ ![Authentication](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Sign-in via Google Account")
+
+ ![Live Chat](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Chat with your opponent")
+
   
   #### Instructions:
   * Log in
