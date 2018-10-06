@@ -67,7 +67,7 @@ $(document).keydown(function (event) {
       case 83:
         //database call to record the press of the keytype and the keycode
         recordGokusKeyPad("keydown", 83);
-        playKick();
+        playCross();
         $(".goku").addClass("kick-p1");
         $(".goku").addClass("goku-kick");
         setTimeout(function (e) {
