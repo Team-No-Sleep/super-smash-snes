@@ -40,8 +40,8 @@ html {
   height: 255px;
 }
 .goku {
-  top: 68%;
-  right: 67%;
+  /* top: 50.5%; */
+  /* right: 67%; */
   position: absolute;
 }
 #gokuImg,
@@ -55,8 +55,8 @@ html {
     filter: grayscale(0%);
 }
 .ryu {
-  top: 68%;
-  right: 34%;
+  /* top: 43%;
+  right: 22%; */
   position: absolute;
 }
 .counter-container {

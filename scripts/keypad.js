@@ -51,11 +51,15 @@ $(document).keydown(function (event) {
         //database call to record the press of the keytype and the keycode
         recordGokusKeyPad("keydown", 65);
         playPunch();
+        $(".goku").removeClass("goku-idle");
+        $(".goku").removeClass("idle-p1");
         $(".goku").addClass("goku-punch");
         $(".goku").addClass("punch-p1");
         setTimeout(function (e) {
           $(".goku").removeClass("punch-p1");
           $(".goku").removeClass("goku-punch");
+          $(".goku").addClass("goku-idle");
+          $(".goku").addClass("idle-p1");
         }, 570);
         break;
 
@@ -63,7 +67,7 @@ $(document).keydown(function (event) {
       case 83:
         //database call to record the press of the keytype and the keycode
         recordGokusKeyPad("keydown", 83);
-        playKick();
+        playCross();
         $(".goku").addClass("kick-p1");
         $(".goku").addClass("goku-kick");
         setTimeout(function (e) {
@@ -77,12 +81,16 @@ $(document).keydown(function (event) {
         //database call to record the press of the keytype and the keycode
         recordGokusKeyPad("keydown", 68);
         playJump();
-        $(".goku").addClass("jump-p1");
+        $(".goku").removeClass("goku-idle");
+        $(".goku").removeClass("idle-p1");
         $(".goku").addClass("goku-jump");
+        $(".goku").addClass("jump-p1");
         setTimeout(function (e) {
+          $(".goku").addClass("goku-idle");
+          $(".goku").addClass("idle-p1");
           $(".goku").removeClass("jump-p1");
           $(".goku").removeClass("goku-jump");
-        }, 830);
+        }, 400);
         break;
     }
   }
@@ -102,9 +110,13 @@ $(document).keydown(function (event) {
         //database call to record the press of the keytype and the keycode
         recordRyusKeyPad("keydown", 74);
         playPunch();
+        $(".ryu").removeClass("ryu-idle");
+        $(".ryu").removeClass("idle-p2");
         $(".ryu").addClass("ryu-punch");
         $(".ryu").addClass("punch-p2");
         setTimeout(function (event) {
+          $(".ryu").addClass("ryu-idle");
+          $(".ryu").addClass("idle-p2");
           $(".ryu").removeClass("punch-p2");
           $(".ryu").removeClass("ryu-punch");
         }, 230);
@@ -120,7 +132,7 @@ $(document).keydown(function (event) {
         setTimeout(function (event) {
           $(".ryu").removeClass("kick-p2");
           $(".ryu").removeClass("ryu-kick");
-        }, 740);
+        }, 600);
         break;
 
       // user presses the "l" JUMP key
@@ -133,7 +145,7 @@ $(document).keydown(function (event) {
         setTimeout(function (event) {
           $(".ryu").removeClass("jump-p2");
           $(".ryu").removeClass("ryu-jump");
-        }, 870);
+        }, 370);
         break;
     }
   }
@@ -146,7 +158,7 @@ $(document).keydown(function (event) {
 var walk = {
 	goku: $(".goku"),
 	ryu: $(".ryu"),
-	speed: 3,
+	speed: 2,
 	gokuLeftKeyToggle  : false,
 	gokuRightKeyToggle : false,
 	ryuLeftKeyToggle   : false,
@@ -196,7 +208,7 @@ var walk = {
 			walk.goku.addClass("goku-walk walk-p1");
 		}
 		if (walk.ryuLeftKeyToggle == true || walk.ryuRightKeyToggle == true) {
-			walk.ryu.addClass("ryu-walk walk-p1");
+			walk.ryu.addClass("ryu-walk walk-p2");
 		}
 	}),
 	animateStop: $(document).keyup(function () {
@@ -204,7 +216,7 @@ var walk = {
 			walk.goku.removeClass("goku-walk walk-p1");
 		}
 		if (walk.ryuLeftKeyToggle == false || walk.ryuRightKeyToggle == false) {
-			walk.ryu.removeClass("ryu-walk walk-p1");
+			walk.ryu.removeClass("ryu-walk walk-p2");
 		}
 	}),
 	moveGoku: function () {
