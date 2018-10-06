@@ -38,17 +38,21 @@ var collisionBox = {
 var collisionQA = {
   logGokuCollision: function() {
     // $(".goku").css({ backgroundColor: "green" });
+    $(".goku").css({ backgroundColor: "none" });
     // console.log('Goku hitbox: ', hitbox);
   },
   logGokuSafe: function() {
     // $(".goku").css({ backgroundColor: "red" });
+    $(".goku").css({ backgroundColor: "none" });
   },
   logRyuCollision: function() {
     // $(".ryu").css({ backgroundColor: "yellow" });
+    $(".ryu").css({ backgroundColor: "none" });
     // console.log('Ryu hitbox: ', hitbox);
   },
   logRyuSafe: function() {
     // $(".ryu").css({ backgroundColor: "blue" });
+    $(".ryu").css({ backgroundColor: "none" });
   },
   hitBoxCheck: $(window).keydown(function() {
     if (collision === true) {
@@ -209,16 +213,20 @@ eventHandlers.intializeGame();
 
 var hitboxQA = {
   gokuPunch: function() {
-    $(".goku").css("background-color", "orange");
+    // $(".goku").css("background-color", "orange");
+    $(".goku").css("background-color", "none");
   },
   gokuKick: function() {
-    $(".goku").css("background-color", "orange");
+    // $(".goku").css("background-color", "orange");
+    $(".goku").css("background-color", "none");
   },
   ryuPunch: function() {
-    $(".ryu").css("background-color", "purple");
+    // $(".ryu").css("background-color", "purple");
+    $(".ryu").css("background-color", "none");
   },
   ryuKick: function() {
-    $(".ryu").css("background-color", "purple");
+    // $(".ryu").css("background-color", "purple");
+    $(".ryu").css("background-color", "none");
   }
 };
 

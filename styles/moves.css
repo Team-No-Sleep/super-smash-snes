@@ -4,7 +4,7 @@
 ============ 
 */
 .goku { 
-    /* transform: scaleX(-1); */
+    transform: scaleX(-1);
 }
 .ryu { 
     transform: scaleX(-1);
@@ -17,11 +17,13 @@
  */
 
 .collision-p1 {
-    /* background-color:red; */
+    /* background-color: red; */
+    background-color: none !important;
 }
 
 .collision-p2 {
     /* background-color: blue; */
+    background-color: none !important;
 }
 
 
@@ -65,9 +67,9 @@
 }
 .goku-damaged {
     background: url('../images/goku-damaged.png') no-repeat;
-    width: 159px;
-    height: 273px;
-    top: 62%;
+    width: 214px;
+    height: 300px;
+    top: 42%;
 }
 
 .ryu-idle {
@@ -107,10 +109,10 @@
 }
 .ryu-damaged {
     background: url('../images/ryu-damaged.png') no-repeat;
-    width: 56px;
-    height: 85px;
-    left: 62%;
-    top: 69%;
+    width: 159px;
+    height:273px;
+    left: 65%;
+    top: 47%;
 }
 
 
@@ -159,11 +161,11 @@
     to { background-position: -1428px -5px; }
 }
 .damaged-p1 { 
-    animation: damaged-p1 steps(2) .25s infinite; 
+    animation: damaged-p1 steps(2) .20s infinite; 
 }
 @keyframes damaged-p1 {
     from { background-position: 0px -0px; }
-    to { background-position: -206px -0px; }
+    to { background-position: -428px -0px; }
 }
 
 
