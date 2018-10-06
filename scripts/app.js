@@ -132,6 +132,9 @@ function characterHandlers() {
                 database.ref("/keypad/ryu/").on("child_added", keyPadInputs, function (errorObject) {
                     console.log("The read failed: " + errorObject.code);
                 });
+
+                //make the fake function call the real function
+                recordGokusKeyPad = recordGokusKeyPadReal;
             }
         );
     });
@@ -172,6 +175,9 @@ function characterHandlers() {
                 database.ref("/keypad/goku/").on("child_added", keyPadInputs, function (errorObject) {
                     console.log("The read failed: " + errorObject.code);
                 });
+
+                //make the fake function call the real function
+                recordRyusKeyPad = recordRyusKeyPadReal;
             }
         );
     });
@@ -252,21 +258,28 @@ function revealFigthingArena() {
     database.ref("/keypad/").remove();
 }
 //records key ups
-function recordGokusKeyPad(keyType, keyCode) {
+function recordGokusKeyPadReal(keyType, keyCode) {
     //change what is saved in firebase
     database.ref("/keypad/goku/").push({
         keyType: keyType,
         keyCode: keyCode
     });
 }
+
+//this is a fake function
+function recordGokusKeyPad(keyType, keyCode){}
+
+
 //records key ups
-function recordRyusKeyPad(keyType, keyCode) {
+function recordRyusKeyPadReal(keyType, keyCode) {
     //change what is saved in firebase
     database.ref("/keypad/ryu/").push({
         keyType: keyType,
         keyCode: keyCode
     });
 }
+//this is a fake function
+function recordRyusKeyPad(keyType, keyCode){}
 
 //receives key pad inputs
 function keyPadInputs(snapshot) {
