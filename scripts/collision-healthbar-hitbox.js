@@ -110,7 +110,7 @@ var collisionQuery = {
 //==================
 //    HEALTHBAR
 //==================
-let maxHitPoints = 0, curHitPoints = maxHitPoints;
+let maxHitPoints = 0, curHitPointsGoku = maxHitPoints, curHitPointsRyu = maxHitPoints;
 // let maxHitPoints = 0, curHitPoints = maxHitPoints;
 var healthbar = {
   generateHitPoints: function() {
@@ -156,13 +156,14 @@ var healthbar = {
     );
   },
   resetHealthBar: function() {
-    curHitPoints = maxHitPoints;
     //Goku
-    $(".health-bar-text").html(curHitPoints + " HP");
+    curHitPointsGoku = maxHitPoints;
+    $(".health-bar-text").html(curHitPointsGoku + " HP");
     $(".health-bar-red").css("width", "100%");
     $(".health-bar").css("width", "100%");
     //RYU
-    $(".health-bar-text-p2").html(curHitPoints + " HP");
+    curHitPointsRyu = maxHitPoints;
+    $(".health-bar-text-p2").html(curHitPointsRyu + " HP");
     $(".health-bar-red-p2").css("width", "100%");
     $(".health-bar-p2").css("width", "100%");
   },
@@ -179,26 +180,24 @@ var eventHandlers = {
   //   healthbar.countDamage(this);
   // },
   applyDamageRyu: function(damage) {
-    curHitPoints = curHitPoints - damage;
-    healthbar.applyDamageRyu(curHitPoints);
+    curHitPointsRyu = curHitPointsRyu - damage;
+    healthbar.applyDamageRyu(curHitPointsRyu);
     //reset the fighting arena when ryu has been defeated
-    if(curHitPoints <= 0){resetFightArena("Goku Wins!", "goku", false);}
+    if(curHitPointsRyu <= 0){resetFightArena("Goku Wins!", "goku", false);}
   },
   applyDamageGoku: function(damage) {
-    curHitPoints = curHitPoints - damage;
-    healthbar.applyDamageGoku(curHitPoints);
+    curHitPointsGoku = curHitPointsGoku - damage;
+    healthbar.applyDamageGoku(curHitPointsGoku);
     //reset the fighting arena when goku has been defeated
-    if(curHitPoints <= 0){resetFightArena("Ryu Wins!", "ryu", false);}
+    if(curHitPointsGoku <= 0){resetFightArena("Ryu Wins!", "ryu", false);}
   },
   intializeGameClick: $(".newGame").click(function() {
-    healthbar.resetGame();
-    $(".health-bar-text").html(curHitPoints + " HP");
-    $(".health-bar-text-p2").html(curHitPoints + " HP");
+    this.intializeGame();
   }),
   intializeGame: function() {
     healthbar.resetGame();
-    $(".health-bar-text").html(curHitPoints + " HP");
-    $(".health-bar-text-p2").html(curHitPoints + " HP");
+    $(".health-bar-text").html(curHitPointsGoku + " HP");
+    $(".health-bar-text-p2").html(curHitPointsRyu + " HP");
   }
 };
 eventHandlers.intializeGame();

@@ -40,8 +40,13 @@ var clockRunning = false;
 
 //make handlers for click handlers for goku and ryu
 function characterHandlers() {
+    //add hover to goku
     $("#gokuImg").addClass("should-hover");
+    //add hover to ryu
     $("#ryuImg").addClass("should-hover");
+
+    //handles data deletion of player wins when player leaves
+    database.ref("/wins/").onDisconnect().remove();
 
     //showcase goku info when the user clicks the character
     $("#gokuChar").on("click", function (event) {
@@ -155,19 +160,15 @@ database.ref("/players/goku").on("value", function (snapshot) {
         $("#player1").text(goku);
 
     } else {
-        //reset game when goku is not present
-        if (goku !== null && ryu !== null) {
-            //reset fight arena based on timer running out, declare a winner and don't reset arena
-            resetFightArena("Goku Forfeits!", "ryu", true);
-        }
-
-        //handles player1 name updates
-        goku = null;
-
+        
         //update html
         $("#player1").text("Player1");
 
-
+        //reset game when goku is not present
+        if (goku !== null) {
+            //reset fight arena based on timer running out, declare a winner and don't reset arena
+            resetFightArena("Goku Forfeits!", "ryu", true);
+        }
     }
     // If any errors are experienced, log them to console.
 }, function (errorObject) {
@@ -193,17 +194,19 @@ database.ref("/players/ryu").on("value", function (snapshot) {
         $("#player2").text(ryu);
 
     } else {
-        //reset game when ryu is not present
-        if (ryu !== null && goku !== null) {
-            //reset fight arena based on timer running out, declare a winner and don't reset arena
-            resetFightArena("Ryu Forfeits!", "goku", true);
-        }
-
-        //handles player2 name updates
-        ryu = null;
-
+        
         //update html
         $("#player2").text("Player2");
+
+        //reset game when ryu is not present
+        if (ryu !== null) {
+            //reset fight arena based on timer running out, declare a winner and don't reset arena
+            resetFightArena("Ryu Forfeits!", "goku", true);
+        } 
+
+       
+
+        
 
     }
 
@@ -298,7 +301,7 @@ function resetFightArena(message, winner, fullReset) {
     countdown.stop();
 
     //makes the current fighter still standing the winner
-    if (myFighter === winner) {
+    if (myFighter === winner && !fullReset) {
         //read current value
         database.ref("/wins/").once("value").then(function (snapshot) {
             //holds current winner
@@ -326,6 +329,11 @@ function resetFightArena(message, winner, fullReset) {
         });
     }
 
+    //removes win count for players
+    if(fullReset){
+        database.ref("/wins/").remove();
+    }
+
     //showcase victories and forfeits messages
     $("#displayMessage").text(message);
 
@@ -346,6 +354,12 @@ function resetFightArena(message, winner, fullReset) {
 
     //clear choices
     setTimeout(function () {
+        //cancels onDisconnect Handler
+        database.ref("/players/goku").onDisconnect().cancel();
+
+        //cancels onDisconnect Handler
+        database.ref("/players/ryu").onDisconnect().cancel();
+
         //remove keypad data
         database.ref("/keypad/").remove();
 
@@ -424,9 +438,9 @@ var countdown = {
             //figure out who the winner is
             let winner = "";
 
-            if (healthCounter.gokuHealth > healthCounter.ryuHealth) {
+            if (curHitPointsGoku > curHitPointsRyu) {
                 winner = "goku";
-            } else if (healthCounter.gokuHealth === healthCounter.ryuHealth) {
+            } else if (curHitPointsGoku === curHitPointsRyu) {
                 winner = null;
             } else {
                 winner = "ryu";
