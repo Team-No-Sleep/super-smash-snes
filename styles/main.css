@@ -138,7 +138,7 @@ main, #messages-card {
   justify-content: flex-end;
   padding-right: 10px;
 }
-#user-container #user-pic {
+#user-container #user-pic, .userLeaderBoard{
   top: -3px;
   position: relative;
   display: inline-block;

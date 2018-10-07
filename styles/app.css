@@ -76,6 +76,17 @@ html {
   padding: 20px;
   text-align: center;
 }
+/* .userLeaderBoard{
+  top: -3px;
+  position: relative;
+  display: inline-block;
+  background-image: url('images/profile.png');
+  background-repeat: no-repeat;
+  width: 40px;
+  height: 40px;
+  background-size: 40px;
+  border-radius: 20px;
+} */
 @media screen and (max-width: 610px) {
   .top-position-uc {
     top: 88px !important;

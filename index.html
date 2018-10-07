@@ -80,26 +80,35 @@
     </div>
     <!-- stops here -->
     <div class="stage">
-      <div id="content" class="row mx-auto text-white align-items-center">
-        <div class="col-sm-4">
-          <ul id="instructions" class="list-unstyled">
-            <li><span class="badge badge-dark badge-pill mr-2">1</span> To get started please sign in with your google
-              account.</li>
-            <li><span class="badge badge-dark badge-pill mr-2">2</span> Select a character</li>
-            <li><span class="badge badge-dark badge-pill mr-2">3</span> Feel free to chat during the match with your
-              opponent using <span class="material-icons icon-sizing">forum</span></li>
-            <li><span class="badge badge-dark badge-pill mr-2">4</span> To play/stop our theme song use <span class="material-icons icon-sizing">volume_up</span>
-              <span class="material-icons icon-sizing">volume_off</span></li>
-          </ul>
-          <h1 id="displayMessage" class="d-none"></h1>
+      <div id="content">
+        <div id="userInstructions" class="row row mx-auto align-items-center text-white">
+          <div class="col-sm-4">
+            <ul id="instructions" class="list-unstyled">
+              <li><span class="badge badge-dark badge-pill mr-2">1</span> To get started please sign in with your
+                google
+                account.</li>
+              <li><span class="badge badge-dark badge-pill mr-2">2</span> Select a character</li>
+              <li><span class="badge badge-dark badge-pill mr-2">3</span> Feel free to chat during the match with your
+                opponent using <span class="material-icons icon-sizing">forum</span></li>
+              <li><span class="badge badge-dark badge-pill mr-2">4</span> To play/stop our theme song use <span class="material-icons icon-sizing">volume_up</span>
+                <span class="material-icons icon-sizing">volume_off</span></li>
+            </ul>
+            <h1 id="displayMessage" class="d-none"></h1>
+          </div>
+          <div id="gokuChar" class="col-sm-4 text-center">
+            <img id="gokuImg" src="images/goku_hbi.png" class="img-fluid" />
+            <p><strong>Goku</strong></p>
+          </div>
+          <div id="ryuChar" class="col-sm-4 text-center">
+            <img id="ryuImg" src="images/ryu_hbi.png" class="img-fluid" />
+            <p><strong>Ryu</strong></p>
+          </div>
         </div>
-        <div id="gokuChar" class="col-sm-4 text-center">
-          <img id="gokuImg" src="images/goku_hbi.png" class="img-fluid"/>
-          <p><strong>Goku</strong></p>
-        </div>
-        <div id="ryuChar" class="col-sm-4 text-center">
-          <img id="ryuImg" src="images/ryu_hbi.png" class="img-fluid"/>
-          <p><strong>Ryu</strong></p>
+        <div id="leaderBoard" class="d-none">
+          <h1>Leaderboard</h1>
+          <div class="pre-scrollable">
+            <ul id="leaderBoardList"class="list-unstyled"></ul>
+          </div>
         </div>
       </div>
       <div id="healthBar" class="row align-items-center mx-auto d-none">
@@ -124,7 +133,7 @@
           </div>
         </div>
         <div class="col">
-            <p class="text-white">Wins: <span id="ryuWinCount">0</span></p>
+          <p class="text-white">Wins: <span id="ryuWinCount">0</span></p>
           <div class="health-box-p2">
             <div class="health-bar-red-p2"></div>
             <div class="health-bar-combine-p2"></div>

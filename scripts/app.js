@@ -1,5 +1,3 @@
-//set up/initialize global variables for winning/loosing the round (winCount, loseCount, player1BaseHealthPoints, player2BaseHealthPoints, player1CurrentHealthPoints, player2HealthPoints, player1AttackPoints, player2AttackPoints)
-
 //initialize player 1
 var goku = null;
 
@@ -9,30 +7,11 @@ var ryu = null;
 //tracks current fighter
 var myFighter = null;
 
-//wins count
-var winCount = 0;
-
-//loss count
-var lossCount = 0;
-
 //  Variable that will hold the setInterval that runs the countdown
 var intervalId;
 
 // prevents the clock from being sped up unnecessarily
 var clockRunning = false;
-
-//player 1 attacks player2 the attack happens with attacks points reduces health points by the number of attack points then player2 attacks player 1 the same way therefore attack points reduces health points by the number of attack points.
-
-//update/reduce health bars based on the attacks from player1 and player2
-
-//start timer at 1 minute maybe? to signify/countdown the amount of time a round lasts
-
-//function that resets the game once a round is finished, all the rounds have been played, when a player leaves and declare a forfeit too, when both players leave
-
-//declare a winner of the round when the timer runs out based on who has the highest amount of health points left, or who stands with the highest amount of healthpoints if the timer has not run out yet
-
-//declare a winner of the game if the either player win 3 rounds in a row
-
 
 // Functions
 // ======================
@@ -42,6 +21,7 @@ var clockRunning = false;
 function characterHandlers() {
     //add hover to goku
     $("#gokuImg").addClass("should-hover");
+
     //add hover to ryu
     $("#ryuImg").addClass("should-hover");
 
@@ -160,7 +140,7 @@ database.ref("/players/goku").on("value", function (snapshot) {
         $("#player1").text(goku);
 
     } else {
-        
+
         //update html
         $("#player1").text("Player1");
 
@@ -194,7 +174,7 @@ database.ref("/players/ryu").on("value", function (snapshot) {
         $("#player2").text(ryu);
 
     } else {
-        
+
         //update html
         $("#player2").text("Player2");
 
@@ -202,12 +182,7 @@ database.ref("/players/ryu").on("value", function (snapshot) {
         if (ryu !== null) {
             //reset fight arena based on timer running out, declare a winner and don't reset arena
             resetFightArena("Ryu Forfeits!", "goku", true);
-        } 
-
-       
-
-        
-
+        }
     }
 
     // If any errors are experienced, log them to console.
@@ -228,13 +203,13 @@ function maybeStartTimer() {
 database.ref("/wins/").on("value", function (snapshot) {
     //whenever win count changes the html gets updated
     console.log(snapshot.val());
-    if(snapshot.val() === null){
+    if (snapshot.val() === null) {
         return;
     }
 
     //update html
-     $("#gokuWinCount").text(snapshot.val().goku);
-     $("#ryuWinCount").text(snapshot.val().ryu);
+    $("#gokuWinCount").text(snapshot.val().goku);
+    $("#ryuWinCount").text(snapshot.val().ryu);
 });
 
 //show fighting arena
@@ -327,10 +302,25 @@ function resetFightArena(message, winner, fullReset) {
             //update database
             database.ref("/wins/").update(tempWins);
         });
+
+        //add user to leaderboard and update the number of times they have won
+        database.ref("/leaderboard/" + userNameElement.textContent).transaction(function (currentValue) {
+            //initialize current user data for the leaderboard
+            let newValue = (currentValue || {
+                count: 0,
+                profilePicUrl: getProfilePicUrl()
+            });
+
+            // increment win count
+            newValue.count++;
+
+            //new leaderboard data
+            return newValue;
+        });
     }
 
     //removes win count for players
-    if(fullReset){
+    if (fullReset) {
         database.ref("/wins/").remove();
     }
 
@@ -386,7 +376,24 @@ function resetFightArena(message, winner, fullReset) {
 
         //reset ryu positioning
         $("#ryuSprite").removeAttr("style");
+
+        //show leaderboard data
+        $("#leaderBoard").removeClass("d-none");
+
+        //hide instructions
+        $("#userInstructions").addClass("d-none");
+
+        //hide leaderboard again
+        setTimeout(function () {
+            //show leaderboard data
+            $("#leaderBoard").addClass("d-none");
+
+            //hide instructions
+            $("#userInstructions").removeClass("d-none");
+        }, 5000);
     }, 5000);
+
+
 }
 // coundown object
 var countdown = {
@@ -450,3 +457,21 @@ var countdown = {
         }
     }
 };
+
+//sets leaderboard
+database.ref("/leaderboard/").on("value", function (snapshot) {
+    console.log(snapshot.val());
+
+    //delete the leaderboard items
+    $("#leaderBoardList").empty();
+
+    //initialize leaderboard data
+    let leaderBoardData = snapshot.val();
+
+    //iterates over user object
+    for (let user in leaderBoardData) {
+        //make a list of users in the leaderboard
+        $("#leaderBoardList").append("<li> <img class='userLeaderBoard img-fluid' src='" + leaderBoardData[user].profilePicUrl + "' /> " + user + " " + leaderBoardData[user].count + "</li>");
+    }
+
+});
