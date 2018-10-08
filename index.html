@@ -4,10 +4,10 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="Learn how to use the Firebase platform on the Web">
+  <meta name="description" content="Smash SNEX is a multiplayer game that takes you back to old school games.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Smash SNES</title>
-
+  <!-- came from firebase messages tutorial application -->
 
   <!-- Disable tap highlight on IE -->
   <meta name="msapplication-tap-highlight" content="no">
@@ -30,31 +30,41 @@
   <meta name="msapplication-TileColor" content="#3372DF">
   <meta name="msapplication-navbutton-color" content="#303F9F">
 
-  <!-- Sound Library -->
-  <script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
-
   <!-- Material Design Lite -->
-
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.orange-indigo.min.css">
   <script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
 
+  <!-- end of firebase messages tutorial application -->
+
+  <!-- Sound Library -->
+  <script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
+
   <!-- App Styling -->
+
+  <!-- favicon -->
   <link rel="icon" href="images/pacman.png">
+  <!-- app font -->
   <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+  <!-- bootstrap -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
     crossorigin="anonymous">
+  <!-- general styles -->
+  <!-- overall look and feel but mostly targeting the chat and google log in -->
   <link rel="stylesheet" href="styles/main.css">
+  <!-- styles for the entire application -->
   <link rel="stylesheet" href="styles/app.css" />
+  <!-- styles pertaining the animation for the sprites in the fighting arena -->
   <link rel="stylesheet" href="styles/moves.css" />
   <link rel="stylesheet" href="styles/style.css" />
 
+  <!-- end of styling -->
 </head>
 
 <body class="mdl-color--black">
   <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase.js"></script>
+  <!-- Header section containing logo and sign in-->
   <header>
-    <!-- Header section containing logo -->
     <nav class="navbar navbar-expand-lg navbar-dark mdl-color--black py-0">
       <a class="navbar-brand mr-auto py-0 font-size-3em mt-2" href="#"><img src="images/smash_icon.png" class="img-fluid material-icons smash-icon" />
         <span class="mt-2 logo">Smash SNES</span></a>
@@ -70,17 +80,11 @@
       </div>
     </nav>
   </header>
+  <!-- game arena, player move instructions, chat icon and theme sound icons -->
   <div class=" mdl-color--grey-100">
-    <!-- don't remove yet -->
-    <div class="container-fluid d-none">
-      <h3>Buttons for visual aid/testing</h3>
-      <button class="newGame">Reset Health Bar</button>
-      <div class="gamePad add-damage"></div>
-      <div>Damage = 10</div>
-    </div>
-    <!-- stops here -->
     <div class="stage">
       <div id="content">
+        <!-- instructions for the user to use the platform and choose character to play-->
         <div id="userInstructions" class="row row mx-auto align-items-center text-white">
           <div class="col-sm-4">
             <ul id="instructions" class="list-unstyled">
@@ -93,6 +97,7 @@
               <li><span class="badge badge-dark badge-pill mr-2">4</span> To play/stop our theme song use <span class="material-icons icon-sizing">volume_up</span>
                 <span class="material-icons icon-sizing">volume_off</span></li>
             </ul>
+            <!-- display winner/forfeit message -->
             <h1 id="displayMessage" class="d-none"></h1>
           </div>
           <div id="gokuChar" class="col-sm-4 text-center">
@@ -104,13 +109,16 @@
             <p><strong>Ryu</strong></p>
           </div>
         </div>
+        <!-- leaderboard -->
         <div id="leaderBoard" class="d-none">
           <h1>Leaderboard</h1>
           <div class="pre-scrollable">
-            <ul id="leaderBoardList"class="list-unstyled"></ul>
+            <ul id="leaderBoardList" class="list-unstyled"></ul>
           </div>
         </div>
       </div>
+      <!-- fighting arena: to be displayed after a character has been chosen to play -->
+      <!-- healthbar area shows the progress of the fight -->
       <div id="healthBar" class="row align-items-center mx-auto d-none">
         <div class="col-sm-1">
           <img src="images/goku_hbi.png" class="img-fluid" />
@@ -124,6 +132,7 @@
             <div class="health-bar-text"></div>
           </div>
         </div>
+        <!-- timer for the match it lasts 60 seconds -->
         <div class="col-sm-1">
           <div class="counter-container">
             <img src="images/counter_box.png" class="img-fluid counter-img" />
@@ -145,12 +154,13 @@
           <img src="images/ryu_hbi.png" class="img-fluid" />
         </div>
       </div>
-      <!-- <div id="gokuSprite" class="goku goku-idle idle-p1"></div> -->
+      <!-- displays character in the fight -->
       <div id="gokuSprite" class="collision-p1 goku goku-idle idle-p1 d-none"></div>
       <div id="ryuSprite" class="collision-p2 ryu ryu-idle idle-p2 d-none"></div>
-      <!-- <div id="ryuSprite" class="ryu ryu-idle idle-p2"></div> -->
+      
     </div>
 
+    <!-- instructions for players and icons -->
     <div class="container-fluid mdl-color--black">
       <div class="row py-2 text-white align-items-center">
         <div class="col-sm-5">
@@ -169,6 +179,8 @@
         </div>
       </div>
     </div>
+
+    <!-- messages -->
     <div class="collapse" id="collapseExample">
       <div id="messages-card-container " class="border shadow mt-0 h-255">
         <!-- Messages container -->
@@ -201,6 +213,8 @@
       </div>
     </div>
   </div>
+
+  <!-- application javascript files -->
   <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
     crossorigin="anonymous"></script>
 
@@ -215,7 +229,7 @@
   <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-messaging.js"></script>
   <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-functions.js"></script>
   <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase.js"></script>
-
+  <!-- bootstrap javascript files -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
     crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
@@ -223,8 +237,9 @@
   <!-- sprite javascript files -->
   <script src="scripts/keypad.js"></script>
   <script src="scripts/collision-healthbar-hitbox.js"></script>
-  <!-- healthbar -->
+  <!-- chat javascript file -->
   <script src="scripts/main.js"></script>
+  <!-- database javascript file -->
   <script src="scripts/app.js"></script>
 </body>
 

@@ -13,10 +13,6 @@ var intervalId;
 // prevents the clock from being sped up unnecessarily
 var clockRunning = false;
 
-// Functions
-// ======================
-// On Click
-
 //make handlers for click handlers for goku and ryu
 function characterHandlers() {
     //add hover to goku
@@ -124,10 +120,6 @@ function characterHandlers() {
 // Firebase is always watching for changes to the data on the character goku.
 // When changes occurs it will print them to console and html
 database.ref("/players/goku").on("value", function (snapshot) {
-
-    // Print the initial data to the console.
-    console.log(snapshot.val());
-
     //update local variables with database data
     if (snapshot.val() !== null) {
         //handles player1 name updates
@@ -138,9 +130,7 @@ database.ref("/players/goku").on("value", function (snapshot) {
 
         //update html
         $("#player1").text(goku);
-
     } else {
-
         //update html
         $("#player1").text("Player1");
 
@@ -158,10 +148,6 @@ database.ref("/players/goku").on("value", function (snapshot) {
 // Firebase is always watching for changes to the data on the character ryu.
 // When changes occurs it will print them to console and html
 database.ref("/players/ryu").on("value", function (snapshot) {
-
-    // Print the initial data to the console.
-    console.log(snapshot.val());
-
     //update local variables with database data
     if (snapshot.val() !== null) {
         //handles player2 name updates
@@ -202,7 +188,6 @@ function maybeStartTimer() {
 //sets who won
 database.ref("/wins/").on("value", function (snapshot) {
     //whenever win count changes the html gets updated
-    console.log(snapshot.val());
     if (snapshot.val() === null) {
         return;
     }
@@ -256,9 +241,6 @@ function recordRyusKeyPad(keyType, keyCode) { }
 
 //receives key pad inputs
 function keyPadInputs(snapshot) {
-    // Print the initial data to the console.
-    console.log(snapshot.val());
-
     // dispatch keyboard events
     document.dispatchEvent(new KeyboardEvent(snapshot.val().keyType, { 'keyCode': snapshot.val().keyCode }));
 }
@@ -269,9 +251,6 @@ function resetFightArena(message, winner, fullReset) {
     goku = null;
     ryu = null;
 
-    //for testing
-    console.log("winner: " + winner);
-
     //stop timer
     countdown.stop();
 
@@ -281,9 +260,6 @@ function resetFightArena(message, winner, fullReset) {
         database.ref("/wins/").once("value").then(function (snapshot) {
             //holds current winner
             let tempWinner = winner;
-
-            //for testing
-            console.log("winner: " + winner);
 
             //holds current wins
             let tempWins = snapshot.val();
@@ -460,8 +436,6 @@ var countdown = {
 
 //sets leaderboard
 database.ref("/leaderboard/").on("value", function (snapshot) {
-    console.log(snapshot.val());
-
     //delete the leaderboard items
     $("#leaderBoardList").empty();
 
@@ -473,5 +447,4 @@ database.ref("/leaderboard/").on("value", function (snapshot) {
         //make a list of users in the leaderboard
         $("#leaderBoardList").append("<li> <img class='userLeaderBoard img-fluid' src='" + leaderBoardData[user].profilePicUrl + "' /> " + user + " " + leaderBoardData[user].count + "</li>");
     }
-
 });
