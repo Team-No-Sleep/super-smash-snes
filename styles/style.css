@@ -1,0 +1,62 @@
+
+/* 
+=============
+  GAME PAD
+============= 
+*/
+
+.gamePad {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 3px outset grey;
+  background: blue;
+}
+
+.newGame {
+  padding: 10px;
+  font-size: 20px;
+  right:    -20;
+  bottom:   -200;
+}
+
+/* 
+==============
+HEALTH BAR
+============== 
+*/
+
+.health-box,
+.health-box-p2 {
+  background-color: black;
+  height: 30px;
+  /* width: 500px; */
+  border: solid 4px black;
+}
+
+.health-bar,
+.health-bar-p2{
+  background-color: yellow;
+  height: 100%;
+  position: relative;
+  bottom: 22px;
+}
+
+.health-bar-red,
+.health-bar-red-p2 {
+  width: 100%;
+  height: 100%;
+  background-color: #cc0000;
+  position: relative;
+}
+
+.health-bar-combine,
+.health-bar-combine-p2 {
+  height: 0;
+}
+
+.health-bar-text,
+.health-bar-text-p2 {
+  position: relative;
+  bottom: 43px;
+}

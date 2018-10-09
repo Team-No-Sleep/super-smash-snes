@@ -1,0 +1,127 @@
+* {
+  box-sizing: border-box;
+}
+
+body,
+html {
+  margin: 0;
+  height: 100%;
+}
+
+/* figthing arena background */
+.stage {
+  background-image: url("http://imgs.abduzeedo.com/files/articles/wicked-fighting-game-background-gifs/E4nU7qja.gif");
+  min-height: 520px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+/* instructions on top of the fighting arena background */
+#content {
+  position: absolute;
+  bottom: 18%;
+  background: rgb(0, 0, 0); /* Fallback color */
+  background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
+  color: #f1f1f1;
+  width: 100%;
+  padding: 20px;
+}
+
+/* resizing icons on the intructions list */
+.icon-sizing {
+  font-size: 21px !important;
+}
+
+/* sizing of the logo icon */
+.smash-icon {
+  top: 0;
+  width: 98px;
+}
+
+/* resizes project title */
+.font-size-3em {
+  font-size: 3em;
+}
+
+/* resizes sign in/out area */
+.top-position-uc {
+  top: 28px !important;
+}
+
+/* custom height for chat box */
+.h-255 {
+  height: 255px;
+}
+
+/* sprite positioning */
+.goku {
+  position: absolute;
+}
+
+/* sprites become black and white on the instructions area */
+#gokuImg,
+#ryuImg {
+    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(100%);
+}
+
+/* sprites regaining color while hovering on the instructions area */
+#gokuImg.should-hover:hover,
+#ryuImg.should-hover:hover {
+    -webkit-filter: grayscale(0%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(0%);
+}
+
+/* sprite positioning */
+.ryu {
+  position: absolute;
+}
+
+/* positions the timer */
+.counter-container {
+  position: relative;
+}
+
+/* handles the image timer */
+.counter-img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* handles the position of the timer text */
+.counter-text {
+  position: absolute;
+  bottom: 3px;
+  width: 100%;
+  transition: 0.5s ease;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+/* resizes list elements */
+li {
+  font-size: 12px;
+  line-height: 2.5;
+}
+
+/* changes color of the text associated with the logo */
+.logo {
+  color: #be6c8d;
+}
+
+@media screen and (max-width: 610px) {
+  /* handles position of sign in/sign out on mobile */
+  .top-position-uc {
+    top: 88px !important;
+  }
+  /* handles height of sign in/sign out on mobile */
+  .height-uc {
+    height: 41px !important;
+  }
+}
+
+
