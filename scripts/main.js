@@ -332,15 +332,18 @@ function toggleButton() {
 //   }
 // }
 // Initialize Firebase
-var config = {
-  apiKey: "AIzaSyB3XsVc-KBQ-2qELEg82RmcIShbGCFHhZE",
-  authDomain: "sprite-chat-cf53a.firebaseapp.com",
-  databaseURL: "https://sprite-chat-cf53a.firebaseio.com",
-  projectId: "sprite-chat-cf53a",
-  storageBucket: "sprite-chat-cf53a.appspot.com",
-  messagingSenderId: "465590087132"
-};
-firebase.initializeApp(config);
+
+
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDUmk6oqYHsQe66jeD7hMrq3a-PfzAmdpU",
+    authDomain: "super-smash-snes.firebaseapp.com",
+    databaseURL: "https://super-smash-snes.firebaseio.com",
+    projectId: "super-smash-snes",
+    storageBucket: "super-smash-snes.appspot.com",
+    messagingSenderId: "872429985194"
+  };
+  firebase.initializeApp(config);
 
 // // Checks that Firebase has been imported.
 // checkSetup();
