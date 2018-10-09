@@ -1,0 +1,4 @@
+#don't use these files for anything!!! You have been warned
+.firebaserc
+database.rules.json
+firebase.json
