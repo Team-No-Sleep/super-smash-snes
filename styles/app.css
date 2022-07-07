@@ -10,7 +10,7 @@ html {
 
 /* figthing arena background */
 .stage {
-  background-image: url("http://imgs.abduzeedo.com/files/articles/wicked-fighting-game-background-gifs/E4nU7qja.gif");
+  background-image: url("/images/dragon-stage.gif");
   min-height: 520px;
   background-position: center;
   background-repeat: no-repeat;
