@@ -10,7 +10,7 @@ html {
 
 /* figthing arena background */
 .stage {
-  background-image: url("images/dragon-stage.gif");
+  background-image: url('images/dragon-stage.gif');
   min-height: 520px;
   background-position: center;
   background-repeat: no-repeat;
